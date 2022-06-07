@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/graph_nav">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/graph_nav"
+    app:startDestination="@id/fragment_home">
 
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.harusekki.jymun.ui.fragment.HomeFragment"
+        android:label="@string/str_home" />
+    <fragment
+        android:id="@+id/fragment_memo"
+        android:name="com.harusekki.jymun.ui.fragment.MemoFragment"
+        android:label="@string/str_memo" />
+    <fragment
+        android:id="@+id/fragment_menu"
+        android:name="com.harusekki.jymun.ui.fragment.MenuFragment"
+        android:label="@string/str_menu" />
+    <fragment
+        android:id="@+id/fragment_mypage"
+        android:name="com.harusekki.jymun.ui.fragment.MyPageFragment"
+        android:label="@string/str_mypage" />
+    <fragment
+        android:id="@+id/fragment_refrigerator"
+        android:name="com.harusekki.jymun.ui.fragment.RefrigeratorFragment"
+        android:label="@string/str_refrigerator" />
 </navigation>
