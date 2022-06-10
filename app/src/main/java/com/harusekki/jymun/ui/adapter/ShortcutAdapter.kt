@@ -27,7 +27,7 @@ class ShortcutAdapter(
         ),
         Shortcut(
             title = "나의 냉장고",
-            subTitle = "냉장고 속 재료를 관리하세요!",
+            subTitle = "나의 냉장고 속 재료를 관리하세요!",
             image = R.drawable.img_shortcut_refrigerator,
             destination = Destination.REFRIGERATOR
         )
