@@ -11,6 +11,7 @@
     <color name="signature_red_dark">#CC3227</color>
     <color name="signature_red_bright">#F8574B</color>
     <color name="gray">#EEEEEE</color>
+    <color name="gray_bright">#F6F6F6</color>
     <color name="gray_dark">#585858</color>
     <color name="orange">#FF8400</color>
     <color name="blue">#168FEF</color>
