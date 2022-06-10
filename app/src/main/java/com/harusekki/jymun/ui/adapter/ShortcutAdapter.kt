@@ -18,18 +18,21 @@ class ShortcutAdapter(
                 title = "오늘의 식단",
                 subTitle = "오늘의 식단 메뉴를 확인하세요!",
                 image = R.drawable.img_shortcut_menu,
+                color = R.color.signature_red_bright,
                 destination = Destination.MENU
             ),
             Shortcut(
                 title = "장보기 메모",
                 subTitle = "필요한 재료를 쉽게 작성하세요!",
                 image = R.drawable.img_shortcut_memo,
+                color = R.color.orange,
                 destination = Destination.MEMO
             ),
             Shortcut(
                 title = "나의 냉장고",
                 subTitle = "나의 냉장고 속 재료를 관리하세요!",
                 image = R.drawable.img_shortcut_refrigerator,
+                color = R.color.green,
                 destination = Destination.REFRIGERATOR
             )
         )
