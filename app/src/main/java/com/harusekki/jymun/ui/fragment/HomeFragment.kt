@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.harusekki.jymun.data.model.Destination.*
 import com.harusekki.jymun.databinding.FragmentHomeBinding
+import com.harusekki.jymun.ui.adapter.CategoryAdapter
 import com.harusekki.jymun.ui.adapter.ShortcutAdapter
 
 class HomeFragment : Fragment() {
@@ -29,7 +30,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initCategoryRecyclerView()
         initShortcutRecyclerView()
+    }
+
+    private fun initCategoryRecyclerView() {
+        binding.categoryRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
+            adapter = CategoryAdapter()
+        }
     }
 
     private fun initShortcutRecyclerView() {
