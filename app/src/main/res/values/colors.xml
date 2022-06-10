@@ -10,5 +10,7 @@
 
     <color name="signature_red_dark">#CC3227</color>
     <color name="signature_red_bright">#F8574B</color>
-    <color name="gray">#DDDDDD</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="gray_dark">#585858</color>
+
 </resources>
