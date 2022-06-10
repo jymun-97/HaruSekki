@@ -12,26 +12,28 @@ class ShortcutAdapter(
     private val shortcutGoButtonClicked: (Shortcut) -> Unit
 ) : RecyclerView.Adapter<ShortcutAdapter.ViewHolder>() {
 
-    private val shortcutList = arrayListOf(
-        Shortcut(
-            title = "오늘의 식단",
-            subTitle = "오늘의 식단 메뉴를 확인하세요!",
-            image = R.drawable.img_shortcut_menu,
-            destination = Destination.MENU
-        ),
-        Shortcut(
-            title = "장보기 메모",
-            subTitle = "필요한 재료를 쉽게 작성하세요!",
-            image = R.drawable.img_shortcut_memo,
-            destination = Destination.MEMO
-        ),
-        Shortcut(
-            title = "나의 냉장고",
-            subTitle = "나의 냉장고 속 재료를 관리하세요!",
-            image = R.drawable.img_shortcut_refrigerator,
-            destination = Destination.REFRIGERATOR
+    private val shortcutList by lazy {
+        arrayListOf(
+            Shortcut(
+                title = "오늘의 식단",
+                subTitle = "오늘의 식단 메뉴를 확인하세요!",
+                image = R.drawable.img_shortcut_menu,
+                destination = Destination.MENU
+            ),
+            Shortcut(
+                title = "장보기 메모",
+                subTitle = "필요한 재료를 쉽게 작성하세요!",
+                image = R.drawable.img_shortcut_memo,
+                destination = Destination.MEMO
+            ),
+            Shortcut(
+                title = "나의 냉장고",
+                subTitle = "나의 냉장고 속 재료를 관리하세요!",
+                image = R.drawable.img_shortcut_refrigerator,
+                destination = Destination.REFRIGERATOR
+            )
         )
-    )
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShortcutAdapter.ViewHolder {
         return ViewHolder(
