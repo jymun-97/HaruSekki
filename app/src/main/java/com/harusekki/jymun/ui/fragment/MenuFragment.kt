@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.harusekki.jymun.databinding.FragmentMenuBinding
+import com.prolificinteractive.materialcalendarview.CalendarDay
 
 class MenuFragment : Fragment() {
 
@@ -24,5 +25,6 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.calendarView.selectedDate = CalendarDay.today()
     }
 }
