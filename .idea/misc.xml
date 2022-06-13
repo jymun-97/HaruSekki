@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable-v24/ic_memo_add.xml" value="0.201" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable-v24/ic_shortcut_sample.xml" value="0.1" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable-v24/ic_write_recipe.xml" value="0.1855" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable-v24/shape_gray_round_button.xml" value="0.1855" />
+        <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable-v24/shape_seekbar_thumb.xml" value="0.186" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable/ic_calendar.xml" value="0.1855" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable/ic_memo.xml" value="0.1855" />
         <entry key="..\:/Users/mjy07/AndroidProjects/HaruSekki/HaruSekki/app/src/main/res/drawable/shape_gray_rectangle.xml" value="0.1855" />

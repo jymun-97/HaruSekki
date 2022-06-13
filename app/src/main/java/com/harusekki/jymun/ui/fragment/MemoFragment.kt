@@ -23,6 +23,6 @@ class MemoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.memoSeekBar.isEnabled = false
     }
 }
