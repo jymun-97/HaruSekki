@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.harusekki.jymun.R
-import com.harusekki.jymun.data.model.Destination
 import com.harusekki.jymun.data.model.Shortcut
 import com.harusekki.jymun.databinding.ItemShortcutBinding
+import com.harusekki.jymun.util.Destination
 
 class ShortcutAdapter(
     private val shortcutGoButtonClicked: (Shortcut) -> Unit
