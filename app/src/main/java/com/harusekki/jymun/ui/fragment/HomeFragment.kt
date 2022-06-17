@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
-import com.harusekki.jymun.data.model.Destination.*
 import com.harusekki.jymun.databinding.FragmentHomeBinding
 import com.harusekki.jymun.ui.adapter.CategoryAdapter
 import com.harusekki.jymun.ui.adapter.ShortcutAdapter
+import com.harusekki.jymun.util.Destination.*
 
 class HomeFragment : Fragment() {
 
