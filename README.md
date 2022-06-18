@@ -30,13 +30,7 @@
 
 # 🛠 Tech Stack
 
-- Android
-    
-    `Kotlin`, `Retrofit`, `DataBinding`, `ViewModel`, `LiveData`, `Glide`, `Coroutine`
-    
-- Backend
-    
-    **TODO. Beckend Tech Stack** 
+`Kotlin`, `Retrofit`, `DataBinding`, `ViewModel`, `LiveData`, `Glide`, `Coroutine`
     
 
 # ⚙️ Architecture
