@@ -4,9 +4,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.harusekki.jymun.data.model.TestModel
 
-object ImageBindingAdapter {
+object BindingAdapters {
+
+    @BindingAdapter("app:items")
+    @JvmStatic
+    fun setItems(recyclerView: RecyclerView, items: List<TestModel>?) {
+        if (recyclerView.adapter == null) {
+            recyclerView.adapter = MemoAdapter()
+        }
+        (recyclerView.adapter as MemoAdapter).submitList(items?.toMutableList())
+    }
 
     @BindingAdapter("imageSrc")
     @JvmStatic
