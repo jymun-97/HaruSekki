@@ -1,4 +1,4 @@
-package com.harusekki.jymun.ui.adapter
+package com.harusekki.jymun.util
 
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.harusekki.jymun.data.model.TestModel
+import com.harusekki.jymun.ui.adapter.MemoAdapter
 
 object BindingAdapters {
 
