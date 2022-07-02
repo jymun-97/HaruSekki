@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.harusekki.jymun.databinding.FragmentRefrigeratorBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RefrigeratorFragment : Fragment() {
 
     private lateinit var binding: FragmentRefrigeratorBinding

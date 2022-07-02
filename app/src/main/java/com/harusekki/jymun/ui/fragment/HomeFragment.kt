@@ -12,7 +12,9 @@ import com.harusekki.jymun.databinding.FragmentHomeBinding
 import com.harusekki.jymun.ui.adapter.CategoryAdapter
 import com.harusekki.jymun.ui.adapter.ShortcutAdapter
 import com.harusekki.jymun.util.Destination.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding

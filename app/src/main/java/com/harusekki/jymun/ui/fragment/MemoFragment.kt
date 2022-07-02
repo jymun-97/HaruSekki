@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.harusekki.jymun.databinding.FragmentMemoBinding
 import com.harusekki.jymun.ui.viewmodel.MemoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MemoFragment : Fragment() {
 
     private lateinit var binding: FragmentMemoBinding

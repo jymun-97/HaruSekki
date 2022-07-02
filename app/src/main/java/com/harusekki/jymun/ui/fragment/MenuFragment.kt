@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.harusekki.jymun.databinding.FragmentMenuBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
 
     private lateinit var binding: FragmentMenuBinding
