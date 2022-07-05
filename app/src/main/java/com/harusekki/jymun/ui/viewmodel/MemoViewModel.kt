@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.harusekki.jymun.data.model.TestModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 
-@HiltViewModel
 class MemoViewModel : ViewModel() {
 
     private val _itemList = MutableLiveData<List<TestModel>>()
