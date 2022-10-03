@@ -30,4 +30,9 @@ interface RecipeRepository {
         ingredientList: List<Long>
     ): List<RecipeEntity>
 
+    suspend fun loadLatestReadRecipe(): List<RecipeEntity>
+
+    suspend fun insertLatestReadRecipe(recipeEntity: RecipeEntity)
+
+    suspend fun deleteOldestReadRecipe()
 }
