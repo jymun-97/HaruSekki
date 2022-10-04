@@ -5,6 +5,7 @@ import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 import com.jymun.harusekki.ui.home.recipe.RecipeSortBy
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 
 class RecipeDataCacheImpl @Inject constructor(
@@ -14,6 +15,7 @@ class RecipeDataCacheImpl @Inject constructor(
     private var curSorted = RecipeSortBy.LATEST
     private var cachedRecipeList: MutableList<RecipeEntity>? = null
     private val lruCacheOfRecipeDetail = LruCache<Long, RecipeEntity>(LRU_MAX_SIZE)
+    private val latestReadRecipeList = LinkedList<RecipeEntity>()
 
     override suspend fun loadAll(
         orderBy: String
@@ -61,6 +63,22 @@ class RecipeDataCacheImpl @Inject constructor(
 
     override fun updateCache(recipeEntity: RecipeEntity) {
         lruCacheOfRecipeDetail.put(recipeEntity.id, recipeEntity)
+    }
+
+    override fun initLatestReadRecipeList(latestReadRecipeList: List<RecipeEntity>) {
+        this.latestReadRecipeList.addAll(latestReadRecipeList)
+    }
+
+    override fun loadLatestReadRecipe(): List<RecipeEntity> = latestReadRecipeList
+
+    override fun insertLatestReadRecipe(recipeEntity: RecipeEntity) {
+        latestReadRecipeList.removeIf { it.id == recipeEntity.id }
+        latestReadRecipeList.addFirst(recipeEntity)
+    }
+
+    override fun deleteOldestReadRecipe() {
+        if (latestReadRecipeList.size <= 10) return
+        latestReadRecipeList.pollLast()
     }
 
     override fun refreshRecipeList() {
