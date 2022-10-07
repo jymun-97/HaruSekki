@@ -56,4 +56,31 @@ object RecipeUseCaseModule {
         LoadRecipeDetailUseCase(
             dispatcherProvider, recipeRepository
         )
+
+    @Provides
+    fun provideLoadLatestReadRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        LoadLatestReadRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideInsertLatestReadRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        InsertLatestReadRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideDeleteOldestReadRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        DeleteOldestReadRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
 }
