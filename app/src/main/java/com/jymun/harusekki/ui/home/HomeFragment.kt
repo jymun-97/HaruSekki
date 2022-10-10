@@ -107,7 +107,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private val recipeAdapterListener = object : RecipeAdapterListener {
-        override fun onRecipeItemClicked(recipe: Recipe) = moveToDetailFragment(recipe.id)
+        override fun onRecipeItemClicked(recipe: Recipe) {
+            viewModel.readRecipe(recipe)
+            moveToDetailFragment(recipe.id)
+        }
     }
 
     private fun initBestRecipeRecyclerView() {

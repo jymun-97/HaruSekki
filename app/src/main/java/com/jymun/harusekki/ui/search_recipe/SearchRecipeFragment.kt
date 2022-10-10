@@ -8,14 +8,18 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.jymun.harusekki.R
+import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.model.recipe.SearchKeyword
 import com.jymun.harusekki.databinding.FragmentSearchRecipeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
+import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
 import com.jymun.harusekki.ui.search_result.SearchMode
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +50,10 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
 
         initSearchKeywordRecyclerView()
         initSearchEditText()
-        showKeyboard()
+        initLatestReadRecipeRecyclerView()
 
         viewModel.loadAllSearchKeywords()
+        viewModel.loadLatestReadRecipe()
     }
 
     private fun initSearchKeywordRecyclerView() {
@@ -95,6 +100,7 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
                 true
             }
         }
+        showKeyboard()
     }
 
     private fun showKeyboard() {
@@ -102,5 +108,19 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             INPUT_METHOD_SERVICE
         ) as InputMethodManager
         imm.showSoftInput(binding.searchEditText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun initLatestReadRecipeRecyclerView() {
+        binding.latestReadRecipeRecyclerView.apply {
+            addSnapToStartHelper()
+            layoutManager = GridLayoutManager(requireActivity(), 1, HORIZONTAL, false)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider).apply {
+                addAdapterListener(object : RecipeAdapterListener {
+                    override fun onRecipeItemClicked(recipe: Recipe) {
+                        viewModel.readRecipe(recipe)
+                    }
+                })
+            }
+        }
     }
 }
