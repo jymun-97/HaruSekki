@@ -118,9 +118,14 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
                 addAdapterListener(object : RecipeAdapterListener {
                     override fun onRecipeItemClicked(recipe: Recipe) {
                         viewModel.readRecipe(recipe)
+                        moveToDetailFragment(recipe.id)
                     }
                 })
             }
         }
     }
+
+    private fun moveToDetailFragment(id: Long) = findNavController().navigate(
+        SearchRecipeFragmentDirections.actionFragmentSearchRecipeToFragmentDetail(id)
+    )
 }
