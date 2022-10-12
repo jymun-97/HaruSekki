@@ -17,10 +17,18 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_fragment_home_to_searchRecipeFragment"
-            app:destination="@id/fragment_search_recipe" />
+            app:destination="@id/fragment_search_recipe"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_fragment_home_to_fragment_search_result"
-            app:destination="@id/fragment_search_result" />
+            app:destination="@id/fragment_search_result"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_menu"
@@ -68,10 +76,18 @@
         android:label="SearchRecipeFragment">
         <action
             android:id="@+id/action_fragment_search_recipe_to_searchResultFragment"
-            app:destination="@id/fragment_search_result" />
+            app:destination="@id/fragment_search_result"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_fragment_search_recipe_to_fragment_detail"
-            app:destination="@id/fragment_detail" />
+            app:destination="@id/fragment_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/fragment_search_result"
