@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         _recipeList.postValue(loadAllRecipeUseCase().subList(0, 10))
         _bestRecipeList.postValue(
             loadAllRecipeUseCase(
-                orderBy = RecipeSortOption.LIKES_DESC,
+                orderBy = RecipeSortOption.LIKES,
                 isGridType = true
             ).subList(0, 10)
         )

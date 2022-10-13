@@ -86,34 +86,20 @@ class RecipeDataCacheImpl @Inject constructor(
     }
 
     private fun sort(orderBy: String) = when (orderBy) {
-        RecipeSortOption.OLD.value -> {
-            cachedRecipeList!!.sortBy { -it.id }
-            curSorted = RecipeSortOption.OLD
-        }
 
         RecipeSortOption.LATEST.value -> {
             cachedRecipeList!!.sortBy { it.id }
             curSorted = RecipeSortOption.LATEST
         }
 
-        RecipeSortOption.HITS_ASC.value -> {
-            cachedRecipeList!!.sortBy { it.hits }
-            curSorted = RecipeSortOption.HITS_ASC
-        }
-
-        RecipeSortOption.HITS_DESC.value -> {
+        RecipeSortOption.HITS.value -> {
             cachedRecipeList!!.sortBy { -it.hits }
-            curSorted = RecipeSortOption.HITS_DESC
+            curSorted = RecipeSortOption.HITS
         }
 
-        RecipeSortOption.LIKES_ASC.value -> {
-            cachedRecipeList!!.sortBy { it.likes }
-            curSorted = RecipeSortOption.LIKES_ASC
-        }
-
-        RecipeSortOption.LIKES_DESC.value -> {
+        RecipeSortOption.LIKES.value -> {
             cachedRecipeList!!.sortBy { -it.likes }
-            curSorted = RecipeSortOption.LIKES_DESC
+            curSorted = RecipeSortOption.LIKES
         }
 
         else -> Unit
