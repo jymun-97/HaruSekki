@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.jymun.harusekki.ui.search_result.SearchMode" />
+
         <variable
             name="viewModel"
             type="com.jymun.harusekki.ui.search_result.SearchResultViewModel" />
@@ -78,14 +80,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="10dp">
+                app:elevation="0dp">
 
-                <Spinner
-                    android:id="@+id/sortOptionSpinner"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_spinner_closed"
-                    android:spinnerMode="dropdown" />
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:scrollbars="none">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Spinner
+                            android:id="@+id/sortOptionSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_spinner_closed"
+                            android:spinnerMode="dropdown"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ToggleButton
+                            android:id="@+id/byTitleModeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/background_toggle_button"
+                            android:paddingHorizontal="12dp"
+                            android:textOff="직접 레시피 검색"
+                            android:textOn="검색어 : 테스트"
+                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
+                            app:layout_constraintStart_toEndOf="@id/sortOptionSpinner"
+                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+
+                        <ToggleButton
+                            android:id="@+id/byIngredientModeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/background_toggle_button"
+                            android:paddingHorizontal="12dp"
+                            android:textOff="나의 냉장고 속 재료로 검색"
+                            android:textOn="나의 냉장고 속 재료로 검색"
+                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
+                            app:layout_constraintStart_toEndOf="@id/byTitleModeButton"
+                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+
+                        <ToggleButton
+                            android:id="@+id/favoriteModeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/background_toggle_button"
+                            android:paddingHorizontal="12dp"
+                            android:textOff="내가 좋아한 레시피"
+                            android:textOn="내가 좋아한 레시피"
+                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
+                            app:layout_constraintStart_toEndOf="@id/byIngredientModeButton"
+                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </HorizontalScrollView>
 
             </com.google.android.material.appbar.AppBarLayout>
 
