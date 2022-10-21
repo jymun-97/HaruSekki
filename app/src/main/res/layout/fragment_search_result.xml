@@ -97,51 +97,37 @@
                         <Spinner
                             android:id="@+id/sortOptionSpinner"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
                             android:background="@drawable/background_spinner_closed"
                             android:spinnerMode="dropdown"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ToggleButton
-                            android:id="@+id/byTitleModeButton"
+                        <com.jymun.harusekki.ui.custom_view.CustomToggleGroup
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/background_toggle_button"
-                            android:paddingHorizontal="12dp"
-                            android:textOff="직접 레시피 검색"
-                            android:textOn="검색어 : 테스트"
-                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
+                            android:layout_marginStart="3dp"
+                            app:layout_constraintBottom_toBottomOf="@id/sortOptionSpinner"
                             app:layout_constraintStart_toEndOf="@id/sortOptionSpinner"
-                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+                            app:layout_constraintTop_toTopOf="@id/sortOptionSpinner">
 
-                        <ToggleButton
-                            android:id="@+id/byIngredientModeButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/background_toggle_button"
-                            android:paddingHorizontal="12dp"
-                            android:textOff="나의 냉장고 속 재료로 검색"
-                            android:textOn="나의 냉장고 속 재료로 검색"
-                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
-                            app:layout_constraintStart_toEndOf="@id/byTitleModeButton"
-                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                                android:id="@+id/byTitleModeButton"
+                                style="@style/SearchModeToggleButtons"
+                                android:text="검색어 : " />
 
-                        <ToggleButton
-                            android:id="@+id/favoriteModeButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/background_toggle_button"
-                            android:paddingHorizontal="12dp"
-                            android:textOff="내가 좋아한 레시피"
-                            android:textOn="내가 좋아한 레시피"
-                            app:layout_constraintBottom_toBottomOf="@+id/sortOptionSpinner"
-                            app:layout_constraintStart_toEndOf="@id/byIngredientModeButton"
-                            app:layout_constraintTop_toTopOf="@+id/sortOptionSpinner" />
+                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                                android:id="@+id/byIngredientModeButton"
+                                style="@style/SearchModeToggleButtons"
+                                android:text="나의 냉장고 속 재료로 검색" />
+
+                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                                android:id="@+id/favoriteModeButton"
+                                style="@style/SearchModeToggleButtons"
+                                android:text="내가 좋아한 레시피" />
+
+                        </com.jymun.harusekki.ui.custom_view.CustomToggleGroup>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
