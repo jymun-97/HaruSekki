@@ -115,17 +115,17 @@
                             <com.jymun.harusekki.ui.custom_view.CustomToggleButton
                                 android:id="@+id/byTitleModeButton"
                                 style="@style/SearchModeToggleButtons"
-                                android:text="검색어 : " />
+                                android:text="@string/by_title_mode_on" />
 
                             <com.jymun.harusekki.ui.custom_view.CustomToggleButton
                                 android:id="@+id/byIngredientModeButton"
                                 style="@style/SearchModeToggleButtons"
-                                android:text="나의 냉장고 속 재료로 검색" />
+                                android:text="@string/by_ingredient_mode" />
 
                             <com.jymun.harusekki.ui.custom_view.CustomToggleButton
                                 android:id="@+id/favoriteModeButton"
                                 style="@style/SearchModeToggleButtons"
-                                android:text="내가 좋아한 레시피" />
+                                android:text="@string/favorite_mode" />
 
                         </com.jymun.harusekki.ui.custom_view.CustomToggleGroup>
 
