@@ -5,12 +5,13 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 
-class CustomToggleGroup(
+class SearchModeToggleGroup(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context, attributeSet) {
 
-    private var selectedButton: CustomToggleButton? = null
+    private var selectedButton: SearchModeToggleButton? = null
+    private var onSearchModeChangedListener: OnSearchModeChangedListener? = null
 
     init {
         initView()
@@ -22,12 +23,18 @@ class CustomToggleGroup(
     }
 
     override fun addView(child: View?) {
-        if (child !is CustomToggleButton) return
+        if (child !is SearchModeToggleButton) return
         super.addView(child)
     }
 
-    fun updateSelectedButton(target: CustomToggleButton?) {
+    fun updateSelectedButton(target: SearchModeToggleButton?) {
         selectedButton?.toggle()
         selectedButton = target.also { it?.toggle() }
+
+        onSearchModeChangedListener?.onSearchModeChanged(selectedButton?.id)
+    }
+
+    fun setOnSearchModeChangedListener(listener: OnSearchModeChangedListener) {
+        onSearchModeChangedListener = listener
     }
 }

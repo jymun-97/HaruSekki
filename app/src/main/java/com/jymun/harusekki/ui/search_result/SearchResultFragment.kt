@@ -1,15 +1,19 @@
 package com.jymun.harusekki.ui.search_result
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentSearchResultBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
+import com.jymun.harusekki.ui.custom_view.OnSearchModeChangedListener
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +26,6 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     lateinit var resourcesProvider: ResourcesProvider
 
     private val args by navArgs<SearchResultFragmentArgs>()
-    private lateinit var searchMode: SearchMode
 
     override val viewModel: SearchResultViewModel by viewModels()
 
@@ -41,8 +44,14 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchMode = args.searchMode
         initSortOptionSpinner()
+        initByTitleModeButton()
+        initSearchModeToggleGroup()
+
+        viewModel.updateSearchMode(args.searchMode)
+        viewModel.searchMode.observe(viewLifecycleOwner) {
+            Log.d("# SearchResultFragment", "$it")
+        }
     }
 
     private fun initSortOptionSpinner() = binding.sortOptionSpinner.apply {
@@ -53,7 +62,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
             resourcesProvider = resourcesProvider,
             layoutResId = R.layout.item_sort_option,
             values = RecipeSortOption.values(),
-            baseSortOption = searchMode.sortOption
+            baseSortOption = args.searchMode.sortOption
         )
         viewTreeObserver.addOnWindowFocusChangeListener { isClosed ->
             background = resourcesProvider.getDrawable(
@@ -73,5 +82,52 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initByTitleModeButton() {
+        val searchMode = args.searchMode
+        binding.byTitleModeButton.apply {
+            if (searchMode is SearchMode.ByTitle) {
+                text =
+                    "${resourcesProvider.getString(R.string.by_title_mode_on)} ${searchMode.keyword}"
+                performClick()
+            } else {
+                text = resourcesProvider.getString(R.string.by_title_mode_off)
+                setOnClickListener {
+                    moveToSearchRecipeFragment()
+                }
+            }
+        }
+    }
+
+    private fun moveToSearchRecipeFragment() = findNavController().navigate(
+        SearchResultFragmentDirections.actionFragmentSearchResultToFragmentSearchRecipe()
+    )
+
+    private fun initSearchModeToggleGroup() {
+        binding.searchModeToggleGroup.setOnSearchModeChangedListener(object :
+            OnSearchModeChangedListener {
+            override fun onSearchModeChanged(id: Int?) {
+                when (id) {
+                    null -> Log.d("# SearchResultFragment", "ALL")
+
+                    R.id.byTitleModeButton -> Log.d(
+                        "# SearchResultFragment",
+                        "title"
+                    )
+
+                    R.id.byIngredientModeButton -> Log.d(
+                        "# SearchResultFragment",
+                        "ingre"
+                    )
+
+                    R.id.favoriteModeButton -> Log.d(
+                        "# SearchResultFragment",
+                        "favorite"
+                    )
+                }
+            }
+        })
     }
 }

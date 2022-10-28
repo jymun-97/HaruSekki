@@ -104,7 +104,8 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.jymun.harusekki.ui.custom_view.CustomToggleGroup
+                        <com.jymun.harusekki.ui.custom_view.SearchModeToggleGroup
+                            android:id="@+id/searchModeToggleGroup"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginStart="3dp"
@@ -112,22 +113,22 @@
                             app:layout_constraintStart_toEndOf="@id/sortOptionSpinner"
                             app:layout_constraintTop_toTopOf="@id/sortOptionSpinner">
 
-                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                            <com.jymun.harusekki.ui.custom_view.SearchModeToggleButton
                                 android:id="@+id/byTitleModeButton"
                                 style="@style/SearchModeToggleButtons"
                                 android:text="@string/by_title_mode_on" />
 
-                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                            <com.jymun.harusekki.ui.custom_view.SearchModeToggleButton
                                 android:id="@+id/byIngredientModeButton"
                                 style="@style/SearchModeToggleButtons"
                                 android:text="@string/by_ingredient_mode" />
 
-                            <com.jymun.harusekki.ui.custom_view.CustomToggleButton
+                            <com.jymun.harusekki.ui.custom_view.SearchModeToggleButton
                                 android:id="@+id/favoriteModeButton"
                                 style="@style/SearchModeToggleButtons"
                                 android:text="@string/favorite_mode" />
 
-                        </com.jymun.harusekki.ui.custom_view.CustomToggleGroup>
+                        </com.jymun.harusekki.ui.custom_view.SearchModeToggleGroup>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

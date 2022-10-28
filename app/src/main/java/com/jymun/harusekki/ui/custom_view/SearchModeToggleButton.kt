@@ -7,7 +7,7 @@ import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatTextView
 import com.jymun.harusekki.R
 
-class CustomToggleButton(
+class SearchModeToggleButton(
     context: Context,
     attributeSet: AttributeSet
 ) : AppCompatTextView(context, attributeSet) {
@@ -42,7 +42,7 @@ class CustomToggleButton(
     }
 
     override fun performClick(): Boolean {
-        (parent as CustomToggleGroup).updateSelectedButton(if (flag) null else this)
+        (parent as SearchModeToggleGroup).updateSelectedButton(if (flag) null else this)
         return super.performClick()
     }
 
