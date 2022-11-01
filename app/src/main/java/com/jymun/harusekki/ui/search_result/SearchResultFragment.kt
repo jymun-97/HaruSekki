@@ -26,6 +26,8 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     lateinit var resourcesProvider: ResourcesProvider
 
     private val args by navArgs<SearchResultFragmentArgs>()
+    private var searchKeyword: String? = null
+    private lateinit var searchMode: SearchMode
 
     override val viewModel: SearchResultViewModel by viewModels()
 
@@ -44,11 +46,13 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        searchMode = args.searchMode
+
         initSortOptionSpinner()
         initByTitleModeButton()
         initSearchModeToggleGroup()
 
-        viewModel.updateSearchMode(args.searchMode)
+        viewModel.updateSearchMode(searchMode)
         viewModel.searchMode.observe(viewLifecycleOwner) {
             Log.d("# SearchResultFragment", "$it")
         }
@@ -78,6 +82,9 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
                 id: Long
             ) {
                 (adapter as SortOptionSpinnerAdapter).updateTarget(position)
+                searchMode.sortOption = RecipeSortOption.values()[position]
+
+                viewModel.updateSearchMode(searchMode)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -86,11 +93,11 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
     @SuppressLint("SetTextI18n")
     private fun initByTitleModeButton() {
-        val searchMode = args.searchMode
         binding.byTitleModeButton.apply {
             if (searchMode is SearchMode.ByTitle) {
-                text =
-                    "${resourcesProvider.getString(R.string.by_title_mode_on)} ${searchMode.keyword}"
+                searchKeyword = (searchMode as SearchMode.ByTitle).keyword
+                text = "${resourcesProvider.getString(R.string.by_title_mode_on)} $searchKeyword"
+
                 performClick()
             } else {
                 text = resourcesProvider.getString(R.string.by_title_mode_off)
@@ -109,24 +116,18 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         binding.searchModeToggleGroup.setOnSearchModeChangedListener(object :
             OnSearchModeChangedListener {
             override fun onSearchModeChanged(id: Int?) {
-                when (id) {
-                    null -> Log.d("# SearchResultFragment", "ALL")
+                searchMode = when (id) {
+                    R.id.byTitleModeButton -> searchKeyword?.let {
+                        SearchMode.ByTitle(it, searchMode.sortOption)
+                    } ?: return
 
-                    R.id.byTitleModeButton -> Log.d(
-                        "# SearchResultFragment",
-                        "title"
-                    )
+                    R.id.byIngredientModeButton -> SearchMode.ByIngredient(searchMode.sortOption)
 
-                    R.id.byIngredientModeButton -> Log.d(
-                        "# SearchResultFragment",
-                        "ingre"
-                    )
+                    R.id.favoriteModeButton -> SearchMode.Favorite(searchMode.sortOption)
 
-                    R.id.favoriteModeButton -> Log.d(
-                        "# SearchResultFragment",
-                        "favorite"
-                    )
+                    else -> SearchMode.All(searchMode.sortOption)
                 }
+                viewModel.updateSearchMode(searchMode)
             }
         })
     }

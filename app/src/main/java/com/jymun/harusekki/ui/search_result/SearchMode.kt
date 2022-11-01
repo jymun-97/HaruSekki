@@ -5,32 +5,32 @@ import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import kotlinx.parcelize.Parcelize
 
 sealed class SearchMode(
-    open val sortOption: RecipeSortOption
+    open var sortOption: RecipeSortOption
 ) : Parcelable {
 
     @Parcelize
     data class ByTitle(
         val keyword: String,
-        override val sortOption: RecipeSortOption = RecipeSortOption.LATEST
+        override var sortOption: RecipeSortOption = RecipeSortOption.LATEST
     ) : SearchMode(sortOption)
 
     @Parcelize
     data class ByCategory(
         val category: String,
-        override val sortOption: RecipeSortOption = RecipeSortOption.LATEST
+        override var sortOption: RecipeSortOption = RecipeSortOption.LATEST
     ) : SearchMode(sortOption)
 
     @Parcelize
     data class ByIngredient(
-        override val sortOption: RecipeSortOption = RecipeSortOption.LATEST
+        override var sortOption: RecipeSortOption = RecipeSortOption.LATEST
     ) : SearchMode(sortOption)
 
     @Parcelize
     data class Favorite(
-        override val sortOption: RecipeSortOption = RecipeSortOption.LATEST
+        override var sortOption: RecipeSortOption = RecipeSortOption.LATEST
     ) : SearchMode(sortOption)
 
     @Parcelize
-    data class All(override val sortOption: RecipeSortOption) : SearchMode(sortOption)
+    data class All(override var sortOption: RecipeSortOption) : SearchMode(sortOption)
 
 }
