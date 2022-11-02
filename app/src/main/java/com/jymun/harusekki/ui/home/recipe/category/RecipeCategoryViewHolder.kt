@@ -1,25 +1,22 @@
 package com.jymun.harusekki.ui.home.recipe.category
 
-import com.jymun.harusekki.data.model.recipe.RecipeCategory
+import androidx.recyclerview.widget.RecyclerView
 import com.jymun.harusekki.databinding.ItemRecipeCategoryBinding
-import com.jymun.harusekki.ui.base.adapter.AdapterListener
-import com.jymun.harusekki.ui.base.adapter.viewholder.ModelViewHolder
 import com.jymun.harusekki.util.resources.ResourcesProvider
 
 class RecipeCategoryViewHolder(
     private val binding: ItemRecipeCategoryBinding,
-    resourcesProvider: ResourcesProvider
-) : ModelViewHolder<RecipeCategory>(binding, resourcesProvider) {
+    private val resourcesProvider: ResourcesProvider
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override fun bindData(model: RecipeCategory, adapterListener: AdapterListener?) {
-        binding.recipeCategory = model
+    fun bindData(model: RecipeCategory, onCategoryItemClicked: (RecipeCategory) -> Unit) {
+        binding.categoryTextView.text =
+            resourcesProvider.getString(model.textStrId).replaceFirst(" / ", "\n")
         binding.categoryImageView.setImageDrawable(
-            resourcesProvider.getDrawable(model.imgResId)
+            resourcesProvider.getDrawable(model.imageResId)
         )
-        (adapterListener as? RecipeCategoryAdapterListener)?.let {
-            binding.root.setOnClickListener { _ ->
-                it.onRecipeCategoryItemClicked(model)
-            }
+        binding.root.setOnClickListener { _ ->
+            onCategoryItemClicked(model)
         }
     }
 }

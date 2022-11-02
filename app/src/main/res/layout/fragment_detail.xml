@@ -53,7 +53,7 @@
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/recipeTitleTextView"
-                            app:srcId="@{viewModel.recipeDetail.category.imgResId}"
+                            app:srcId="@{viewModel.recipeDetail.category.imageResId}"
                             tools:src="@color/black" />
 
                         <TextView

@@ -43,12 +43,8 @@ object ModelViewHolderMapper {
                 ItemCookingStepBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
-            ModelType.SEARCH_KEYWORD -> SearchKeywordViewHolder(
+            else -> SearchKeywordViewHolder(
                 ItemSearchKeywordBinding.inflate(inflater, parent, false),
-                resourcesProvider
-            )
-            else -> RecipeCategoryViewHolder(
-                ItemRecipeCategoryBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
         } as ModelViewHolder<M>

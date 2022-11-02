@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.recipe.Recipe
-import com.jymun.harusekki.data.model.recipe.RecipeCategory
 import com.jymun.harusekki.databinding.FragmentHomeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
@@ -21,8 +20,8 @@ import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
 import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
-import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapterListener
-import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapter
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.MenuShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.RefrigeratorShortcutFragment
@@ -95,14 +94,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.fragmentHomeContent.recipeCategoryRecyclerView.apply {
             addSnapToCenterHelper()
             layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
-            adapter = ModelRecyclerAdapter<RecipeCategory>(resourcesProvider).apply {
-                submitList(RecipeCategoryProvider.get(resourcesProvider))
-
-                addAdapterListener(object : RecipeCategoryAdapterListener {
-                    override fun onRecipeCategoryItemClicked(recipeCategory: RecipeCategory) {
-                        moveToSearchResultFragment(SearchMode.ByCategory(recipeCategory.name))
-                    }
-                })
+            adapter = RecipeCategoryAdapter(
+                resourcesProvider,
+                onCategoryItemClicked = {
+                    moveToSearchResultFragment(
+                        SearchMode.All(RecipeSortOption.LATEST, it)
+                    )
+                }
+            ).apply {
+                submitList(RecipeCategory.values().toList())
             }
         }
     }

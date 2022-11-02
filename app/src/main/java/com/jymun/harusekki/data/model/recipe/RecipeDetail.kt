@@ -5,6 +5,7 @@ import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 
 data class RecipeDetail(
     override val id: Long,
@@ -22,7 +23,7 @@ data class RecipeDetail(
     fun toEntity() = RecipeEntity(
         id = id,
         title = title,
-        category = category.name,
+        category = category.value,
         summary = summary,
         imgList = imgList,
         hits = hits,
