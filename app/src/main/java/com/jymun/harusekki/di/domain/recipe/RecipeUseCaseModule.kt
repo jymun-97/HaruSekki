@@ -31,15 +31,6 @@ object RecipeUseCaseModule {
         )
 
     @Provides
-    fun provideSearchRecipeByCategoryUseCase(
-        dispatcherProvider: DispatcherProvider,
-        recipeRepository: RecipeRepository
-    ) =
-        SearchRecipeByCategoryUseCase(
-            dispatcherProvider, recipeRepository
-        )
-
-    @Provides
     fun provideSearchRecipeByIngredientUseCase(
         dispatcherProvider: DispatcherProvider,
         recipeRepository: RecipeRepository
