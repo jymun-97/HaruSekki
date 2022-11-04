@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="com.jymun.harusekki.ui.base.LoadState" />
+
+        <import type="android.view.View" />
+
         <import type="com.jymun.harusekki.ui.search_result.SearchMode" />
 
         <variable
@@ -88,7 +92,8 @@
                     android:clipToPadding="false"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="10dp"
-                    android:scrollbars="none">
+                    android:scrollbars="none"
+                    app:layout_scrollFlags="scroll|enterAlways">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -136,6 +141,10 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
+            <include
+                android:id="@+id/searchResultFragmentContent"
+                layout="@layout/fragment_search_result_content" />
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <ProgressBar
@@ -143,6 +152,7 @@
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/app_signature_dark"
             android:progressTint="@color/app_signature_dark"
+            android:visibility="@{viewModel.loadState instanceof LoadState.Loading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
