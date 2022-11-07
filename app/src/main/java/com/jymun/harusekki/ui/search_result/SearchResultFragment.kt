@@ -2,19 +2,20 @@ package com.jymun.harusekki.ui.search_result
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.tabs.TabLayoutMediator
 import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentSearchResultBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.custom_view.OnSearchModeChangedListener
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,13 +29,17 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     private val args by navArgs<SearchResultFragmentArgs>()
     private var searchKeyword: String? = null
     private lateinit var searchMode: SearchMode
+    private val categoryList = RecipeCategory.values().toList()
 
-    override val viewModel: SearchResultViewModel by viewModels()
+    override val viewModel: SearchResultViewModel by activityViewModels()
 
     override fun getViewDataBinding() = FragmentSearchResultBinding.inflate(layoutInflater)
 
     override fun setUpBinding() = binding.apply {
         viewModel = this@SearchResultFragment.viewModel
+        lifecycleOwner = viewLifecycleOwner
+
+        searchResultFragmentContent.viewModel = this@SearchResultFragment.viewModel
         lifecycleOwner = viewLifecycleOwner
     }
 
@@ -51,11 +56,10 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         initSortOptionSpinner()
         initByTitleModeButton()
         initSearchModeToggleGroup()
+        initSearchResultPager()
+        initCategoryTabLayout()
 
         viewModel.updateSearchMode(searchMode)
-        viewModel.searchMode.observe(viewLifecycleOwner) {
-            Log.d("# SearchResultFragment", "$it")
-        }
     }
 
     private fun initSortOptionSpinner() = binding.sortOptionSpinner.apply {
@@ -82,9 +86,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
                 id: Long
             ) {
                 (adapter as SortOptionSpinnerAdapter).updateTarget(position)
-                searchMode.sortOption = RecipeSortOption.values()[position]
-
-                viewModel.updateSearchMode(searchMode)
+                viewModel.updateSortOption(RecipeSortOption.values()[position])
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
@@ -130,5 +132,20 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
                 viewModel.updateSearchMode(searchMode)
             }
         })
+    }
+
+    private fun initSearchResultPager() {
+        binding.searchResultFragmentContent.searchResultPager.adapter = SearchResultPageAdapter(
+            fragmentActivity = requireActivity(),
+            fragmentList = categoryList.map { SearchResultPage(it) }
+        )
+    }
+
+    private fun initCategoryTabLayout() = with(binding.searchResultFragmentContent) {
+        TabLayoutMediator(categoryTabLayout, searchResultPager) { tab, pos ->
+            val target = categoryList[pos]
+
+            tab.text = resourcesProvider.getString(target.textStrId)
+        }.attach()
     }
 }
