@@ -1,4 +1,4 @@
-package com.jymun.harusekki.base
+package com.jymun.harusekki.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

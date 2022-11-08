@@ -1,4 +1,4 @@
-package com.jymun.harusekki.base
+package com.jymun.harusekki.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
