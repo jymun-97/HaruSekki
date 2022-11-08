@@ -1,6 +1,8 @@
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
+    id(Plugins.KAPT)
+    id(Plugins.HILT)
 }
 
 android {
@@ -50,4 +52,12 @@ dependencies {
     testImplementation(Testing.JUNIT4)
     androidTestImplementation(Testing.ANDROID_JUNIT)
     androidTestImplementation(Testing.ESPRESSO_CORE)
+
+    // Hilt
+    implementation(Dependencies.Hilt)
+    kapt(Dependencies.HILT_KAPT)
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -5,4 +5,7 @@ object Dependencies {
     const val CONSTRAINT_LAYOUT =
         "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
 
+    // Hilt
+    const val Hilt = "com.google.dagger:hilt-android:${Versions.HILT}"
+    const val HILT_KAPT = "com.google.dagger:hilt-compiler:${Versions.HILT}"
 }
