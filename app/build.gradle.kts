@@ -59,6 +59,12 @@ dependencies {
 
     // Coroutine
     implementation(Dependencies.COROUTINE)
+
+    // Lifecycle
+    implementation(Dependencies.VIEWMODEL)
+    implementation(Dependencies.LIVEDATA)
+    implementation(Dependencies.ACTIVITY_KTX)
+    implementation(Dependencies.FRAGMENT_KTX)
 }
 
 kapt {

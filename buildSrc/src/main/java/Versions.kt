@@ -17,4 +17,7 @@ object Versions {
     // Library
     const val HILT = "2.44"
     const val COROUTINE = "1.6.4"
+    const val LIFECYCLE = "2.5.1"
+    const val ACTIVITY_KTX = "1.6.1"
+    const val FRAGMENT_KTX = "1.5.4"
 }
