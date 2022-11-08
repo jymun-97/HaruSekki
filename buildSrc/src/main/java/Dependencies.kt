@@ -8,4 +8,7 @@ object Dependencies {
     // Hilt
     const val Hilt = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val HILT_KAPT = "com.google.dagger:hilt-compiler:${Versions.HILT}"
+
+    // Coroutine
+    const val COROUTINE = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINE}"
 }

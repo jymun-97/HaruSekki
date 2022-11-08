@@ -56,6 +56,9 @@ dependencies {
     // Hilt
     implementation(Dependencies.Hilt)
     kapt(Dependencies.HILT_KAPT)
+
+    // Coroutine
+    implementation(Dependencies.COROUTINE)
 }
 
 kapt {

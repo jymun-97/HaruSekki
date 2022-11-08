@@ -16,4 +16,5 @@ object Versions {
 
     // Library
     const val HILT = "2.44"
+    const val COROUTINE = "1.6.4"
 }
