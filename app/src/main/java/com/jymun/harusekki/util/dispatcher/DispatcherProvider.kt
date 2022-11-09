@@ -1,4 +1,4 @@
-package com.jymun.harusekki.di.dispatcher
+package com.jymun.harusekki.util.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 

@@ -1,5 +1,7 @@
-package com.jymun.harusekki.di.dispatcher
+package com.jymun.harusekki.di
 
+import com.jymun.harusekki.util.dispatcher.DispatcherProvider
+import com.jymun.harusekki.util.dispatcher.DispatcherProviderImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
