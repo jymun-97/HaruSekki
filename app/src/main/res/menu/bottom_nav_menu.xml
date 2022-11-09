@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/fragment_menu"
+        android:title="@string/menu"
+        android:icon="@drawable/ic_calendar"/>
+
+    <item
+        android:id="@+id/fragment_memo"
+        android:title="@string/memo"
+        android:icon="@drawable/ic_memo"/>
+
+    <item
+        android:id="@+id/fragment_refrigerator"
+        android:title="@string/refrigerator"
+        android:icon="@drawable/ic_refrigerator"/>
+
+    <item
+        android:id="@+id/fragment_mypage"
+        android:title="@string/mypage"
+        android:icon="@drawable/ic_mypage"/>
+
+</menu>
