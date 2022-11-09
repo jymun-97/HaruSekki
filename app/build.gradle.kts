@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
     id(Plugins.HILT)
+    id(Plugins.NAVIGATION_SAFE_ARGS)
 }
 
 android {
@@ -65,6 +66,10 @@ dependencies {
     implementation(Dependencies.LIVEDATA)
     implementation(Dependencies.ACTIVITY_KTX)
     implementation(Dependencies.FRAGMENT_KTX)
+
+    // Navigation
+    implementation(Dependencies.NAVIGATION_UI_KTX)
+    implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
 }
 
 kapt {

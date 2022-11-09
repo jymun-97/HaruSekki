@@ -4,4 +4,5 @@ plugins {
     id(Plugins.ANDROID_LIBRARY) version Versions.AGP apply false
     id(Plugins.KOTLIN_ANDROID) version Versions.KOTLIN apply false
     id(Plugins.HILT) version Versions.HILT apply false
+    id(Plugins.NAVIGATION_SAFE_ARGS) version Versions.NAVIGATION apply false
 }

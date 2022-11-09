@@ -20,4 +20,5 @@ object Versions {
     const val LIFECYCLE = "2.5.1"
     const val ACTIVITY_KTX = "1.6.1"
     const val FRAGMENT_KTX = "1.5.4"
+    const val NAVIGATION = "2.5.3"
 }

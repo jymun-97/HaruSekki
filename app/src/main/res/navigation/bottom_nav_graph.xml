@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.jymun.harusekki.ui.home.HomeFragment"
+        android:label="@string/home" />
+    <fragment
+        android:id="@+id/fragment_menu"
+        android:name="com.jymun.harusekki.ui.menu.MenuFragment"
+        android:label="@string/menu" />
+    <fragment
+        android:id="@+id/fragment_memo"
+        android:name="com.jymun.harusekki.ui.memo.MemoFragment"
+        android:label="@string/memo" />
+    <fragment
+        android:id="@+id/fragment_refrigerator"
+        android:name="com.jymun.harusekki.ui.refrigerator.RefrigeratorFragment"
+        android:label="@string/refrigerator" />
+    <fragment
+        android:id="@+id/fragment_mypage"
+        android:name="com.jymun.harusekki.ui.mypage.MyPageFragment"
+        android:label="@string/mypage" />
+</navigation>
