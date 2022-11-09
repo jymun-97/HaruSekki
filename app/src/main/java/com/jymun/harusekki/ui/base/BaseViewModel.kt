@@ -2,7 +2,7 @@ package com.jymun.harusekki.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jymun.harusekki.di.dispatcher.DispatcherProvider
+import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
