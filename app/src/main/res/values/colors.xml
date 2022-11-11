@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="app_signature">#FFC00000</color>
-    <color name="app_signature_dark">#AF0000</color>
+    <color name="app_signature">#CC3227</color>
+    <color name="app_signature_bright">#CF4F46</color>
+    <color name="app_signature_dark">#FFCC1919</color>
+    <color name="gray_light">#E3E3E3</color>
 </resources>
