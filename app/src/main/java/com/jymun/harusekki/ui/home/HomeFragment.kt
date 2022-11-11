@@ -14,6 +14,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tempTextView.text = "홈"
+        binding.fragmentHomeContent.tempTextView.text = "홈"
     }
 }
