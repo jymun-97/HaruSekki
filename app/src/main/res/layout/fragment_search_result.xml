@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="10dp"
+                    android:paddingTop="10dp"
                     android:scrollbars="none"
                     app:layout_scrollFlags="scroll|enterAlways">
 
@@ -138,6 +138,16 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </HorizontalScrollView>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/categoryTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="noScroll"
+                    app:tabMode="scrollable" />
 
             </com.google.android.material.appbar.AppBarLayout>
 

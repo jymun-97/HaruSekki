@@ -141,8 +141,11 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         )
     }
 
-    private fun initCategoryTabLayout() = with(binding.searchResultFragmentContent) {
-        TabLayoutMediator(categoryTabLayout, searchResultPager) { tab, pos ->
+    private fun initCategoryTabLayout() = with(binding) {
+        TabLayoutMediator(
+            categoryTabLayout,
+            binding.searchResultFragmentContent.searchResultPager
+        ) { tab, pos ->
             val target = categoryList[pos]
 
             tab.text = resourcesProvider.getString(target.textStrId)
