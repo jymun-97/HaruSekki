@@ -70,6 +70,9 @@ dependencies {
     // Navigation
     implementation(Dependencies.NAVIGATION_UI_KTX)
     implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
+
+    // Circle ImageView
+    implementation(Dependencies.CIRCLE_IMAGEVIEW)
 }
 
 kapt {
