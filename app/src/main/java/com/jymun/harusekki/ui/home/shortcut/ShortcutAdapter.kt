@@ -1,4 +1,4 @@
-package com.jymun.harusekki.ui.shortcut
+package com.jymun.harusekki.ui.home.shortcut
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

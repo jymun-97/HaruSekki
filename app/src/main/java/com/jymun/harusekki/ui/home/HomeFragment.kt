@@ -7,10 +7,10 @@ import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentHomeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.extensions.showOtherPages
-import com.jymun.harusekki.ui.shortcut.MemoShortcutFragment
-import com.jymun.harusekki.ui.shortcut.MenuShortcutFragment
-import com.jymun.harusekki.ui.shortcut.RefrigeratorShortcutFragment
-import com.jymun.harusekki.ui.shortcut.ShortcutAdapter
+import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
+import com.jymun.harusekki.ui.home.shortcut.MenuShortcutFragment
+import com.jymun.harusekki.ui.home.shortcut.RefrigeratorShortcutFragment
+import com.jymun.harusekki.ui.home.shortcut.ShortcutAdapter
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
