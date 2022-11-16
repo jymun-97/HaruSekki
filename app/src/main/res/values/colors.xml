@@ -12,4 +12,8 @@
     <color name="app_signature_bright">#CF4F46</color>
     <color name="app_signature_dark">#FFCC1919</color>
     <color name="gray_light">#E3E3E3</color>
+    <color name="gray_dark">#454545</color>
+    <color name="gray">#B5B5B5</color>
+    <color name="orange">#FF8400</color>
+    <color name="green">#28B62E</color>
 </resources>

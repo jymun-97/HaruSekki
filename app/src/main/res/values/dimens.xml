@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shortcut_page_margin">20dp</dimen>
+    <dimen name="shortcut_page_width">300dp</dimen>
+    <dimen name="shortcut_page_height">180dp</dimen>
+</resources>
