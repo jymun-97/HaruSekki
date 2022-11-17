@@ -1,57 +1,29 @@
 package com.jymun.harusekki.ui.home.recipe.category
 
 import com.jymun.harusekki.R
+import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.recipe.RecipeCategory
+import com.jymun.harusekki.util.resources.ResourcesProvider
+import javax.inject.Inject
 
-object RecipeCategoryGenerator {
+class RecipeCategoryGenerator @Inject constructor(
+    resourcesProvider: ResourcesProvider
+) {
+    private val recipeCategoryStringArrayRes =
+        resourcesProvider.getStringArray(R.array.recipe_category_string_resources)
+    private val recipeCategoryImageArrayRes =
+        resourcesProvider.getDrawableIdArray(R.array.recipe_category_image_resources)
+
     private val recipeCategoryList: List<RecipeCategory> by lazy {
-        listOf(
+        val size = recipeCategoryImageArrayRes.length()
+        (0 until size).map { index ->
             RecipeCategory(
-                id = 0,
-                name = RecipeCategoryType.RICE.value,
-                imgResId = R.drawable.ic_category_rice
-            ),
-            RecipeCategory(
-                id = 1,
-                name = RecipeCategoryType.SIDE.value,
-                imgResId = R.drawable.ic_category_side
-            ),
-            RecipeCategory(
-                id = 2,
-                name = RecipeCategoryType.SOUP.value,
-                imgResId = R.drawable.ic_category_soup
-            ),
-            RecipeCategory(
-                id = 3,
-                name = RecipeCategoryType.STIR.value,
-                imgResId = R.drawable.ic_category_stir
-            ),
-            RecipeCategory(
-                id = 4,
-                name = RecipeCategoryType.NOODLE.value,
-                imgResId = R.drawable.ic_category_noodle
-            ),
-            RecipeCategory(
-                id = 5,
-                name = RecipeCategoryType.STEAMED.value,
-                imgResId = R.drawable.ic_category_steamed
-            ),
-            RecipeCategory(
-                id = 6,
-                name = RecipeCategoryType.WESTERN.value,
-                imgResId = R.drawable.ic_category_western
-            ),
-            RecipeCategory(
-                id = 7,
-                name = RecipeCategoryType.FRIED.value,
-                imgResId = R.drawable.ic_category_fried
-            ),
-            RecipeCategory(
-                id = 8,
-                name = RecipeCategoryType.OTHERS.value,
-                imgResId = R.drawable.ic_category_others
-            ),
-        )
+                id = index.toLong(),
+                type = ModelType.RECIPE_CATEGORY,
+                name = recipeCategoryStringArrayRes[index],
+                imgResId = recipeCategoryImageArrayRes.getResourceId(index, 0)
+            )
+        }
     }
 
     fun get() = recipeCategoryList
