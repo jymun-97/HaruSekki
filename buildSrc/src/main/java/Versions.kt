@@ -25,5 +25,5 @@ object Versions {
 
     // Retrofit
     const val RETROFIT = "2.9.0"
-    const val OKHTTP3 = "4.9.3"
+    const val OKHTTP3 = "4.10.0"
 }
