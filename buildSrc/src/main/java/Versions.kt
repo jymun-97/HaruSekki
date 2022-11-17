@@ -21,4 +21,5 @@ object Versions {
     const val ACTIVITY_KTX = "1.6.1"
     const val FRAGMENT_KTX = "1.5.4"
     const val NAVIGATION = "2.5.3"
+    const val CIRCLE_IMAGEVIEW = "3.1.0"
 }

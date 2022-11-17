@@ -1,4 +1,4 @@
-package com.jymun.harusekki.ui.shortcut
+package com.jymun.harusekki.ui.home.shortcut
 
 import android.os.Bundle
 import android.view.View

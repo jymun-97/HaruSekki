@@ -22,4 +22,7 @@ object Dependencies {
     const val NAVIGATION_FRAGMENT_KTX =
         "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
     const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+
+    // CircleImageView
+    const val CIRCLE_IMAGEVIEW = "de.hdodenhof:circleimageview:${Versions.CIRCLE_IMAGEVIEW}"
 }
