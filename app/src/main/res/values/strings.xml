@@ -3,11 +3,15 @@
         com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior
     </string>
     <string name="app_name">하루세끼</string>
+
+    <!-- Bottom Navigation -->
     <string name="home">홈</string>
     <string name="menu">식단 관리</string>
     <string name="memo">장보기 메모</string>
     <string name="refrigerator">나의 냉장고</string>
     <string name="mypage">마이페이지</string>
+
+    <!-- Shortcuts -->
     <string name="search_image_button_text">직접 레시피 검색</string>
     <string name="search_recipe_by_ingredients">나의 냉장고 속 재료를 조합하여 검색하기</string>
     <string name="shortcut_menu_title">오늘의 메뉴</string>
@@ -17,4 +21,15 @@
     <string name="add">추가</string>
     <string name="shortcut_memo_empty">필요한 재료가 있다면 작성해보세요!</string>
     <string name="shortcut_refrigerator_subtitle">보유한 재료를 냉장고에 넣어보세요!</string>
+
+    <!-- RecipeCategory -->
+    <string name="recipe_category_rice">밥/죽/떡</string>
+    <string name="recipe_category_side">반찬</string>
+    <string name="recipe_category_soup">국/찌개</string>
+    <string name="recipe_category_stir">볶음/구이</string>
+    <string name="recipe_category_noodle">면/만두</string>
+    <string name="recipe_category_steamed">찜/조림</string>
+    <string name="recipe_category_western">양식</string>
+    <string name="recipe_category_fried">튀김/부침</string>
+    <string name="recipe_category_others">기타</string>
 </resources>
