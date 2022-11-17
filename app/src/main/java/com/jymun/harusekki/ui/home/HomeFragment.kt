@@ -2,6 +2,7 @@ package com.jymun.harusekki.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
@@ -12,6 +13,7 @@ import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.harusekki.ui.extensions.addSnapHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryGenerator
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.MenuShortcutFragment
@@ -60,11 +62,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun initRecipeCategoryRecyclerView() {
         binding.fragmentHomeContent.recipeCategoryRecyclerView.apply {
+            addSnapHelper()
             layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
             adapter = ModelRecyclerAdapter<RecipeCategory>(resourcesProvider).apply {
-                submitList(RecipeCategoryGenerator.get())
+                submitList(RecipeCategoryGenerator(resourcesProvider).get())
+                addAdapterListener(object : RecipeCategoryAdapterListener {
+                    override fun onRecipeCategoryItemClicked(recipeCategory: RecipeCategory) {
+                        // TODO. 레시피 카테고리 아이템 클릭 콜백
+                        Toast.makeText(
+                            requireActivity(),
+                            recipeCategory.name,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
             }
-            addSnapHelper()
         }
     }
 }

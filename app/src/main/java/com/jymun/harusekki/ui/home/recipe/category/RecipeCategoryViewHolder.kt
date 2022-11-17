@@ -16,5 +16,10 @@ class RecipeCategoryViewHolder(
         binding.categoryImageView.setImageDrawable(
             resourcesProvider.getDrawable(model.imgResId)
         )
+        (adapterListener as? RecipeCategoryAdapterListener)?.let {
+            binding.root.setOnClickListener { _ ->
+                it.onRecipeCategoryItemClicked(model)
+            }
+        }
     }
 }
