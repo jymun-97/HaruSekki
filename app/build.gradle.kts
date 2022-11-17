@@ -73,6 +73,12 @@ dependencies {
 
     // Circle ImageView
     implementation(Dependencies.CIRCLE_IMAGEVIEW)
+
+    // Retrofit
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.GSON_CONVERTER)
+    implementation(Dependencies.OKHTTP3)
+    implementation(Dependencies.OKHTTP3_INTERCEPTOR)
 }
 
 kapt {

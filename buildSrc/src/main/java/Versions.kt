@@ -22,4 +22,8 @@ object Versions {
     const val FRAGMENT_KTX = "1.5.4"
     const val NAVIGATION = "2.5.3"
     const val CIRCLE_IMAGEVIEW = "3.1.0"
+
+    // Retrofit
+    const val RETROFIT = "2.9.0"
+    const val OKHTTP3 = "4.9.3"
 }
