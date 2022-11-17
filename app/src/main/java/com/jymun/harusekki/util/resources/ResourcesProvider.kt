@@ -1,7 +1,9 @@
 package com.jymun.harusekki.util.resources
 
+import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 interface ResourcesProvider {
@@ -13,4 +15,6 @@ interface ResourcesProvider {
     fun getDimension(@DimenRes resId: Int): Int
 
     fun getScreenWidth(): Int
+
+    fun getDrawable(@DrawableRes resId: Int): Drawable
 }

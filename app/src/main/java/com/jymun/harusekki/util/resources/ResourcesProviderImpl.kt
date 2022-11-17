@@ -1,6 +1,7 @@
 package com.jymun.harusekki.util.resources
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.StringRes
@@ -23,5 +24,7 @@ class ResourcesProviderImpl @Inject constructor(
         context.resources.getDimensionPixelOffset(resId)
 
     override fun getScreenWidth(): Int = context.resources.displayMetrics.widthPixels
+
+    override fun getDrawable(resId: Int): Drawable = ContextCompat.getDrawable(context, resId)!!
 
 }
