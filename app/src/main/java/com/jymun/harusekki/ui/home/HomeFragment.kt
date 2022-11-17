@@ -10,6 +10,7 @@ import com.jymun.harusekki.data.model.recipe.RecipeCategory
 import com.jymun.harusekki.databinding.FragmentHomeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.extensions.addSnapHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryGenerator
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
@@ -63,6 +64,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             adapter = ModelRecyclerAdapter<RecipeCategory>(resourcesProvider).apply {
                 submitList(RecipeCategoryGenerator.get())
             }
+            addSnapHelper()
         }
     }
 }
