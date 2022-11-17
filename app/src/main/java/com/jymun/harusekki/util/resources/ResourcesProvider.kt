@@ -1,14 +1,14 @@
 package com.jymun.harusekki.util.resources
 
+import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 
 interface ResourcesProvider {
 
     fun getString(@StringRes resId: Int): String
+
+    fun getStringArray(@ArrayRes resId: Int): Array<String>
 
     fun getColor(@ColorRes resId: Int): Int
 
@@ -17,4 +17,6 @@ interface ResourcesProvider {
     fun getScreenWidth(): Int
 
     fun getDrawable(@DrawableRes resId: Int): Drawable
+
+    fun getDrawableIdArray(@ArrayRes resId: Int): TypedArray
 }
