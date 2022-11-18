@@ -22,6 +22,11 @@ object ModelViewHolderMapper {
                 ItemRecipeCategoryBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
+            // TODO. other viewHolders
+            else -> RecipeCategoryViewHolder(
+                ItemRecipeCategoryBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
         } as ModelViewHolder<M>
     }
 }
