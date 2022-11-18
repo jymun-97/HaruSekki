@@ -1,4 +1,4 @@
-package com.jymun.harusekki.di
+package com.jymun.harusekki.di.util
 
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import com.jymun.harusekki.util.dispatcher.DispatcherProviderImpl

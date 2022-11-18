@@ -43,6 +43,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         initShortcuts()
         initRecipeCategoryRecyclerView()
+
+        viewModel.loadAllRecipe()
     }
 
     private fun initShortcuts() = with(resourcesProvider) {
