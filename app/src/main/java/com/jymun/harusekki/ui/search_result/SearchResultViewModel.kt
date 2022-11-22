@@ -1,6 +1,5 @@
 package com.jymun.harusekki.ui.search_result
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
@@ -22,23 +21,16 @@ class SearchResultViewModel @Inject constructor(
     private val searchRecipeByIngredientUseCase: SearchRecipeByIngredientUseCase
 ) : BaseViewModel(dispatcherProvider) {
 
-    private val _searchMode = MutableLiveData<SearchMode>()
-    val searchMode: LiveData<SearchMode>
-        get() = _searchMode
+    private val searchMode = MutableLiveData<SearchMode>()
 
-    fun updateSearchMode(mode: SearchMode) = _searchMode.postValue(mode)
+    fun updateSearchMode(mode: SearchMode) = searchMode.postValue(mode)
 
-    fun updateSortOption(sortOption: RecipeSortOption) = _searchMode.value?.let {
+    fun updateSortOption(sortOption: RecipeSortOption) = searchMode.value?.let {
         it.sortOption = sortOption
-        _searchMode.postValue(it)
+        searchMode.postValue(it)
     }
 
-    fun updateCategory(category: RecipeCategory) = _searchMode.value?.let {
-        it.category = category
-        _searchMode.postValue(it)
-    }
-
-    val searchResult = _searchMode.switchMap { mode ->
+    val searchResult = searchMode.switchMap { mode ->
         liveData {
             emit(
                 RecipeCategory.values().map { category ->

@@ -58,6 +58,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         initSearchModeToggleGroup()
         initSearchResultPager()
         initCategoryTabLayout()
+        setInitialPage()
 
         viewModel.updateSearchMode(searchMode)
     }
@@ -150,5 +151,12 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
             tab.text = resourcesProvider.getString(target.textStrId)
         }.attach()
+    }
+
+    private fun setInitialPage() {
+        val target = RecipeCategory.values().indexOf(searchMode.category)
+
+        binding.categoryTabLayout.getTabAt(target)?.select()
+        binding.searchResultFragmentContent.searchResultPager.setCurrentItem(target, false)
     }
 }
