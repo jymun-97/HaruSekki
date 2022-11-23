@@ -1,6 +1,6 @@
 package com.jymun.harusekki.data.model.recipe
 
-import com.jymun.harusekki.data.entity.recipe.RecipeDetailEntity
+import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
@@ -19,7 +19,7 @@ data class RecipeDetail(
     val cookingStepList: List<CookingStep>
 ) : Model(id, type) {
 
-    fun toEntity() = RecipeDetailEntity(
+    fun toEntity() = RecipeEntity(
         id = id,
         title = title,
         category = category.name,
