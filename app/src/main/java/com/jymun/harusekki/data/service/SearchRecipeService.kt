@@ -1,8 +1,6 @@
 package com.jymun.harusekki.data.service
 
-import com.jymun.harusekki.data.entity.recipe.RecipeDetailEntity
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
-import com.jymun.harusekki.data.entity.recipe.SearchRecipeResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,7 +10,7 @@ interface SearchRecipeService {
     @GET("/recipe/findall")
     suspend fun loadAll(
         @Query("order") orderBy: String
-    ): Response<SearchRecipeResponse>
+    ): Response<List<RecipeEntity>>
 
     @GET("/recipe/findbytitle")
     suspend fun searchByTitle(
@@ -29,7 +27,7 @@ interface SearchRecipeService {
     @GET("/recipe/detail")
     suspend fun loadDetail(
         @Query("recipe_id") id: Long
-    ): Response<RecipeDetailEntity>
+    ): Response<RecipeEntity>
 
     @GET("/recipe/findbyingredientlist")
     suspend fun searchByIngredient(
