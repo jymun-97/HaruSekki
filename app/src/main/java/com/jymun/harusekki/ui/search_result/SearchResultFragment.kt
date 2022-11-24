@@ -38,9 +38,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     override fun setUpBinding() = binding.apply {
         viewModel = this@SearchResultFragment.viewModel
         lifecycleOwner = viewLifecycleOwner
-
-        searchResultFragmentContent.viewModel = this@SearchResultFragment.viewModel
-        lifecycleOwner = viewLifecycleOwner
+        searchResultFragmentContent.lifecycleOwner = viewLifecycleOwner
     }
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
