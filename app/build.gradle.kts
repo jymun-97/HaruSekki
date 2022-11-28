@@ -54,6 +54,9 @@ dependencies {
     androidTestImplementation(Testing.ANDROID_JUNIT)
     androidTestImplementation(Testing.ESPRESSO_CORE)
 
+    testImplementation(Testing.TRUTH)
+    testImplementation(Testing.COROUTINE)
+
     // Hilt
     implementation(Dependencies.Hilt)
     kapt(Dependencies.HILT_KAPT)
