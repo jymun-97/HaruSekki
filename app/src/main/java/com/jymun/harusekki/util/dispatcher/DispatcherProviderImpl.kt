@@ -3,9 +3,7 @@ package com.jymun.harusekki.util.dispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class DispatcherProviderImpl @Inject constructor() : DispatcherProvider {
     override val main: CoroutineDispatcher
         get() = Dispatchers.Main

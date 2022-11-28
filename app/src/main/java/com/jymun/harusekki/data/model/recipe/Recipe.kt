@@ -22,6 +22,8 @@ data class Recipe(
         summary = summary,
         imgList = imgList,
         hits = hits,
-        likes = likes
+        likes = likes,
+        ingredientList = null,
+        cookingStepList = null
     )
 }
