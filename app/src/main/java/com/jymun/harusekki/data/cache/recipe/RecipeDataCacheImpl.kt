@@ -36,7 +36,7 @@ class RecipeDataCacheImpl @Inject constructor(
             if (curSorted.value != orderBy) {
                 sort(orderBy)
             }
-            cachedRecipeList!!.filter { it.title == title }
+            cachedRecipeList!!.filter { it.title.contains(title) }
         }
     }
 
