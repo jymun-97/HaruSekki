@@ -8,7 +8,7 @@ data class Recipe(
     override val id: Long,
     override val type: ModelType = ModelType.RECIPE,
     val title: String,
-    val category: RecipeCategory,
+    val category: String,
     val summary: String,
     val hits: Long,
     val likes: Long,
@@ -18,7 +18,7 @@ data class Recipe(
     fun toEntity() = RecipeEntity(
         id = id,
         title = title,
-        category = category.name,
+        category = category,
         summary = summary,
         imgList = imgList,
         hits = hits,
