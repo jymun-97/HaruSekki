@@ -6,7 +6,7 @@ import com.jymun.harusekki.data.model.recipe.RecipeCategory
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import javax.inject.Inject
 
-class RecipeCategoryGenerator @Inject constructor(
+class RecipeCategoryProvider @Inject constructor(
     resourcesProvider: ResourcesProvider
 ) {
     private val recipeCategoryStringArrayRes =
