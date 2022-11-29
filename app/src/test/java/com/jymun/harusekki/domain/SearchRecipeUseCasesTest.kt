@@ -23,7 +23,7 @@ import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class RecipeUseCasesTest {
+class SearchRecipeUseCasesTest {
 
     private val fakeRecipeList = (0 until 100).map {
         RecipeEntity(
