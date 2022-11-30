@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.databinding.ItemRecipeCategoryBinding
+import com.jymun.harusekki.databinding.ItemRecipeGridBinding
+import com.jymun.harusekki.ui.home.RecipeGridViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
 import com.jymun.harusekki.util.resources.ResourcesProvider
 
@@ -20,6 +22,10 @@ object ModelViewHolderMapper {
         return when (type) {
             ModelType.RECIPE_CATEGORY -> RecipeCategoryViewHolder(
                 ItemRecipeCategoryBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
+            ModelType.RECIPE_GRID -> RecipeGridViewHolder(
+                ItemRecipeGridBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
             // TODO. other viewHolders
