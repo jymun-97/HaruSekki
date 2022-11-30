@@ -3,4 +3,5 @@
     <dimen name="shortcut_page_margin">20dp</dimen>
     <dimen name="shortcut_page_width">300dp</dimen>
     <dimen name="shortcut_page_height">180dp</dimen>
+    <dimen name="horizontal_space">20dp</dimen>
 </resources>
