@@ -3,6 +3,7 @@
         com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior
     </string>
     <string name="app_name">하루세끼</string>
+    <string name="best_recipe">Best 레시피</string>
 
     <!-- Bottom Navigation -->
     <string name="home">홈</string>

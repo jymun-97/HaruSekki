@@ -35,7 +35,7 @@ abstract class BaseViewModel(
 
     protected inline fun BaseViewModel.onMainDispatcher(
         crossinline body: suspend CoroutineScope.() -> Unit
-    ) = viewModelScope.launch {
+    ) = viewModelScope.launch(main + exceptionHandler) {
         body(this)
     }
 
@@ -47,7 +47,7 @@ abstract class BaseViewModel(
 
     protected inline fun BaseViewModel.onDefaultDispatcher(
         crossinline body: suspend CoroutineScope.() -> Unit
-    ) = viewModelScope.launch(default) {
+    ) = viewModelScope.launch(default + exceptionHandler) {
         body(this)
     }
 }

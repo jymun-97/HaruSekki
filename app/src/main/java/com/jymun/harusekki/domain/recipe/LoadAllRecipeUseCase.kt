@@ -18,7 +18,8 @@ class LoadAllRecipeUseCase @Inject constructor(
 
     suspend operator fun invoke(
         orderBy: RecipeSortBy = RecipeSortBy.LATEST,
-        refreshFlag: Boolean = false
+        refreshFlag: Boolean = false,
+        isGridType: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 
         val recipeEntityList = recipeRepository.loadAll(orderBy.value, refreshFlag)
@@ -27,7 +28,7 @@ class LoadAllRecipeUseCase @Inject constructor(
         return@withContext recipeEntityList.map {
             Recipe(
                 id = it.id,
-                type = ModelType.RECIPE,
+                type = if (isGridType) ModelType.RECIPE_GRID else ModelType.RECIPE,
                 title = it.title,
                 category = it.category,
                 summary = it.summary,

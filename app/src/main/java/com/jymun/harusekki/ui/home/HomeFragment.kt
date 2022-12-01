@@ -1,20 +1,24 @@
 package com.jymun.harusekki.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.jymun.harusekki.R
+import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.model.recipe.RecipeCategory
 import com.jymun.harusekki.databinding.FragmentHomeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
-import com.jymun.harusekki.ui.extensions.addSnapHelper
+import com.jymun.harusekki.ui.extensions.addSnapToCenterHelper
+import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapterListener
-import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryGenerator
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.MenuShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.RefrigeratorShortcutFragment
@@ -28,6 +32,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
+
     private val shortcutList = listOf(
         MenuShortcutFragment(),
         MemoShortcutFragment(),
@@ -43,8 +48,19 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         initShortcuts()
         initRecipeCategoryRecyclerView()
+        initBestRecipeRecyclerView()
 
-        viewModel.loadAllRecipe()
+        binding.apply {
+            this.fragmentHomeContent.viewModel = this@HomeFragment.viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        viewModel.loadState.observe(viewLifecycleOwner) {
+            Log.d("# HomeFragment", it)
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.loadData()
     }
 
     private fun initShortcuts() = with(resourcesProvider) {
@@ -64,10 +80,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun initRecipeCategoryRecyclerView() {
         binding.fragmentHomeContent.recipeCategoryRecyclerView.apply {
-            addSnapHelper()
+            addSnapToCenterHelper()
             layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
             adapter = ModelRecyclerAdapter<RecipeCategory>(resourcesProvider).apply {
-                submitList(RecipeCategoryGenerator(resourcesProvider).get())
+                submitList(RecipeCategoryProvider(resourcesProvider).get())
+
                 addAdapterListener(object : RecipeCategoryAdapterListener {
                     override fun onRecipeCategoryItemClicked(recipeCategory: RecipeCategory) {
                         // TODO. 레시피 카테고리 아이템 클릭 콜백
@@ -79,6 +96,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                     }
                 })
             }
+        }
+    }
+
+    private fun initBestRecipeRecyclerView() {
+        binding.fragmentHomeContent.bestRecipeRecyclerView.apply {
+            addSnapToStartHelper()
+            layoutManager = GridLayoutManager(requireActivity(), 1, HORIZONTAL, false)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
         }
     }
 }
