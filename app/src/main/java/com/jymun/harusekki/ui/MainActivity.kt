@@ -1,6 +1,7 @@
 package com.jymun.harusekki.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -25,7 +26,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun initBottomNav() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
+        val navController = navHostFragment.navController.apply {
+            addOnDestinationChangedListener { _, destination, _ ->
+                binding.bottomNavigationView.visibility = when (destination.id) {
+                    R.id.fragment_detail -> View.GONE
+
+                    else -> View.VISIBLE
+                }
+            }
+        }
 
         binding.bottomNavigationView.setupWithNavController(navController)
     }
