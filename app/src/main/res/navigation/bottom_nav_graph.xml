@@ -7,7 +7,15 @@
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.jymun.harusekki.ui.home.HomeFragment"
-        android:label="@string/home" />
+        android:label="@string/home">
+        <action
+            android:id="@+id/action_fragment_home_to_detailFragment"
+            app:destination="@id/fragment_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_menu"
         android:name="com.jymun.harusekki.ui.menu.MenuFragment"
@@ -24,4 +32,13 @@
         android:id="@+id/fragment_mypage"
         android:name="com.jymun.harusekki.ui.mypage.MyPageFragment"
         android:label="@string/mypage" />
+    <fragment
+        android:id="@+id/fragment_detail"
+        android:name="com.jymun.harusekki.ui.detail.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
 </navigation>
