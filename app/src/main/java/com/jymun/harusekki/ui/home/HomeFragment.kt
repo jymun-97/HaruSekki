@@ -1,7 +1,6 @@
 package com.jymun.harusekki.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -13,6 +12,7 @@ import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.model.recipe.RecipeCategory
 import com.jymun.harusekki.databinding.FragmentHomeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
+import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.harusekki.ui.extensions.addSnapToCenterHelper
 import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
@@ -50,17 +50,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         initRecipeCategoryRecyclerView()
         initBestRecipeRecyclerView()
 
-        binding.apply {
-            this.fragmentHomeContent.viewModel = this@HomeFragment.viewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
-
-        viewModel.loadState.observe(viewLifecycleOwner) {
-            Log.d("# HomeFragment", it)
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-        }
-
         viewModel.loadData()
+    }
+
+    override fun setUpBinding() = binding.apply {
+        this.fragmentHomeContent.viewModel = this@HomeFragment.viewModel
+        viewModel = this@HomeFragment.viewModel
+        lifecycleOwner = viewLifecycleOwner
+    }
+
+    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
+        if (it is LoadState.Error)
+            Toast.makeText(requireActivity(), it.exception.message, Toast.LENGTH_SHORT).show()
     }
 
     private fun initShortcuts() = with(resourcesProvider) {

@@ -16,4 +16,12 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.tempTextView.text = "장보기 메모"
     }
+
+    override fun setUpBinding() = binding.apply {
+        // TODO("Not yet implemented")
+    }
+
+    override fun observeState() {
+        // TODO("Not yet implemented")
+    }
 }
