@@ -5,31 +5,34 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
+import com.jymun.harusekki.util.exception.CustomExceptions
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import java.net.ConnectException
 import java.net.SocketException
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 abstract class BaseViewModel(
     dispatcherProvider: DispatcherProvider
 ) : ViewModel(), DispatcherProvider by dispatcherProvider {
 
-    protected val _loadState = MutableLiveData<String>()
-    val loadState: LiveData<String>
+    private val _loadState = MutableLiveData<LoadState>()
+    val loadState: LiveData<LoadState>
         get() = _loadState
 
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        throwable.printStackTrace()
         when (throwable) {
-            is SocketException -> _loadState.postValue("인터넷 연결")
-
-            is HttpException, is NullPointerException -> _loadState.postValue("파싱 에러")
-
-            is UnknownHostException -> _loadState.postValue("잘못된 연결")
-
-            else -> _loadState.postValue("실패")
+            is UnknownHostException, is ConnectException -> _loadState.postValue(
+                LoadState.Error(CustomExceptions.InvalidNetworkException())
+            )
+            is SocketException, is SocketTimeoutException -> _loadState.postValue(
+                LoadState.Error(CustomExceptions.FailToConnectServerException())
+            )
+            else -> _loadState.postValue(
+                LoadState.Error(CustomExceptions.InvalidAccessException())
+            )
         }
     }
 
