@@ -1,6 +1,5 @@
 package com.jymun.harusekki.ui.base
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,19 +17,17 @@ abstract class BaseViewModel(
     dispatcherProvider: DispatcherProvider
 ) : ViewModel(), DispatcherProvider by dispatcherProvider {
 
-    private val _loadState = MutableLiveData<LoadState>()
-    val loadState: LiveData<LoadState>
-        get() = _loadState
+    val loadState = MutableLiveData<LoadState>()
 
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         when (throwable) {
-            is UnknownHostException, is ConnectException -> _loadState.postValue(
+            is UnknownHostException, is ConnectException -> loadState.postValue(
                 LoadState.Error(CustomExceptions.InvalidNetworkException())
             )
-            is SocketException, is SocketTimeoutException -> _loadState.postValue(
+            is SocketException, is SocketTimeoutException -> loadState.postValue(
                 LoadState.Error(CustomExceptions.FailToConnectServerException())
             )
-            else -> _loadState.postValue(
+            else -> loadState.postValue(
                 LoadState.Error(CustomExceptions.InvalidAccessException())
             )
         }
@@ -39,18 +36,27 @@ abstract class BaseViewModel(
     protected inline fun BaseViewModel.onMainDispatcher(
         crossinline body: suspend CoroutineScope.() -> Unit
     ) = viewModelScope.launch(main + exceptionHandler) {
+
+        loadState.postValue(LoadState.Loading)
         body(this)
+        loadState.postValue(LoadState.Success)
     }
 
     protected inline fun BaseViewModel.onIoDispatcher(
         crossinline body: suspend CoroutineScope.() -> Unit
     ) = viewModelScope.launch(io + exceptionHandler) {
+
+        loadState.postValue(LoadState.Loading)
         body(this)
+        loadState.postValue(LoadState.Success)
     }
 
     protected inline fun BaseViewModel.onDefaultDispatcher(
         crossinline body: suspend CoroutineScope.() -> Unit
     ) = viewModelScope.launch(default + exceptionHandler) {
+
+        loadState.postValue(LoadState.Loading)
         body(this)
+        loadState.postValue(LoadState.Success)
     }
 }
