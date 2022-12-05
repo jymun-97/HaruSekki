@@ -13,5 +13,10 @@ class RecipeLinearViewHolder(
 
     override fun bindData(model: Recipe, adapterListener: AdapterListener?) {
         binding.recipe = model
+        binding.root.setOnClickListener {
+            adapterListener?.let {
+                (it as RecipeAdapterListener).onRecipeItemClicked(model)
+            }
+        }
     }
 }

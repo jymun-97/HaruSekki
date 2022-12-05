@@ -1,9 +1,11 @@
 package com.jymun.harusekki.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
@@ -17,6 +19,7 @@ import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.harusekki.ui.extensions.addSnapToCenterHelper
 import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
+import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
@@ -45,6 +48,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("# HomeFragment", "onViewCreated() called")
 
         initShortcuts()
         initRecipeCategoryRecyclerView()
@@ -105,14 +109,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.fragmentHomeContent.bestRecipeRecyclerView.apply {
             addSnapToStartHelper()
             layoutManager = GridLayoutManager(requireActivity(), 1, HORIZONTAL, false)
-            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider).apply {
+                addAdapterListener(recipeAdapterListener)
+            }
         }
     }
 
     private fun initLatestRecipeRecyclerview() {
         binding.fragmentHomeContent.latestRecipeRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
-            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider).apply {
+                addAdapterListener(recipeAdapterListener)
+            }
         }
+    }
+
+    private val recipeAdapterListener = object : RecipeAdapterListener {
+        override fun onRecipeItemClicked(recipe: Recipe) = findNavController().navigate(
+            HomeFragmentDirections.actionFragmentHomeToDetailFragment(recipe.id)
+        )
     }
 }
