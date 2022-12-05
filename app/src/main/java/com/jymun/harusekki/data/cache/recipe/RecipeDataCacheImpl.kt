@@ -69,12 +69,12 @@ class RecipeDataCacheImpl @Inject constructor(
 
     private fun sort(orderBy: String) = when (orderBy) {
         RecipeSortBy.OLD.value -> {
-            cachedRecipeList!!.sortBy { it.id }
+            cachedRecipeList!!.sortBy { -it.id }
             curSorted = RecipeSortBy.OLD
         }
 
         RecipeSortBy.LATEST.value -> {
-            cachedRecipeList!!.sortBy { -it.id }
+            cachedRecipeList!!.sortBy { it.id }
             curSorted = RecipeSortBy.LATEST
         }
 
