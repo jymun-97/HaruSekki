@@ -29,4 +29,15 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> : Fragment(
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpBinding()
+        observeState()
+    }
+
+    abstract fun setUpBinding(): B
+
+    abstract fun observeState()
 }

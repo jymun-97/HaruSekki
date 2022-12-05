@@ -16,4 +16,12 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMyPageBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.tempTextView.text = "마이페이지"
     }
+
+    override fun setUpBinding() = binding.apply {
+        // TODO("Not yet implemented")
+    }
+
+    override fun observeState() {
+        // TODO("Not yet implemented")
+    }
 }

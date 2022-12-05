@@ -16,4 +16,12 @@ class RefrigeratorFragment : BaseFragment<RefrigeratorViewModel, FragmentRefrige
         super.onViewCreated(view, savedInstanceState)
         binding.tempTextView.text = "나의 냉장고"
     }
+
+    override fun setUpBinding() = binding.apply {
+        // TODO("Not yet implemented")
+    }
+
+    override fun observeState() {
+        // TODO("Not yet implemented")
+    }
 }

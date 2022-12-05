@@ -17,4 +17,12 @@ class MenuShortcutFragment : BaseFragment<MenuViewModel, ShortcutMenuBinding>() 
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+    override fun setUpBinding() = binding.apply {
+        // TODO("Not yet implemented")
+    }
+
+    override fun observeState() {
+        // TODO("Not yet implemented")
+    }
 }

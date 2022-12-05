@@ -16,4 +16,12 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.tempTextView.text = "식단 관리"
     }
+
+    override fun setUpBinding() = binding.apply {
+        // TODO("Not yet implemented")
+    }
+
+    override fun observeState() {
+        // TODO("Not yet implemented")
+    }
 }
