@@ -28,7 +28,7 @@ class LoadAllRecipeUseCase @Inject constructor(
         return@withContext recipeEntityList.map {
             Recipe(
                 id = it.id,
-                type = if (isGridType) ModelType.RECIPE_GRID else ModelType.RECIPE,
+                type = if (isGridType) ModelType.RECIPE_GRID else ModelType.RECIPE_LINEAR,
                 title = it.title,
                 category = it.category,
                 summary = it.summary,

@@ -31,7 +31,7 @@ class SearchRecipeByIngredientUseCase @Inject constructor(
         return@withContext recipeEntityList.map {
             Recipe(
                 id = it.id,
-                type = ModelType.RECIPE,
+                type = ModelType.RECIPE_LINEAR,
                 title = it.title,
                 category = it.category,
                 summary = it.summary,
