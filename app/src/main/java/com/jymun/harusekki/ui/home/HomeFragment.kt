@@ -49,6 +49,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         initShortcuts()
         initRecipeCategoryRecyclerView()
         initBestRecipeRecyclerView()
+        initLatestRecipeRecyclerview()
 
         viewModel.loadData()
     }
@@ -104,6 +105,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.fragmentHomeContent.bestRecipeRecyclerView.apply {
             addSnapToStartHelper()
             layoutManager = GridLayoutManager(requireActivity(), 1, HORIZONTAL, false)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
+        }
+    }
+
+    private fun initLatestRecipeRecyclerview() {
+        binding.fragmentHomeContent.latestRecipeRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
             adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
         }
     }
