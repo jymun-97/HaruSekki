@@ -13,8 +13,15 @@ class RecipeGridViewHolder(
 ) : ModelViewHolder<Recipe>(binding, resourcesProvider) {
 
     override fun bindData(model: Recipe, adapterListener: AdapterListener?) {
-        binding.recipe = model
-        binding.root.layoutParams.width = getWidthAccordingToShowingCount()
+        binding.apply {
+            recipe = model
+            root.layoutParams.width = getWidthAccordingToShowingCount()
+            root.setOnClickListener {
+                adapterListener?.let {
+                    (it as RecipeAdapterListener).onRecipeItemClicked(model)
+                }
+            }
+        }
     }
 
     private fun getWidthAccordingToShowingCount(): Int {
