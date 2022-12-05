@@ -1,4 +1,4 @@
-package com.jymun.harusekki.ui.home
+package com.jymun.harusekki.ui.home.recipe
 
 import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.recipe.Recipe

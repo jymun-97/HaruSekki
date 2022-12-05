@@ -6,7 +6,7 @@ import com.jymun.harusekki.data.model.ModelType
 
 data class Recipe(
     override val id: Long,
-    override val type: ModelType = ModelType.RECIPE,
+    override val type: ModelType = ModelType.RECIPE_LINEAR,
     val title: String,
     val category: String,
     val summary: String,
