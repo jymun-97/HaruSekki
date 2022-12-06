@@ -25,7 +25,5 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.textView.text = args.id.toString()
     }
 }
