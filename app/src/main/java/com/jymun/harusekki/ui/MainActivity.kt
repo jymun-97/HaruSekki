@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         val navController = navHostFragment.navController.apply {
             addOnDestinationChangedListener { _, destination, _ ->
                 binding.bottomNavigationView.visibility = when (destination.id) {
-                    R.id.fragment_detail -> View.GONE
+                    R.id.fragment_detail, R.id.fragment_search_recipe, R.id.fragment_search_result -> View.GONE
 
                     else -> View.VISIBLE
                 }
