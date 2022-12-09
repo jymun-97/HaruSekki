@@ -64,6 +64,7 @@ class SearchResultPage(
 
     private val recipeAdapterListener = object : RecipeAdapterListener {
         override fun onRecipeItemClicked(recipe: Recipe) {
+            viewModel.readRecipe(recipe)
             moveToDetailFragment(recipe.id)
         }
     }
