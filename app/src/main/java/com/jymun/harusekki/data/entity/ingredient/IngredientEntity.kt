@@ -6,5 +6,5 @@ data class IngredientEntity(
     override val id: Long,
     val title: String,
     val category: String,
-    val image: String
+    val image: String?
 ) : Entity
