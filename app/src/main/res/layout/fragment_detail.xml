@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="recipe"
-            type="com.jymun.harusekki.data.model.recipe.RecipeDetail" />
+            name="viewModel"
+            type="com.jymun.harusekki.ui.detail.DetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -59,7 +59,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="Recipe Title"
+                            android:text="@{viewModel.recipeDetail.title}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold"
