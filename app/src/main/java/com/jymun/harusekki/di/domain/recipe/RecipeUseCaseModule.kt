@@ -1,10 +1,7 @@
 package com.jymun.harusekki.di.domain.recipe
 
 import com.jymun.harusekki.data.repository.RecipeRepository
-import com.jymun.harusekki.domain.recipe.LoadAllRecipeUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByCategoryUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByIngredientUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByTitleUseCase
+import com.jymun.harusekki.domain.recipe.*
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -48,6 +45,15 @@ object RecipeUseCaseModule {
         recipeRepository: RecipeRepository
     ) =
         SearchRecipeByIngredientUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideLoadRecipeDetailUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        LoadRecipeDetailUseCase(
             dispatcherProvider, recipeRepository
         )
 }
