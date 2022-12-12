@@ -82,6 +82,10 @@ dependencies {
     implementation(Dependencies.GSON_CONVERTER)
     implementation(Dependencies.OKHTTP3)
     implementation(Dependencies.OKHTTP3_INTERCEPTOR)
+
+    // Glide
+    implementation(Dependencies.GLIDE)
+    annotationProcessor(Dependencies.GLIDE_COMPILER)
 }
 
 kapt {
