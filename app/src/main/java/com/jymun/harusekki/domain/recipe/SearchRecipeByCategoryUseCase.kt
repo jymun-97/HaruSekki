@@ -4,6 +4,7 @@ import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.repository.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.RecipeSortBy
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import com.jymun.harusekki.util.exception.CustomExceptions
 import kotlinx.coroutines.withContext
@@ -31,7 +32,7 @@ class SearchRecipeByCategoryUseCase @Inject constructor(
                 id = it.id,
                 type = ModelType.RECIPE_LINEAR,
                 title = it.title,
-                category = it.category,
+                category = RecipeCategoryProvider.get(it.category),
                 summary = it.summary,
                 hits = it.hits,
                 likes = it.likes,
