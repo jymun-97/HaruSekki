@@ -8,6 +8,7 @@ import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.recipe.RecipeDetail
 import com.jymun.harusekki.data.repository.RecipeRepository
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class LoadRecipeDetailUseCase @Inject constructor(
             id = recipeEntity.id,
             type = ModelType.RECIPE_LINEAR,
             title = recipeEntity.title,
-            category = recipeEntity.category,
+            category = RecipeCategoryProvider.get(recipeEntity.category),
             summary = recipeEntity.summary,
             imgList = recipeEntity.imgList,
             hits = recipeEntity.hits,

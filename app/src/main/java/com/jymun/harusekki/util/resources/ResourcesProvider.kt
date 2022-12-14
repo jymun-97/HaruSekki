@@ -19,4 +19,6 @@ interface ResourcesProvider {
     fun getDrawable(@DrawableRes resId: Int): Drawable
 
     fun getDrawableIdArray(@ArrayRes resId: Int): TypedArray
+
+    fun getInteger(@IntegerRes resId: Int): Int
 }

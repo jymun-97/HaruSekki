@@ -39,6 +39,16 @@ object BindingAdapters {
             .placeholder(animPlaceholder)
             .error(R.drawable.ic_load_fail)
             .fallback(R.drawable.ic_load_fail)
+            .centerCrop()
             .into(imageView)
+    }
+
+    @BindingAdapter("app:srcId")
+    @JvmStatic
+    fun setImageViewResource(
+        imageView: ImageView,
+        imgResId: Int
+    ) {
+        imageView.setImageResource(imgResId)
     }
 }

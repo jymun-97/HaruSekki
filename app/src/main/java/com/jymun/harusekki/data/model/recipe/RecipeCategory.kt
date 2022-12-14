@@ -10,5 +10,5 @@ data class RecipeCategory(
     val imgResId: Int
 ) : Model(id, type) {
 
-    val text: String get() = name.replaceFirst('/', '\n')
+    val text: String get() = name.replaceFirst(" / ", "\n")
 }

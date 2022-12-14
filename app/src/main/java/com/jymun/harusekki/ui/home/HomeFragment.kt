@@ -89,7 +89,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             addSnapToCenterHelper()
             layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
             adapter = ModelRecyclerAdapter<RecipeCategory>(resourcesProvider).apply {
-                submitList(RecipeCategoryProvider(resourcesProvider).get())
+                submitList(RecipeCategoryProvider.get(resourcesProvider))
 
                 addAdapterListener(object : RecipeCategoryAdapterListener {
                     override fun onRecipeCategoryItemClicked(recipeCategory: RecipeCategory) {
