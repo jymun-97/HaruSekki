@@ -25,13 +25,13 @@
     <string name="shortcut_refrigerator_subtitle">보유한 재료를 냉장고에 넣어보세요!</string>
 
     <!-- RecipeCategory -->
-    <string name="recipe_category_rice">밥/죽/떡</string>
+    <string name="recipe_category_rice">밥 / 죽 / 떡</string>
     <string name="recipe_category_side">반찬</string>
-    <string name="recipe_category_soup">국/찌개</string>
-    <string name="recipe_category_stir">볶음/구이</string>
-    <string name="recipe_category_noodle">면/만두</string>
-    <string name="recipe_category_steamed">찜/조림</string>
+    <string name="recipe_category_soup">국 / 찌개</string>
+    <string name="recipe_category_stir">볶음 / 구이</string>
+    <string name="recipe_category_noodle">면 / 만두</string>
+    <string name="recipe_category_steamed">찜 / 조림</string>
     <string name="recipe_category_western">양식</string>
-    <string name="recipe_category_fried">튀김/부침</string>
+    <string name="recipe_category_fried">튀김 / 부침</string>
     <string name="recipe_category_others">기타</string>
 </resources>

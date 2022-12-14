@@ -18,7 +18,7 @@ object RecipeCategoryProvider {
             resourcesProvider.getDrawableIdArray(R.array.recipe_category_image_resources)
 
         val size = recipeCategoryImageArrayRes.length()
-        (0 until size).map { index ->
+        recipeCategoryList = (0 until size).map { index ->
             RecipeCategory(
                 id = index.toLong(),
                 type = ModelType.RECIPE_CATEGORY,
