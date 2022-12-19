@@ -1,4 +1,4 @@
-package com.jymun.harusekki.ui.cooking_step
+package com.jymun.harusekki.ui.detail.cooking_step
 
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.databinding.ItemCookingStepBinding
@@ -13,5 +13,10 @@ class CookingStepViewHolder(
 
     override fun bindData(model: CookingStep, adapterListener: AdapterListener?) {
         binding.cookingStep = model
+        binding.cookingStepImageView.setOnClickListener {
+            adapterListener?.let {
+                (it as CookingStepAdapterListener).onCookingStepImageClicked(model.image)
+            }
+        }
     }
 }

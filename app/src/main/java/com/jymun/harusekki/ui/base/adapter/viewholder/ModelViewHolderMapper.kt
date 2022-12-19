@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.databinding.*
-import com.jymun.harusekki.ui.cooking_step.CookingStepViewHolder
+import com.jymun.harusekki.ui.detail.cooking_step.CookingStepViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeGridViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeLinearViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
