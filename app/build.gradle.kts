@@ -86,6 +86,9 @@ dependencies {
     // Glide
     implementation(Dependencies.GLIDE)
     annotationProcessor(Dependencies.GLIDE_COMPILER)
+
+    // Photo View
+    implementation(Dependencies.PHOTOVIEW)
 }
 
 kapt {

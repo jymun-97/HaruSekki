@@ -4,10 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
-import com.jymun.harusekki.databinding.ItemIngredientBinding
-import com.jymun.harusekki.databinding.ItemRecipeCategoryBinding
-import com.jymun.harusekki.databinding.ItemRecipeGridBinding
-import com.jymun.harusekki.databinding.ItemRecipeLinearBinding
+import com.jymun.harusekki.databinding.*
+import com.jymun.harusekki.ui.detail.cooking_step.CookingStepViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeGridViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeLinearViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
@@ -38,6 +36,10 @@ object ModelViewHolderMapper {
             )
             ModelType.INGREDIENT -> IngredientViewHolder(
                 ItemIngredientBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
+            ModelType.COOKING_STEP -> CookingStepViewHolder(
+                ItemCookingStepBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
             else -> RecipeCategoryViewHolder(

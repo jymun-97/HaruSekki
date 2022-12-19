@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.harusekki.R
+import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.databinding.FragmentDetailBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.detail.cooking_step.CookingStepAdapterListener
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -44,6 +48,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         initNeedIngredientRecyclerView()
+        initCookingStepRecyclerView()
 
         viewModel.loadData(args.id)
     }
@@ -60,5 +65,20 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
                 override fun canScrollVertically(): Boolean = false
             }
         }
+    }
+
+    private fun initCookingStepRecyclerView() {
+        binding.fragmentDetailContent.cookingStepRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = ModelRecyclerAdapter<CookingStep>(resourcesProvider).apply {
+                addAdapterListener(cookingStepAdapterListener)
+            }
+        }
+    }
+
+    private val cookingStepAdapterListener = object : CookingStepAdapterListener {
+        override fun onCookingStepImageClicked(imageUrl: String) = findNavController().navigate(
+            DetailFragmentDirections.actionFragmentDetailToImageDetailFragment(imageUrl)
+        )
     }
 }
