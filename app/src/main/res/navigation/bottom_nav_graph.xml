@@ -40,5 +40,20 @@
             android:name="id"
             android:defaultValue="0L"
             app:argType="long" />
+        <action
+            android:id="@+id/action_fragment_detail_to_image_detail_fragment"
+            app:destination="@id/fragment_image_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_image_detail"
+        android:name="com.jymun.harusekki.ui.detail.cooking_step.ImageDetailFragment"
+        android:label="ImageDetailFragment">
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
     </fragment>
 </navigation>
