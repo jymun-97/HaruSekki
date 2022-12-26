@@ -15,6 +15,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_fragment_home_to_searchRecipeFragment"
+            app:destination="@id/fragment_search_recipe" />
     </fragment>
     <fragment
         android:id="@+id/fragment_menu"
@@ -56,4 +59,8 @@
             android:name="imageUrl"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_search_recipe"
+        android:name="com.jymun.harusekki.ui.search_recipe.SearchRecipeFragment"
+        android:label="SearchRecipeFragment" />
 </navigation>

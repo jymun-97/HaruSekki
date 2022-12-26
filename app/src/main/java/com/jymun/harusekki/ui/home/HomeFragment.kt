@@ -60,6 +60,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun setUpBinding() = binding.apply {
         this.fragmentHomeContent.viewModel = this@HomeFragment.viewModel
+        this.fragmentHomeContent.lifecycleOwner = viewLifecycleOwner
         viewModel = this@HomeFragment.viewModel
         lifecycleOwner = viewLifecycleOwner
     }
@@ -99,6 +100,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                             recipeCategory.name,
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionFragmentHomeToSearchRecipeFragment()
+                        )
                     }
                 })
             }
