@@ -15,8 +15,6 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
     override fun getViewDataBinding() = FragmentSearchRecipeBinding.inflate(layoutInflater)
 
     override fun setUpBinding() = binding.apply {
-        this.fragmentSearchRecipeContent.viewModel = this@SearchRecipeFragment.viewModel
-        this.fragmentSearchRecipeContent.lifecycleOwner = viewLifecycleOwner
         viewModel = this@SearchRecipeFragment.viewModel
         lifecycleOwner = viewLifecycleOwner
     }
