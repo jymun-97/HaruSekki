@@ -89,6 +89,11 @@ dependencies {
 
     // Photo View
     implementation(Dependencies.PHOTOVIEW)
+
+    // Room
+    implementation(Dependencies.ROOM)
+    implementation(Dependencies.ROOM_KTX)
+    kapt(Dependencies.ROOM_COMPILER)
 }
 
 kapt {

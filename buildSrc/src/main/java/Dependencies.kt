@@ -38,4 +38,9 @@ object Dependencies {
 
     // Photo View
     const val PHOTOVIEW = "com.github.chrisbanes:PhotoView:${Versions.PHOTOVIEW}"
+
+    // Room
+    const val ROOM = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val ROOM_KTX = "androidx.room:room-ktx:${Versions.ROOM}"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
 }
