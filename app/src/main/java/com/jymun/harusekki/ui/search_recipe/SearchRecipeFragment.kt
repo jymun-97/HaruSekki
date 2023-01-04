@@ -40,7 +40,8 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
         super.onViewCreated(view, savedInstanceState)
 
         initSearchKeywordRecyclerView()
-//        createSearchKeywordForTest()
+        initSearchEditText()
+
         viewModel.loadAllSearchKeywords()
     }
 
@@ -65,19 +66,9 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
         SearchRecipeFragmentDirections.actionFragmentSearchRecipeToSearchResultFragment()
     )
 
-    private fun createSearchKeywordForTest() {
-        val testData = listOf(
-            SearchKeyword(keyword = "비빔밥"),
-            SearchKeyword(keyword = "김치찌개"),
-            SearchKeyword(keyword = "삼겹살"),
-            SearchKeyword(keyword = "제육볶음"),
-            SearchKeyword(keyword = "국수"),
-            SearchKeyword(keyword = "라면"),
-            SearchKeyword(keyword = "된장찌개"),
-            SearchKeyword(keyword = "김치볶음밥"),
-            SearchKeyword(keyword = "시금치"),
-            SearchKeyword(keyword = "나물"),
-        )
-        testData.forEach { viewModel.addSearchKeyword(it) }
+    private fun initSearchEditText() {
+        binding.searchEditText.setOnFocusChangeListener { _, isFocused ->
+            binding.cancelButton.visibility = if (isFocused) View.VISIBLE else View.GONE
+        }
     }
 }
