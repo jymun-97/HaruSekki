@@ -27,4 +27,5 @@ object Versions {
     const val OKHTTP3 = "4.10.0"
     const val GLIDE = "4.14.2"
     const val PHOTOVIEW = "2.3.0"
+    const val ROOM = "2.4.3"
 }
