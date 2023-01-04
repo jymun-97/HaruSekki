@@ -12,6 +12,7 @@ import com.jymun.harusekki.databinding.FragmentSearchRecipeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.search_result.SearchMode
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -51,7 +52,7 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             adapter = ModelRecyclerAdapter<SearchKeyword>(resourcesProvider).apply {
                 addAdapterListener(object : SearchKeywordAdapterListener {
                     override fun onKeywordTextClicked(keyword: String) {
-                        moveToSearchResultFragment()
+                        moveToSearchResultFragment(keyword)
                     }
 
                     override fun onDeleteButtonClicked(searchKeyword: SearchKeyword) {
@@ -62,8 +63,10 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
         }
     }
 
-    private fun moveToSearchResultFragment() = findNavController().navigate(
-        SearchRecipeFragmentDirections.actionFragmentSearchRecipeToSearchResultFragment()
+    private fun moveToSearchResultFragment(keyword: String) = findNavController().navigate(
+        SearchRecipeFragmentDirections.actionFragmentSearchRecipeToSearchResultFragment(
+            SearchMode.ByTitle(keyword)
+        )
     )
 
     private fun initSearchEditText() {

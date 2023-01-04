@@ -15,6 +15,9 @@ sealed class SearchMode : Parcelable {
     object ByIngredient : SearchMode()
 
     @Parcelize
+    object Latest : SearchMode()
+
+    @Parcelize
     object Best : SearchMode()
 
     @Parcelize
