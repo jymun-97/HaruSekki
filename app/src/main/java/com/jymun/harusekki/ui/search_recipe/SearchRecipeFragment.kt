@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import com.jymun.harusekki.data.model.recipe.SearchKeyword
@@ -49,12 +50,7 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             adapter = ModelRecyclerAdapter<SearchKeyword>(resourcesProvider).apply {
                 addAdapterListener(object : SearchKeywordAdapterListener {
                     override fun onKeywordTextClicked(keyword: String) {
-                        // TODO. 검색 결과 창으로 이동
-                        Toast.makeText(
-                            requireActivity(),
-                            keyword,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        moveToSearchResultFragment()
                     }
 
                     override fun onDeleteButtonClicked(searchKeyword: SearchKeyword) {
@@ -64,6 +60,10 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             }
         }
     }
+
+    private fun moveToSearchResultFragment() = findNavController().navigate(
+        SearchRecipeFragmentDirections.actionFragmentSearchRecipeToSearchResultFragment()
+    )
 
     private fun createSearchKeywordForTest() {
         val testData = listOf(
