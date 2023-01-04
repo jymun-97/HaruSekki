@@ -51,8 +51,9 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             layoutManager = LinearLayoutManager(requireActivity(), HORIZONTAL, false)
             adapter = ModelRecyclerAdapter<SearchKeyword>(resourcesProvider).apply {
                 addAdapterListener(object : SearchKeywordAdapterListener {
-                    override fun onKeywordTextClicked(keyword: String) {
-                        moveToSearchResultFragment(keyword)
+                    override fun onKeywordTextClicked(searchKeyword: SearchKeyword) {
+                        viewModel.addSearchKeyword(searchKeyword)
+                        moveToSearchResultFragment(searchKeyword.keyword)
                     }
 
                     override fun onDeleteButtonClicked(searchKeyword: SearchKeyword) {

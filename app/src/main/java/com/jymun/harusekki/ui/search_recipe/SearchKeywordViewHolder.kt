@@ -16,7 +16,7 @@ class SearchKeywordViewHolder(
             searchKeyword = model
             keywordTextView.setOnClickListener {
                 adapterListener?.let {
-                    (it as SearchKeywordAdapterListener).onKeywordTextClicked(model.keyword)
+                    (it as SearchKeywordAdapterListener).onKeywordTextClicked(model)
                 }
             }
             deleteKeywordImageButton.setOnClickListener {
