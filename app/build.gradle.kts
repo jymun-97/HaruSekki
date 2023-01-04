@@ -4,6 +4,7 @@ plugins {
     id(Plugins.KAPT)
     id(Plugins.HILT)
     id(Plugins.NAVIGATION_SAFE_ARGS)
+    id(Plugins.PARCELIZE)
 }
 
 android {
