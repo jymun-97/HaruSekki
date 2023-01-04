@@ -32,7 +32,7 @@ class SearchRecipeViewModel @Inject constructor(
     }
 
     fun deleteAllSearchKeywords() = onMainDispatcher {
-        _searchKeywordList.postValue(null)
+        _searchKeywordList.postValue(emptyList())
         deleteAllSearchKeywordsUseCase()
     }
 
@@ -43,6 +43,6 @@ class SearchRecipeViewModel @Inject constructor(
 
     fun deleteSearchKeyword(searchKeyword: SearchKeyword) = onMainDispatcher {
         deleteSearchKeywordUseCase(searchKeyword)
-//        loadAllSearchKeywords()
+        loadAllSearchKeywords()
     }
 }

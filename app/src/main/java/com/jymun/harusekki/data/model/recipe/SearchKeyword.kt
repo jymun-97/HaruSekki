@@ -11,7 +11,6 @@ data class SearchKeyword(
 ) : Model(id, type) {
 
     fun toEntity() = SearchKeywordEntity(
-        id = id,
         keyword = keyword
     )
 }
