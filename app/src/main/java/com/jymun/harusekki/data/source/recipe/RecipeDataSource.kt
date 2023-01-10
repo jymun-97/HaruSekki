@@ -4,26 +4,37 @@ import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 
 interface RecipeDataSource {
 
-    suspend fun loadAll(
-        orderBy: String
-    ): List<RecipeEntity>
+    interface Remote {
 
-    suspend fun searchByTitle(
-        title: String,
-        orderBy: String
-    ): List<RecipeEntity>
+        suspend fun loadAll(
+            orderBy: String
+        ): List<RecipeEntity>
 
-    suspend fun searchByCategory(
-        category: String,
-        orderBy: String
-    ): List<RecipeEntity>
+        suspend fun searchByTitle(
+            title: String,
+            orderBy: String
+        ): List<RecipeEntity>
 
-    suspend fun loadDetail(
-        id: Long
-    ): RecipeEntity
+        suspend fun searchByCategory(
+            category: String,
+            orderBy: String
+        ): List<RecipeEntity>
 
-    suspend fun searchByIngredient(
-        ingredientList: List<Long>
-    ): List<RecipeEntity>
+        suspend fun loadDetail(
+            id: Long
+        ): RecipeEntity
 
+        suspend fun searchByIngredient(
+            ingredientList: List<Long>
+        ): List<RecipeEntity>
+    }
+
+    interface Local {
+
+        suspend fun loadLatestReadRecipe(): List<RecipeEntity>
+
+        suspend fun insertLatestReadRecipe(recipeEntity: RecipeEntity)
+
+        suspend fun deleteOldestReadRecipe()
+    }
 }

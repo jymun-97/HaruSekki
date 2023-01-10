@@ -7,7 +7,7 @@ import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.recipe.RecipeDetail
-import com.jymun.harusekki.data.repository.RecipeRepository
+import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext

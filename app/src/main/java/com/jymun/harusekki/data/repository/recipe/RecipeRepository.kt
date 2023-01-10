@@ -1,4 +1,4 @@
-package com.jymun.harusekki.data.repository
+package com.jymun.harusekki.data.repository.recipe
 
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 
@@ -30,4 +30,9 @@ interface RecipeRepository {
         ingredientList: List<Long>
     ): List<RecipeEntity>
 
+    suspend fun loadLatestReadRecipe(): List<RecipeEntity>
+
+    suspend fun insertLatestReadRecipe(recipeEntity: RecipeEntity)
+
+    suspend fun deleteOldestReadRecipe()
 }

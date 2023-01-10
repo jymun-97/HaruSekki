@@ -1,5 +1,7 @@
 package com.jymun.harusekki.di.data
 
+import com.jymun.harusekki.data.source.recipe.RecipeDataSource
+import com.jymun.harusekki.data.source.recipe.RecipeLocalDataSource
 import com.jymun.harusekki.data.source.recipe.SearchKeywordDataSource
 import com.jymun.harusekki.data.source.recipe.SearchKeywordLocalDataSource
 import dagger.Binds
@@ -17,4 +19,10 @@ abstract class LocalDataSourceModule {
     abstract fun bindsSearchKeywordLocalDataSource(
         searchKeywordLocalDataSource: SearchKeywordLocalDataSource
     ): SearchKeywordDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsRecipeLocalDataSource(
+        recipeLocalDataSource: RecipeLocalDataSource
+    ): RecipeDataSource.Local
 }

@@ -3,10 +3,9 @@ package com.jymun.harusekki.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jymun.harusekki.data.model.recipe.Recipe
+import com.jymun.harusekki.domain.recipe.DeleteOldestReadRecipeUseCase
+import com.jymun.harusekki.domain.recipe.InsertLatestReadRecipeUseCase
 import com.jymun.harusekki.domain.recipe.LoadAllRecipeUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByCategoryUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByIngredientUseCase
-import com.jymun.harusekki.domain.recipe.SearchRecipeByTitleUseCase
 import com.jymun.harusekki.ui.base.BaseViewModel
 import com.jymun.harusekki.ui.home.recipe.RecipeSortBy
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
@@ -17,9 +16,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
     private val loadAllRecipeUseCase: LoadAllRecipeUseCase,
-    private val searchRecipeByTitleUseCase: SearchRecipeByTitleUseCase,
-    private val searchRecipeByCategoryUseCase: SearchRecipeByCategoryUseCase,
-    private val searchRecipeByIngredientUseCase: SearchRecipeByIngredientUseCase
+    private val insertLatestReadRecipeUseCase: InsertLatestReadRecipeUseCase,
+    private val deleteOldestReadRecipeUseCase: DeleteOldestReadRecipeUseCase
 ) : BaseViewModel(dispatcherProvider) {
 
     private val _recipeList = MutableLiveData<List<Recipe>?>()
@@ -31,12 +29,17 @@ class HomeViewModel @Inject constructor(
         get() = _bestRecipeList
 
     fun loadData() = onMainDispatcher {
-        _recipeList.postValue(loadAllRecipeUseCase())
+        _recipeList.postValue(loadAllRecipeUseCase().subList(0, 10))
         _bestRecipeList.postValue(
             loadAllRecipeUseCase(
                 orderBy = RecipeSortBy.LIKES_DESC,
                 isGridType = true
-            )
+            ).subList(0, 10)
         )
+    }
+
+    fun readRecipe(recipe: Recipe) = onMainDispatcher {
+        insertLatestReadRecipeUseCase(recipe)
+        deleteOldestReadRecipeUseCase()
     }
 }

@@ -17,7 +17,7 @@ interface RecipeDataCache {
         category: String,
         orderBy: String
     ): List<RecipeEntity>?
-    
+
     fun loadDetail(
         id: Long
     ): RecipeEntity?
@@ -29,6 +29,14 @@ interface RecipeDataCache {
     fun updateCache(
         recipeEntity: RecipeEntity
     )
+
+    fun initLatestReadRecipeList(latestReadRecipeList: List<RecipeEntity>)
+
+    fun loadLatestReadRecipe(): List<RecipeEntity>
+
+    fun insertLatestReadRecipe(recipeEntity: RecipeEntity)
+
+    fun deleteOldestReadRecipe()
 
     fun refreshRecipeList()
 }

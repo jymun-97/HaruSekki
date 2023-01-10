@@ -1,9 +1,9 @@
 package com.jymun.harusekki.di.data
 
-import com.jymun.harusekki.data.repository.RecipeRepository
-import com.jymun.harusekki.data.repository.RecipeRepositoryImpl
 import com.jymun.harusekki.data.repository.SearchKeywordRepository
 import com.jymun.harusekki.data.repository.SearchKeywordRepositoryImpl
+import com.jymun.harusekki.data.repository.recipe.RecipeRepository
+import com.jymun.harusekki.data.repository.recipe.RecipeRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

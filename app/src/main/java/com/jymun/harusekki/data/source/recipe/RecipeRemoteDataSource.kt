@@ -9,7 +9,7 @@ import javax.inject.Inject
 class RecipeRemoteDataSource @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val searchRecipeService: SearchRecipeService
-) : RecipeDataSource {
+) : RecipeDataSource.Remote {
 
     override suspend fun loadAll(
         orderBy: String
