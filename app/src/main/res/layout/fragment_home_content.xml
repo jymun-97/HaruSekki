@@ -62,6 +62,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipeCategoryRecyclerView" />
 
+                <TextView
+                    android:id="@+id/searchMoreBestRecipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontal_space"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="@string/show_more"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    app:drawableEndCompat="@drawable/ic_arrow_forward"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="@id/bestRecipeTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/bestRecipeTextView" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bestRecipeRecyclerView"
                     android:layout_width="0dp"
@@ -86,6 +102,22 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bestRecipeRecyclerView" />
+
+                <TextView
+                    android:id="@+id/searchMoreLatestRecipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontal_space"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="@string/show_more"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    app:drawableEndCompat="@drawable/ic_arrow_forward"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="@id/latestRecipeTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/latestRecipeTextView" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/latestRecipeRecyclerView"

@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_fragment_home_to_searchRecipeFragment"
             app:destination="@id/fragment_search_recipe" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_search_result"
+            app:destination="@id/fragment_search_result" />
     </fragment>
     <fragment
         android:id="@+id/fragment_menu"
@@ -62,5 +65,17 @@
     <fragment
         android:id="@+id/fragment_search_recipe"
         android:name="com.jymun.harusekki.ui.search_recipe.SearchRecipeFragment"
-        android:label="SearchRecipeFragment" />
+        android:label="SearchRecipeFragment">
+        <action
+            android:id="@+id/action_fragment_search_recipe_to_searchResultFragment"
+            app:destination="@id/fragment_search_result" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_search_result"
+        android:name="com.jymun.harusekki.ui.search_result.SearchResultFragment"
+        android:label="SearchResultFragment">
+        <argument
+            android:name="searchMode"
+            app:argType="com.jymun.harusekki.ui.search_result.SearchMode" />
+    </fragment>
 </navigation>

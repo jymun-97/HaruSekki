@@ -5,7 +5,7 @@ import com.jymun.harusekki.ui.base.adapter.AdapterListener
 
 interface SearchKeywordAdapterListener : AdapterListener {
 
-    fun onKeywordTextClicked(keyword: String)
+    fun onKeywordTextClicked(searchKeyword: SearchKeyword)
 
     fun onDeleteButtonClicked(searchKeyword: SearchKeyword)
 }

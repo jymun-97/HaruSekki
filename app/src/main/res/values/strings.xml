@@ -39,4 +39,6 @@
     <string name="latest_search_keyword">최근 검색어</string>
     <string name="remove_all">전체 삭제</string>
     <string name="latest_read_recipe">최근 열람한 레시피</string>
+    <string name="show_more">더보기</string>
+    <string name="toast_empty_keyword">검색할 키워드를 입력하세요.</string>
 </resources>

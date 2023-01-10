@@ -26,6 +26,7 @@ import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.MenuShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.RefrigeratorShortcutFragment
 import com.jymun.harusekki.ui.home.shortcut.ShortcutAdapter
+import com.jymun.harusekki.ui.search_result.SearchMode
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -54,6 +55,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         initRecipeCategoryRecyclerView()
         initBestRecipeRecyclerView()
         initLatestRecipeRecyclerview()
+        initSearchImageButton()
+        initSearchByIngredientButton()
+        initSearchMoreBestRecipeButton()
+        initSearchMoreLatestRecipeButton()
 
         viewModel.loadData()
     }
@@ -94,20 +99,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
                 addAdapterListener(object : RecipeCategoryAdapterListener {
                     override fun onRecipeCategoryItemClicked(recipeCategory: RecipeCategory) {
-                        // TODO. 레시피 카테고리 아이템 클릭 콜백
-                        Toast.makeText(
-                            requireActivity(),
-                            recipeCategory.name,
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionFragmentHomeToSearchRecipeFragment()
-                        )
+                        moveToSearchResultFragment(SearchMode.ByCategory(recipeCategory.name))
                     }
                 })
             }
         }
+    }
+
+    private val recipeAdapterListener = object : RecipeAdapterListener {
+        override fun onRecipeItemClicked(recipe: Recipe) = moveToDetailFragment(recipe.id)
     }
 
     private fun initBestRecipeRecyclerView() {
@@ -129,9 +129,38 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private val recipeAdapterListener = object : RecipeAdapterListener {
-        override fun onRecipeItemClicked(recipe: Recipe) = findNavController().navigate(
-            HomeFragmentDirections.actionFragmentHomeToDetailFragment(recipe.id)
-        )
+    private fun initSearchImageButton() {
+        binding.searchImageButton.setOnClickListener { moveToSearchRecipeFragment() }
+        binding.searchTextButton.setOnClickListener { moveToSearchRecipeFragment() }
     }
+
+    private fun initSearchByIngredientButton() {
+        binding.searchRecipeByIngredientsButton.setOnClickListener {
+            moveToSearchResultFragment(SearchMode.ByIngredient)
+        }
+    }
+
+    private fun initSearchMoreBestRecipeButton() {
+        binding.fragmentHomeContent.searchMoreBestRecipe.setOnClickListener {
+            moveToSearchResultFragment(SearchMode.Best)
+        }
+    }
+
+    private fun initSearchMoreLatestRecipeButton() {
+        binding.fragmentHomeContent.searchMoreLatestRecipe.setOnClickListener {
+            moveToSearchResultFragment(SearchMode.Latest)
+        }
+    }
+
+    private fun moveToDetailFragment(id: Long) = findNavController().navigate(
+        HomeFragmentDirections.actionFragmentHomeToDetailFragment(id)
+    )
+
+    private fun moveToSearchRecipeFragment() = findNavController().navigate(
+        HomeFragmentDirections.actionFragmentHomeToSearchRecipeFragment()
+    )
+
+    private fun moveToSearchResultFragment(searchMode: SearchMode) = findNavController().navigate(
+        HomeFragmentDirections.actionFragmentHomeToFragmentSearchResult(searchMode)
+    )
 }
