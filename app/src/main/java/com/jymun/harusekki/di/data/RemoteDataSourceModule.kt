@@ -16,5 +16,5 @@ abstract class RemoteDataSourceModule {
     @Singleton
     abstract fun bindsRecipeRemoteDataSource(
         recipeRemoteDataSource: RecipeRemoteDataSource
-    ): RecipeDataSource
+    ): RecipeDataSource.Remote
 }
