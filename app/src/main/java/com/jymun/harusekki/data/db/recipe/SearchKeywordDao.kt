@@ -12,7 +12,7 @@ interface SearchKeywordDao {
     @Delete
     suspend fun deleteKeyword(keyword: SearchKeywordEntity)
 
-    @Query("SELECT * FROM search_keyword")
+    @Query("SELECT * FROM search_keyword ORDER BY timestamp DESC")
     suspend fun loadAllKeywords(): List<SearchKeywordEntity>
 
     @Query("DELETE FROM search_keyword")
