@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.recipe.SearchKeyword
 import com.jymun.harusekki.databinding.FragmentSearchRecipeBinding
 import com.jymun.harusekki.ui.base.BaseFragment
@@ -85,7 +86,11 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
                     moveToSearchResultFragment(text.toString())
                     viewModel.addSearchKeyword(SearchKeyword(keyword = text.toString()))
                 } else {
-                    Toast.makeText(requireActivity(), "검색할 키워드를 입력하세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        resourcesProvider.getString(R.string.toast_empty_keyword),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 true
             }
