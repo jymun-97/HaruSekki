@@ -1,7 +1,9 @@
 package com.jymun.harusekki.ui.search_recipe
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +44,7 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
 
         initSearchKeywordRecyclerView()
         initSearchEditText()
+        showKeyboard()
 
         viewModel.loadAllSearchKeywords()
     }
@@ -71,8 +74,18 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
     )
 
     private fun initSearchEditText() {
-        binding.searchEditText.setOnFocusChangeListener { _, isFocused ->
-            binding.cancelButton.visibility = if (isFocused) View.VISIBLE else View.GONE
+        binding.searchEditText.apply {
+            requestFocus()
+            setOnFocusChangeListener { _, isFocused ->
+                binding.cancelButton.visibility = if (isFocused) View.VISIBLE else View.GONE
+            }
         }
+    }
+
+    private fun showKeyboard() {
+        val imm: InputMethodManager = requireActivity().getSystemService(
+            INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        imm.showSoftInput(binding.searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
 }
