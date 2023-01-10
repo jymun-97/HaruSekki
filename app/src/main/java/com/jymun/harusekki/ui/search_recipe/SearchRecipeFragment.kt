@@ -3,6 +3,7 @@ package com.jymun.harusekki.ui.search_recipe
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -78,6 +79,15 @@ class SearchRecipeFragment : BaseFragment<SearchRecipeViewModel, FragmentSearchR
             requestFocus()
             setOnFocusChangeListener { _, isFocused ->
                 binding.cancelButton.visibility = if (isFocused) View.VISIBLE else View.GONE
+            }
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH && !text.isNullOrEmpty()) {
+                    moveToSearchResultFragment(text.toString())
+                    viewModel.addSearchKeyword(SearchKeyword(keyword = text.toString()))
+                } else {
+                    Toast.makeText(requireActivity(), "검색할 키워드를 입력하세요.", Toast.LENGTH_SHORT).show()
+                }
+                true
             }
         }
     }
