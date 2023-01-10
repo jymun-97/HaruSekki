@@ -2,6 +2,7 @@ package com.jymun.harusekki.di.data
 
 import android.content.Context
 import androidx.room.Room
+import com.jymun.harusekki.data.db.recipe.RecipeDatabase
 import com.jymun.harusekki.data.db.recipe.SearchKeywordDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,5 +23,15 @@ object DatabaseModule {
         context.applicationContext,
         SearchKeywordDatabase::class.java,
         "search_keyword"
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideRecipeDatabase(
+        @ApplicationContext context: Context
+    ): RecipeDatabase = Room.databaseBuilder(
+        context.applicationContext,
+        RecipeDatabase::class.java,
+        "recipe"
     ).build()
 }
