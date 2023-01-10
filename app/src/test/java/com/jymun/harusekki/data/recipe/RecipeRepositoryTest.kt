@@ -4,8 +4,8 @@ import com.google.common.truth.Truth.assertThat
 import com.jymun.harusekki.data.cache.recipe.RecipeDataCache
 import com.jymun.harusekki.data.cache.recipe.RecipeDataCacheImpl
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
-import com.jymun.harusekki.data.repository.RecipeRepository
-import com.jymun.harusekki.data.repository.RecipeRepositoryImpl
+import com.jymun.harusekki.data.repository.recipe.RecipeRepository
+import com.jymun.harusekki.data.repository.recipe.RecipeRepositoryImpl
 import com.jymun.harusekki.data.source.recipe.RecipeDataSource
 import com.jymun.harusekki.util.TestDispatcherProvider
 import kotlinx.coroutines.Dispatchers

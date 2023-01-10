@@ -5,8 +5,8 @@ import com.jymun.harusekki.data.cache.recipe.RecipeDataCache
 import com.jymun.harusekki.data.cache.recipe.RecipeDataCacheImpl
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 import com.jymun.harusekki.data.recipe.FakeRecipeRemoteDataSource
-import com.jymun.harusekki.data.repository.RecipeRepository
-import com.jymun.harusekki.data.repository.RecipeRepositoryImpl
+import com.jymun.harusekki.data.repository.recipe.RecipeRepository
+import com.jymun.harusekki.data.repository.recipe.RecipeRepositoryImpl
 import com.jymun.harusekki.data.source.recipe.RecipeDataSource
 import com.jymun.harusekki.domain.recipe.LoadAllRecipeUseCase
 import com.jymun.harusekki.domain.recipe.SearchRecipeByCategoryUseCase

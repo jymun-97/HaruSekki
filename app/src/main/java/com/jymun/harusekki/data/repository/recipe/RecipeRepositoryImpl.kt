@@ -1,4 +1,4 @@
-package com.jymun.harusekki.data.repository
+package com.jymun.harusekki.data.repository.recipe
 
 import com.jymun.harusekki.data.cache.recipe.RecipeDataCache
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
