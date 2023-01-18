@@ -33,23 +33,6 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         super.onViewCreated(view, savedInstanceState)
 
         val searchMode = args.searchMode
-        Toast.makeText(
-            requireActivity(),
-            when (searchMode) {
-                is SearchMode.ByTitle -> searchMode.keyword
-
-                is SearchMode.ByCategory -> searchMode.category
-
-                is SearchMode.Best -> "Best"
-
-                is SearchMode.Favorite -> "Favorite"
-
-                is SearchMode.ByIngredient -> "Ingredient"
-
-                is SearchMode.Latest -> "Latest"
-            },
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
 }
