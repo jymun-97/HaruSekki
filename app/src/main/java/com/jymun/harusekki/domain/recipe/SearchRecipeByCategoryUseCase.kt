@@ -3,7 +3,7 @@ package com.jymun.harusekki.domain.recipe
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
-import com.jymun.harusekki.ui.home.recipe.RecipeSortBy
+import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import com.jymun.harusekki.util.exception.CustomExceptions
@@ -19,7 +19,7 @@ class SearchRecipeByCategoryUseCase @Inject constructor(
 
     suspend operator fun invoke(
         category: String,
-        orderBy: RecipeSortBy = RecipeSortBy.LATEST,
+        orderBy: RecipeSortOption = RecipeSortOption.LATEST,
         refreshFlag: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 

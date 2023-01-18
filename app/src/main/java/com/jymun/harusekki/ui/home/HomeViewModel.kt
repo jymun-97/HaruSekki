@@ -7,7 +7,7 @@ import com.jymun.harusekki.domain.recipe.DeleteOldestReadRecipeUseCase
 import com.jymun.harusekki.domain.recipe.InsertLatestReadRecipeUseCase
 import com.jymun.harusekki.domain.recipe.LoadAllRecipeUseCase
 import com.jymun.harusekki.ui.base.BaseViewModel
-import com.jymun.harusekki.ui.home.recipe.RecipeSortBy
+import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         _recipeList.postValue(loadAllRecipeUseCase().subList(0, 10))
         _bestRecipeList.postValue(
             loadAllRecipeUseCase(
-                orderBy = RecipeSortBy.LIKES_DESC,
+                orderBy = RecipeSortOption.LIKES_DESC,
                 isGridType = true
             ).subList(0, 10)
         )
