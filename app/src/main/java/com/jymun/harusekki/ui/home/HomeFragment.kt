@@ -20,6 +20,7 @@ import com.jymun.harusekki.ui.extensions.addSnapToCenterHelper
 import com.jymun.harusekki.ui.extensions.addSnapToStartHelper
 import com.jymun.harusekki.ui.extensions.showOtherPages
 import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
+import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
 import com.jymun.harusekki.ui.home.shortcut.MemoShortcutFragment
@@ -139,19 +140,19 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun initSearchByIngredientButton() {
         binding.searchRecipeByIngredientsButton.setOnClickListener {
-            moveToSearchResultFragment(SearchMode.ByIngredient)
+            moveToSearchResultFragment(SearchMode.ByIngredient())
         }
     }
 
     private fun initSearchMoreBestRecipeButton() {
         binding.fragmentHomeContent.searchMoreBestRecipe.setOnClickListener {
-            moveToSearchResultFragment(SearchMode.Best)
+            moveToSearchResultFragment(SearchMode.All(RecipeSortOption.LIKES))
         }
     }
 
     private fun initSearchMoreLatestRecipeButton() {
         binding.fragmentHomeContent.searchMoreLatestRecipe.setOnClickListener {
-            moveToSearchResultFragment(SearchMode.Latest)
+            moveToSearchResultFragment(SearchMode.All(RecipeSortOption.LATEST))
         }
     }
 
