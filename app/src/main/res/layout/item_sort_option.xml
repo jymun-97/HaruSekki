@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="10dp">
 
         <ImageView
@@ -29,9 +29,11 @@
             android:paddingStart="5dp"
             android:paddingEnd="16dp"
             android:textColor="@color/black"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/optionImageView"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage"
             tools:text="옵션" />
 
         <ImageView
