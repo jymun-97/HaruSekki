@@ -46,4 +46,10 @@
     <string name="sort_by_latest">최신순</string>
     <string name="sort_by_hits">조회순</string>
     <string name="sort_by_likes">인기순</string>
+
+    <!-- RecipeSearchMode -->
+    <string name="by_title_mode_on">검색어 :</string>
+    <string name="by_title_mode_off">직접 레시피 검색</string>
+    <string name="by_ingredient_mode">나의 냉장고 속 재료로 검색</string>
+    <string name="favorite_mode">내가 좋아한 레시피</string>
 </resources>
