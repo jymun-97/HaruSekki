@@ -96,5 +96,14 @@
         <argument
             android:name="searchMode"
             app:argType="com.jymun.harusekki.ui.search_result.SearchMode" />
+        <action
+            android:id="@+id/action_fragment_search_result_to_fragment_search_recipe"
+            app:destination="@id/fragment_search_recipe"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/fragment_search_result"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

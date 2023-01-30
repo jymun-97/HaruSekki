@@ -19,4 +19,16 @@
         <item name="boxStrokeWidth">2dp</item>
         <item name="boxBackgroundColor">@color/app_signature_bright</item>
     </style>
+
+    <style name="SearchModeToggleButtons">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginHorizontal">3dp</item>
+        <item name="toggle_background">@drawable/shape_gray_oval_rectangle</item>
+        <item name="selected_background">@drawable/shape_gray_filled_oval_rectangle</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>

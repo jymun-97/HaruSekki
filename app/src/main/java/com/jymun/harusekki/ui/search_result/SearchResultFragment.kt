@@ -1,15 +1,19 @@
 package com.jymun.harusekki.ui.search_result
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentSearchResultBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
+import com.jymun.harusekki.ui.custom_view.OnSearchModeChangedListener
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +26,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     lateinit var resourcesProvider: ResourcesProvider
 
     private val args by navArgs<SearchResultFragmentArgs>()
+    private var searchKeyword: String? = null
     private lateinit var searchMode: SearchMode
 
     override val viewModel: SearchResultViewModel by viewModels()
@@ -42,7 +47,15 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         super.onViewCreated(view, savedInstanceState)
 
         searchMode = args.searchMode
+
         initSortOptionSpinner()
+        initByTitleModeButton()
+        initSearchModeToggleGroup()
+
+        viewModel.updateSearchMode(searchMode)
+        viewModel.searchMode.observe(viewLifecycleOwner) {
+            Log.d("# SearchResultFragment", "$it")
+        }
     }
 
     private fun initSortOptionSpinner() = binding.sortOptionSpinner.apply {
@@ -53,7 +66,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
             resourcesProvider = resourcesProvider,
             layoutResId = R.layout.item_sort_option,
             values = RecipeSortOption.values(),
-            baseSortOption = searchMode.sortOption
+            baseSortOption = args.searchMode.sortOption
         )
         viewTreeObserver.addOnWindowFocusChangeListener { isClosed ->
             background = resourcesProvider.getDrawable(
@@ -69,9 +82,53 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
                 id: Long
             ) {
                 (adapter as SortOptionSpinnerAdapter).updateTarget(position)
+                searchMode.sortOption = RecipeSortOption.values()[position]
+
+                viewModel.updateSearchMode(searchMode)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initByTitleModeButton() {
+        binding.byTitleModeButton.apply {
+            if (searchMode is SearchMode.ByTitle) {
+                searchKeyword = (searchMode as SearchMode.ByTitle).keyword
+                text = "${resourcesProvider.getString(R.string.by_title_mode_on)} $searchKeyword"
+
+                performClick()
+            } else {
+                text = resourcesProvider.getString(R.string.by_title_mode_off)
+                setOnClickListener {
+                    moveToSearchRecipeFragment()
+                }
+            }
+        }
+    }
+
+    private fun moveToSearchRecipeFragment() = findNavController().navigate(
+        SearchResultFragmentDirections.actionFragmentSearchResultToFragmentSearchRecipe()
+    )
+
+    private fun initSearchModeToggleGroup() {
+        binding.searchModeToggleGroup.setOnSearchModeChangedListener(object :
+            OnSearchModeChangedListener {
+            override fun onSearchModeChanged(id: Int?) {
+                searchMode = when (id) {
+                    R.id.byTitleModeButton -> searchKeyword?.let {
+                        SearchMode.ByTitle(it, searchMode.sortOption)
+                    } ?: return
+
+                    R.id.byIngredientModeButton -> SearchMode.ByIngredient(searchMode.sortOption)
+
+                    R.id.favoriteModeButton -> SearchMode.Favorite(searchMode.sortOption)
+
+                    else -> SearchMode.All(searchMode.sortOption)
+                }
+                viewModel.updateSearchMode(searchMode)
+            }
+        })
     }
 }
