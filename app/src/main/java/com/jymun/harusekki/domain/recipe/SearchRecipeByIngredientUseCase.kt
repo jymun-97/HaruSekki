@@ -4,6 +4,7 @@ import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryMapper
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import com.jymun.harusekki.util.exception.CustomExceptions
@@ -20,6 +21,7 @@ class SearchRecipeByIngredientUseCase @Inject constructor(
     suspend operator fun invoke(
         ingredientList: List<Long>,
         orderBy: RecipeSortOption = RecipeSortOption.LATEST,
+        category: RecipeCategory,
         refreshFlag: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 
@@ -40,6 +42,8 @@ class SearchRecipeByIngredientUseCase @Inject constructor(
                 likes = it.likes,
                 imgList = it.imgList
             )
+        }.filter {
+            it.category == category || category == RecipeCategory.ALL
         }
     }
 }
