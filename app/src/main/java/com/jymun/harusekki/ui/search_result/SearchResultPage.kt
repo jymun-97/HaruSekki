@@ -17,11 +17,14 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchResultPage(
-    private val category: RecipeCategory
+    category: RecipeCategory
 ) : BaseFragment<SearchResultViewModel, FragmentSearchResultPageBinding>() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
+
+    private val categoryIndex = RecipeCategory.values().indexOf(category)
+    private lateinit var adapter: ModelRecyclerAdapter<Recipe>
 
     override val viewModel: SearchResultViewModel by activityViewModels()
 
@@ -41,16 +44,16 @@ class SearchResultPage(
         super.onViewCreated(view, savedInstanceState)
 
         initSearchResultRecyclerView()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.updateCategory(category)
+        viewModel.searchResult.observe(viewLifecycleOwner) {
+            adapter.submitList(it[categoryIndex])
+        }
     }
 
     private fun initSearchResultRecyclerView() {
+        adapter = ModelRecyclerAdapter(resourcesProvider)
         binding.searchResultRecyclerView.apply {
-            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider)
+            adapter = this@SearchResultPage.adapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }

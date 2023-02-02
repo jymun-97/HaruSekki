@@ -38,26 +38,29 @@ class SearchResultViewModel @Inject constructor(
         _searchMode.postValue(it)
     }
 
-    val searchResult = _searchMode.switchMap {
+    val searchResult = _searchMode.switchMap { mode ->
         liveData {
             emit(
-                when (it) {
-                    is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
-                        keyword = it.keyword,
-                        orderBy = it.sortOption,
-                        category = it.category,
-                        refreshFlag = false
-                    )
-                    // todo. ingredient mode
+                RecipeCategory.values().map { category ->
+                    when (mode) {
+                        is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
+                            keyword = mode.keyword,
+                            orderBy = mode.sortOption,
+                            category = category,
+                            refreshFlag = false
+                        ).take(10)
 
-                    // todo. favorite mode
+                        // todo. ingredient mode
 
-                    else -> loadAllRecipeUseCase(
-                        orderBy = it.sortOption,
-                        category = it.category,
-                        refreshFlag = false,
-                        isGridType = false
-                    )
+                        // todo. favorite mode
+
+                        else -> loadAllRecipeUseCase(
+                            orderBy = mode.sortOption,
+                            category = category,
+                            refreshFlag = false,
+                            isGridType = false
+                        ).take(10)
+                    }
                 }
             )
         }
