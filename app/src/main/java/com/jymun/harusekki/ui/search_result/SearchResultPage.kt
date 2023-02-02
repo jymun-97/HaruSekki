@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.databinding.FragmentSearchResultPageBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,10 +53,22 @@ class SearchResultPage(
     }
 
     private fun initSearchResultRecyclerView() {
-        adapter = ModelRecyclerAdapter(resourcesProvider)
+        adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider).apply {
+            addAdapterListener(recipeAdapterListener)
+        }
         binding.searchResultRecyclerView.apply {
             adapter = this@SearchResultPage.adapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }
+
+    private val recipeAdapterListener = object : RecipeAdapterListener {
+        override fun onRecipeItemClicked(recipe: Recipe) {
+            moveToDetailFragment(recipe.id)
+        }
+    }
+
+    private fun moveToDetailFragment(id: Long) = findNavController().navigate(
+        SearchResultFragmentDirections.actionFragmentSearchResultToFragmentDetail(id)
+    )
 }
