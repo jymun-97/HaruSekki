@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="com.jymun.harusekki.ui.base.LoadState" />
+
+        <import type="android.view.View" />
+
         <import type="com.jymun.harusekki.ui.search_result.SearchMode" />
 
         <variable
@@ -87,8 +91,9 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="10dp"
-                    android:scrollbars="none">
+                    android:paddingTop="10dp"
+                    android:scrollbars="none"
+                    app:layout_scrollFlags="scroll|enterAlways">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -134,7 +139,21 @@
 
                 </HorizontalScrollView>
 
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/categoryTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="noScroll"
+                    app:tabMode="scrollable" />
+
             </com.google.android.material.appbar.AppBarLayout>
+
+            <include
+                android:id="@+id/searchResultFragmentContent"
+                layout="@layout/fragment_search_result_content" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -143,6 +162,7 @@
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/app_signature_dark"
             android:progressTint="@color/app_signature_dark"
+            android:visibility="@{viewModel.loadState instanceof LoadState.Loading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

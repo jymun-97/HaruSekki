@@ -3,6 +3,7 @@ package com.jymun.harusekki.data.model.recipe
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 import com.jymun.harusekki.data.model.Model
 import com.jymun.harusekki.data.model.ModelType
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 
 data class Recipe(
     override val id: Long,
@@ -18,7 +19,7 @@ data class Recipe(
     fun toEntity() = RecipeEntity(
         id = id,
         title = title,
-        category = category.name,
+        category = category.value,
         summary = summary,
         imgList = imgList,
         hits = hits,

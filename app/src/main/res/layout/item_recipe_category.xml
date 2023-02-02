@@ -6,9 +6,6 @@
 
     <data>
 
-        <variable
-            name="recipeCategory"
-            type="com.jymun.harusekki.data.model.recipe.RecipeCategory" />
     </data>
 
     <LinearLayout
@@ -32,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="@{recipeCategory.text}"
             android:textColor="@color/gray_dark"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"

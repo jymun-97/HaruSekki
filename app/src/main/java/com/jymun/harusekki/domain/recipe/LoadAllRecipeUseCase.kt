@@ -4,7 +4,8 @@ import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
-import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryProvider
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
+import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryMapper
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import com.jymun.harusekki.util.exception.CustomExceptions
 import kotlinx.coroutines.withContext
@@ -19,6 +20,7 @@ class LoadAllRecipeUseCase @Inject constructor(
 
     suspend operator fun invoke(
         orderBy: RecipeSortOption = RecipeSortOption.LATEST,
+        category: RecipeCategory = RecipeCategory.ALL,
         refreshFlag: Boolean = false,
         isGridType: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
@@ -31,12 +33,14 @@ class LoadAllRecipeUseCase @Inject constructor(
                 id = it.id,
                 type = if (isGridType) ModelType.RECIPE_GRID else ModelType.RECIPE_LINEAR,
                 title = it.title,
-                category = RecipeCategoryProvider.get(it.category),
+                category = RecipeCategoryMapper.map(it.category),
                 summary = it.summary,
                 hits = it.hits,
                 likes = it.likes,
                 imgList = it.imgList
             )
+        }.filter {
+            it.category == category || category == RecipeCategory.ALL
         }
     }
 }
