@@ -2,14 +2,12 @@ package com.jymun.harusekki.ui.search_result
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.databinding.FragmentSearchResultPageBinding
 import com.jymun.harusekki.ui.base.BaseFragment
-import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.harusekki.ui.home.recipe.RecipeAdapterListener
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
@@ -37,10 +35,7 @@ class SearchResultPage(
         lifecycleOwner = viewLifecycleOwner
     }
 
-    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
-        if (it is LoadState.Error)
-            Toast.makeText(requireActivity(), it.exception.message, Toast.LENGTH_SHORT).show()
-    }
+    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

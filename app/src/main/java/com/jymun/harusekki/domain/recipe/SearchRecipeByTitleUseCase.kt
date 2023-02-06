@@ -25,8 +25,6 @@ class SearchRecipeByTitleUseCase @Inject constructor(
         refreshFlag: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 
-        if (keyword.isEmpty()) throw CustomExceptions.EmptySearchKeywordException()
-
         val recipeEntityList = recipeRepository.searchByTitle(keyword, orderBy.value, refreshFlag)
         if (recipeEntityList.isEmpty()) throw CustomExceptions.NotDataExistException()
 

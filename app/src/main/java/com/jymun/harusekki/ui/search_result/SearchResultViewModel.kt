@@ -1,7 +1,6 @@
 package com.jymun.harusekki.ui.search_result
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.domain.recipe.*
@@ -10,6 +9,7 @@ import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,8 +32,9 @@ class SearchResultViewModel @Inject constructor(
     }
 
     val searchResult = searchMode.switchMap { mode ->
-        liveData {
-            emit(
+        val result = MutableLiveData<List<List<Recipe>>>()
+        onMainDispatcher {
+            result.postValue(withContext(dispatcherProvider.default) {
                 RecipeCategory.values().map { category ->
                     when (mode) {
                         is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
@@ -55,8 +56,9 @@ class SearchResultViewModel @Inject constructor(
                         ).take(10)
                     }
                 }
-            )
+            })
         }
+        result
     }
 
     fun readRecipe(recipe: Recipe) = onMainDispatcher {

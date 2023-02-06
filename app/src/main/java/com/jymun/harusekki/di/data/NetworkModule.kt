@@ -1,13 +1,16 @@
 package com.jymun.harusekki.di.data
 
+import android.content.Context
 import com.jymun.harusekki.data.service.Constant
 import com.jymun.harusekki.data.service.SearchRecipeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,12 +21,20 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context
+    ): OkHttpClient {
+        val cache = Cache(context.cacheDir, 20 * 1024 * 1024)
+        val interceptor = Interceptor { chain ->
+            val request = chain.request()
+            request.newBuilder().header("Cache-Control", "public, max-age=5").build()
+
+            chain.proceed(request)
+        }
 
         return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
+            .cache(cache)
+            .addInterceptor(interceptor)
             .build()
     }
 

@@ -5,6 +5,7 @@
     <string name="app_name">하루세끼</string>
     <string name="best_recipe">Best 레시피</string>
     <string name="latest_recipe">최근 등록된 레시피</string>
+    <string name="go_back">뒤로가기</string>
 
     <!-- Bottom Navigation -->
     <string name="home">홈</string>
