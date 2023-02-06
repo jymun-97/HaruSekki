@@ -25,8 +25,6 @@ class SearchRecipeByIngredientUseCase @Inject constructor(
         refreshFlag: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 
-        if (ingredientList.isEmpty()) throw CustomExceptions.NothingSelectedException()
-
         // TODO. api -> orderBy 파라미터 추가
         val recipeEntityList = recipeRepository.searchByIngredient(ingredientList)
         if (recipeEntityList.isEmpty()) throw CustomExceptions.NotDataExistException()
