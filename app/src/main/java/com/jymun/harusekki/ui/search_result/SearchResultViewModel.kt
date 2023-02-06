@@ -1,7 +1,6 @@
 package com.jymun.harusekki.ui.search_result
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.domain.recipe.*
@@ -32,31 +31,31 @@ class SearchResultViewModel @Inject constructor(
     }
 
     val searchResult = searchMode.switchMap { mode ->
-        liveData {
-            emit(
-                RecipeCategory.values().map { category ->
-                    when (mode) {
-                        is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
-                            keyword = mode.keyword,
-                            orderBy = mode.sortOption,
-                            category = category,
-                            refreshFlag = false
-                        ).take(10)
+        val result = MutableLiveData<List<List<Recipe>>>()
+        onMainDispatcher {
+            result.postValue(RecipeCategory.values().map { category ->
+                when (mode) {
+                    is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
+                        keyword = mode.keyword,
+                        orderBy = mode.sortOption,
+                        category = category,
+                        refreshFlag = false
+                    ).take(10)
 
-                        // todo. ingredient mode
+                    // todo. ingredient mode
 
-                        // todo. favorite mode
+                    // todo. favorite mode
 
-                        else -> loadAllRecipeUseCase(
-                            orderBy = mode.sortOption,
-                            category = category,
-                            refreshFlag = false,
-                            isGridType = false
-                        ).take(10)
-                    }
+                    else -> loadAllRecipeUseCase(
+                        orderBy = mode.sortOption,
+                        category = category,
+                        refreshFlag = false,
+                        isGridType = false
+                    ).take(10)
                 }
-            )
+            })
         }
+        result
     }
 
     fun readRecipe(recipe: Recipe) = onMainDispatcher {

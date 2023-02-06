@@ -20,16 +20,19 @@ abstract class BaseViewModel(
     val loadState = MutableLiveData<LoadState>()
 
     val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        when (throwable) {
-            is UnknownHostException, is ConnectException -> loadState.postValue(
-                LoadState.Error(CustomExceptions.InvalidNetworkException())
-            )
-            is SocketException, is SocketTimeoutException -> loadState.postValue(
-                LoadState.Error(CustomExceptions.FailToConnectServerException())
-            )
-            else -> loadState.postValue(
-                LoadState.Error(CustomExceptions.InvalidAccessException())
-            )
+        if (throwable is CustomExceptions) loadState.postValue(LoadState.Error(throwable))
+        else {
+            when (throwable) {
+                is UnknownHostException, is ConnectException -> loadState.postValue(
+                    LoadState.Error(CustomExceptions.InvalidNetworkException())
+                )
+                is SocketException, is SocketTimeoutException -> loadState.postValue(
+                    LoadState.Error(CustomExceptions.FailToConnectServerException())
+                )
+                else -> loadState.postValue(
+                    LoadState.Error(CustomExceptions.InvalidAccessException())
+                )
+            }
         }
     }
 
