@@ -9,6 +9,7 @@ import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,25 +34,27 @@ class SearchResultViewModel @Inject constructor(
     val searchResult = searchMode.switchMap { mode ->
         val result = MutableLiveData<List<List<Recipe>>>()
         onMainDispatcher {
-            result.postValue(RecipeCategory.values().map { category ->
-                when (mode) {
-                    is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
-                        keyword = mode.keyword,
-                        orderBy = mode.sortOption,
-                        category = category,
-                        refreshFlag = false
-                    ).take(10)
+            result.postValue(withContext(dispatcherProvider.default) {
+                RecipeCategory.values().map { category ->
+                    when (mode) {
+                        is SearchMode.ByTitle -> searchRecipeByTitleUseCase(
+                            keyword = mode.keyword,
+                            orderBy = mode.sortOption,
+                            category = category,
+                            refreshFlag = false
+                        ).take(10)
 
-                    // todo. ingredient mode
+                        // todo. ingredient mode
 
-                    // todo. favorite mode
+                        // todo. favorite mode
 
-                    else -> loadAllRecipeUseCase(
-                        orderBy = mode.sortOption,
-                        category = category,
-                        refreshFlag = false,
-                        isGridType = false
-                    ).take(10)
+                        else -> loadAllRecipeUseCase(
+                            orderBy = mode.sortOption,
+                            category = category,
+                            refreshFlag = false,
+                            isGridType = false
+                        ).take(10)
+                    }
                 }
             })
         }

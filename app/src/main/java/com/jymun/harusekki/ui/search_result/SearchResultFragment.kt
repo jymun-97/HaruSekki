@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentSearchResultBinding
@@ -43,7 +43,12 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
         if (it is LoadState.Error)
-            Toast.makeText(requireActivity(), it.exception.message, Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, it.exception.message, Snackbar.LENGTH_LONG).apply {
+                setAction(resourcesProvider.getString(R.string.go_back)) {
+                    findNavController().popBackStack()
+                    dismiss()
+                }
+            }.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,7 +1,7 @@
 package com.jymun.harusekki.util.exception
 
 sealed class CustomExceptions(
-    override val message: String?
+    override val message: String
 ) : Throwable(message) {
 
     class FailToConnectServerException : CustomExceptions("서버와의 연결에 실패하였습니다. 다시 시도해 주세요.")
