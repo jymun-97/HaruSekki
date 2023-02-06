@@ -1,10 +1,8 @@
 package com.jymun.harusekki.data.repository.recipe
 
-import com.jymun.harusekki.data.cache.recipe.RecipeDataCache
 import com.jymun.harusekki.data.entity.recipe.RecipeEntity
 import com.jymun.harusekki.data.source.recipe.RecipeDataSource
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,7 +12,6 @@ class RecipeRepositoryImpl @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val recipeLocalDataSource: RecipeDataSource.Local,
     private val recipeRemoteDataSource: RecipeDataSource.Remote,
-    private val recipeDataCache: RecipeDataCache
 ) : RecipeRepository {
 
     override suspend fun loadAll(
@@ -22,14 +19,7 @@ class RecipeRepositoryImpl @Inject constructor(
         refreshFlag: Boolean
     ): List<RecipeEntity> = withContext(dispatcherProvider.io) {
 
-        return@withContext if (refreshFlag) {
-            recipeRemoteDataSource.loadAll(orderBy).also { recipeDataCache.updateCache(it) }
-        } else {
-            recipeDataCache.loadAll(orderBy)
-                ?: recipeRemoteDataSource.loadAll(orderBy).also {
-                    recipeDataCache.updateCache(it)
-                }
-        }
+        return@withContext recipeRemoteDataSource.loadAll(orderBy)
     }
 
     override suspend fun searchByTitle(
@@ -38,12 +28,7 @@ class RecipeRepositoryImpl @Inject constructor(
         refreshFlag: Boolean
     ): List<RecipeEntity> = withContext(dispatcherProvider.io) {
 
-        return@withContext if (refreshFlag) {
-            recipeRemoteDataSource.searchByTitle(title, orderBy)
-        } else {
-            recipeDataCache.searchByTitle(title, orderBy)
-                ?: recipeRemoteDataSource.searchByTitle(title, orderBy)
-        }
+        return@withContext recipeRemoteDataSource.searchByTitle(title, orderBy)
     }
 
     override suspend fun searchByCategory(
@@ -52,12 +37,7 @@ class RecipeRepositoryImpl @Inject constructor(
         refreshFlag: Boolean
     ): List<RecipeEntity> = withContext(dispatcherProvider.io) {
 
-        return@withContext if (refreshFlag) {
-            recipeRemoteDataSource.searchByCategory(category, orderBy)
-        } else {
-            recipeDataCache.searchByCategory(category, orderBy)
-                ?: recipeRemoteDataSource.searchByCategory(category, orderBy)
-        }
+        return@withContext recipeRemoteDataSource.searchByCategory(category, orderBy)
     }
 
     override suspend fun loadDetail(
@@ -65,14 +45,7 @@ class RecipeRepositoryImpl @Inject constructor(
         refreshFlag: Boolean
     ): RecipeEntity = withContext(dispatcherProvider.io) {
 
-        return@withContext if (refreshFlag) {
-            recipeRemoteDataSource.loadDetail(id).also { recipeDataCache.updateCache(it) }
-        } else {
-            recipeDataCache.loadDetail(id)
-                ?: recipeRemoteDataSource.loadDetail(id).also {
-                    recipeDataCache.updateCache(it)
-                }
-        }
+        return@withContext recipeRemoteDataSource.loadDetail(id)
     }
 
     override suspend fun searchByIngredient(
@@ -84,11 +57,7 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun loadLatestReadRecipe(): List<RecipeEntity> =
         withContext(dispatcherProvider.io) {
-            return@withContext recipeDataCache.loadLatestReadRecipe().ifEmpty {
-                recipeLocalDataSource.loadLatestReadRecipe().also {
-                    recipeDataCache.initLatestReadRecipeList(it)
-                }
-            }
+            return@withContext recipeLocalDataSource.loadLatestReadRecipe()
         }
 
     override suspend fun insertLatestReadRecipe(
@@ -96,28 +65,10 @@ class RecipeRepositoryImpl @Inject constructor(
     ) = withContext(dispatcherProvider.io) {
 
         recipeLocalDataSource.insertLatestReadRecipe(recipeEntity)
-        coroutineScope {
-            if (recipeDataCache.loadLatestReadRecipe().isEmpty()) {
-                recipeDataCache.initLatestReadRecipeList(
-                    recipeLocalDataSource.loadLatestReadRecipe()
-                )
-            } else {
-                recipeDataCache.insertLatestReadRecipe(recipeEntity)
-            }
-        }
     }
 
-    override suspend fun deleteOldestReadRecipe() {
+    override suspend fun deleteOldestReadRecipe() = withContext(dispatcherProvider.io) {
         recipeLocalDataSource.deleteOldestReadRecipe()
-        coroutineScope {
-            if (recipeDataCache.loadLatestReadRecipe().isEmpty()) {
-                recipeDataCache.initLatestReadRecipeList(
-                    recipeLocalDataSource.loadLatestReadRecipe()
-                )
-            } else {
-                recipeDataCache.deleteOldestReadRecipe()
-            }
-        }
     }
 
 }
