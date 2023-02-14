@@ -95,6 +95,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+        setSelection(RecipeSortOption.values().indexOf(searchMode.sortOption))
     }
 
     @SuppressLint("SetTextI18n")
