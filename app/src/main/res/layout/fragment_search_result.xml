@@ -29,6 +29,7 @@
                 android:id="@+id/refreshButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.refresh()}"
                 app:button_icon="@drawable/ic_refresh"
                 app:button_text_enabled="false" />
 

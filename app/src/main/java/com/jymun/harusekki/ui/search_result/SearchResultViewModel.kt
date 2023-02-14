@@ -31,6 +31,8 @@ class SearchResultViewModel @Inject constructor(
         searchMode.postValue(it)
     }
 
+    fun refresh() = searchMode.postValue(searchMode.value)
+
     val searchResult = searchMode.switchMap { mode ->
         val result = MutableLiveData<List<List<Recipe>>>()
         onMainDispatcher {
