@@ -55,7 +55,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         initRecipeCategoryRecyclerView()
         initBestRecipeRecyclerView()
         initLatestRecipeRecyclerview()
-        initSearchImageButton()
+        initSearchByTitleButton()
+        initRefreshButton()
         initSearchByIngredientButton()
         initSearchMoreBestRecipeButton()
         initSearchMoreLatestRecipeButton()
@@ -133,9 +134,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
-    private fun initSearchImageButton() {
-        binding.searchImageButton.setOnClickListener { moveToSearchRecipeFragment() }
-        binding.searchTextButton.setOnClickListener { moveToSearchRecipeFragment() }
+    private fun initSearchByTitleButton() {
+        binding.searchByTitleButton.setOnClickListener {
+            moveToSearchRecipeFragment()
+        }
+    }
+
+    private fun initRefreshButton() {
+        binding.refreshButton.setOnClickListener {
+            viewModel.loadData()
+        }
     }
 
     private fun initSearchByIngredientButton() {
