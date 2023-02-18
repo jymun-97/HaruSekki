@@ -95,6 +95,9 @@ dependencies {
     implementation(Dependencies.ROOM)
     implementation(Dependencies.ROOM_KTX)
     kapt(Dependencies.ROOM_COMPILER)
+
+    // Calendar View
+    implementation(Dependencies.CALENDAR_VIEW)
 }
 
 kapt {

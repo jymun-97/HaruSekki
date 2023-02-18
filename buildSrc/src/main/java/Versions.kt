@@ -28,4 +28,5 @@ object Versions {
     const val GLIDE = "4.14.2"
     const val PHOTOVIEW = "2.3.0"
     const val ROOM = "2.4.3"
+    const val CALENDAR_VIEW = "1.6.0"
 }
