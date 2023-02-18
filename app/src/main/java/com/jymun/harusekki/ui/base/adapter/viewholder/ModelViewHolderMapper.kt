@@ -10,6 +10,7 @@ import com.jymun.harusekki.ui.home.recipe.RecipeGridViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeLinearViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
 import com.jymun.harusekki.ui.ingredient.IngredientViewHolder
+import com.jymun.harusekki.ui.menu.MenuViewHolder
 import com.jymun.harusekki.ui.search_recipe.SearchKeywordViewHolder
 import com.jymun.harusekki.util.resources.ResourcesProvider
 
@@ -41,6 +42,10 @@ object ModelViewHolderMapper {
             )
             ModelType.COOKING_STEP -> CookingStepViewHolder(
                 ItemCookingStepBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
+            ModelType.MENU -> MenuViewHolder(
+                ItemMenuBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
             else -> SearchKeywordViewHolder(
