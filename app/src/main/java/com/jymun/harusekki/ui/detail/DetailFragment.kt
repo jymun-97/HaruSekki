@@ -40,7 +40,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
         if (it is LoadState.Error) {
-            Log.d("# DetailFragment", "${it.exception.message}")
+            Log.d("# DetailFragment", it.exception.message)
         }
     }
 
@@ -49,6 +49,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
         initNeedIngredientRecyclerView()
         initCookingStepRecyclerView()
+        initAppbarLayout()
 
         viewModel.loadData(args.id)
     }
@@ -80,5 +81,11 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         override fun onCookingStepImageClicked(imageUrl: String) = findNavController().navigate(
             DetailFragmentDirections.actionFragmentDetailToImageDetailFragment(imageUrl)
         )
+    }
+
+    private fun initAppbarLayout() {
+        binding.appBarContainer.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.toolbarLayout.alpha = -verticalOffset.toFloat() / appBarLayout.totalScrollRange
+        }
     }
 }
