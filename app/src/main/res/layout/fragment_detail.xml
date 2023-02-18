@@ -47,6 +47,7 @@
                     app:toolbar_background="@color/transparent">
 
                     <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                        android:id="@+id/addMenuButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:button_icon="@drawable/ic_add"
