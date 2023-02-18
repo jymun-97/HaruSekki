@@ -56,4 +56,9 @@
     <string name="by_title_mode_off">직접 레시피 검색</string>
     <string name="by_ingredient_mode">나의 냉장고 속 재료로 검색</string>
     <string name="favorite_mode">내가 좋아한 레시피</string>
+
+    <!-- MenuCategory -->
+    <string name="breakfast">아침</string>
+    <string name="lunch">점심</string>
+    <string name="dinner">저녁</string>
 </resources>
