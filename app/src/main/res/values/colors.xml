@@ -19,4 +19,5 @@
     <color name="blue">#2585DA</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#CC3227</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
