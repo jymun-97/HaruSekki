@@ -3,17 +3,18 @@ package com.jymun.harusekki.ui.custom_view
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.Gravity.CENTER_VERTICAL
 import android.view.LayoutInflater
-import android.widget.LinearLayout
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.HarusekkiBaseToolbarBinding
 
 class HaruSekkiBaseToolbar(
     context: Context,
     attributeSet: AttributeSet
-) : LinearLayout(context, attributeSet) {
+) : Toolbar(context, attributeSet) {
 
     private val binding =
         HarusekkiBaseToolbarBinding.inflate(LayoutInflater.from(context), this)
@@ -55,12 +56,19 @@ class HaruSekkiBaseToolbar(
 
     private fun initView() = binding.apply {
         this@HaruSekkiBaseToolbar.background = toolbarBackground
-        this@HaruSekkiBaseToolbar.gravity = CENTER_VERTICAL
         this@HaruSekkiBaseToolbar.setPaddingRelative(10, 0, 10, 0)
 
         appNameTextView.text = toolbarText
         appNameTextView.setTextColor(toolbarTextColor)
         appNameImageView.setImageDrawable(toolbarIcon)
         appNameImageView.setColorFilter(toolbarIconTint)
+    }
+
+    override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
+        if (child is HaruSekkiToolbarButton) {
+            binding.toolbarButtonContainer.addView(child, index, params)
+        } else {
+            super.addView(child, index, params)
+        }
     }
 }
