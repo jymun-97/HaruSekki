@@ -56,7 +56,6 @@ class HaruSekkiBaseToolbar(
 
     private fun initView() = binding.apply {
         this@HaruSekkiBaseToolbar.background = toolbarBackground
-        this@HaruSekkiBaseToolbar.setPaddingRelative(10, 0, 10, 0)
 
         appNameTextView.text = toolbarText
         appNameTextView.setTextColor(toolbarTextColor)
