@@ -6,6 +6,7 @@
     <string name="best_recipe">Best 레시피</string>
     <string name="latest_recipe">최근 등록된 레시피</string>
     <string name="go_back">뒤로가기</string>
+    <string name="move">이동하기</string>
 
     <!-- Bottom Navigation -->
     <string name="home">홈</string>

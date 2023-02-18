@@ -16,7 +16,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
     private val loadRecipeDetailUseCase: LoadRecipeDetailUseCase,
-    private val insertMenuUseCase: InsertMenuUseCase
+    private val insertMenuUseCase: InsertMenuUseCase,
 ) : BaseViewModel(dispatcherProvider) {
 
     private val _recipeDetail = MutableLiveData<RecipeDetail>()

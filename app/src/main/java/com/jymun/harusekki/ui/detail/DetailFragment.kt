@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
@@ -95,7 +96,25 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         binding.addMenuButton.setOnClickListener {
             AddMenuDialog(requireActivity()) { year: Int, month: Int, dayOfMonth: Int, menuCategory: MenuCategory ->
                 viewModel.addMenu(year, month, dayOfMonth, menuCategory)
+
+                Snackbar.make(
+                    binding.root,
+                    "레시피를 ${year}년 ${month}월 ${dayOfMonth}일 ${
+                        resourcesProvider.getString(
+                            menuCategory.textResId
+                        )
+                    } 식단에 추가하였습니다.",
+                    Snackbar.LENGTH_LONG
+                ).apply {
+                    setAction(resourcesProvider.getString(R.string.move)) {
+                        moveToMenuFragment("$year-$month-$dayOfMonth")
+                    }
+                }.show()
             }.show()
         }
     }
+
+    private fun moveToMenuFragment(dateStr: String) = findNavController().navigate(
+        DetailFragmentDirections.actionFragmentDetailToFragmentMenu(dateStr)
+    )
 }

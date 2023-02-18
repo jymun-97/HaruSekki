@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.jymun.harusekki.databinding.FragmentMenuBinding
 import com.jymun.harusekki.ui.base.BaseFragment
@@ -22,6 +23,8 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
 
+    private val args by navArgs<MenuFragmentArgs>()
+
     private lateinit var menuPageAdapter: MenuPageAdapter
     private lateinit var curDate: LocalDate
     private var curPosition = 0
@@ -34,8 +37,10 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         menuPageAdapter = MenuPageAdapter(requireActivity())
-        curDate = LocalDate.now()
-        curPosition = menuPageAdapter.defaultPosition
+        curDate = args.date.toLocalDate() ?: LocalDate.now()
+        curPosition =
+            menuPageAdapter.defaultPosition + ChronoUnit.DAYS.between(LocalDate.now(), curDate)
+                .toInt()
 
         initMenuPager()
         initCalendarView()
@@ -71,6 +76,8 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
 
     private fun initCalendarView() = binding.calendarView.apply {
         selectedDate = curDate.toCalendarDay()
+        setCurrentDate(curDate.toCalendarDay(), false)
+
         setOnDateChangedListener { _, calendarDate, _ ->
             val newDate = calendarDate.toLocalDate()
             binding.menuViewPager.setCurrentItem(
