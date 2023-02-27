@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.jymun.harusekki.data.model.menu.Menu
 import com.jymun.harusekki.databinding.FragmentMenuPageBinding
 import com.jymun.harusekki.ui.base.BaseFragment
@@ -44,8 +45,27 @@ class MenuPageFragment(
     }
 
     private fun initMenuRecyclerView() = binding.apply {
-        breakfastRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider)
-        lunchRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider)
-        dinnerRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider)
+        breakfastRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider).apply {
+            addAdapterListener(menuAdapterListener)
+        }
+        lunchRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider).apply {
+            addAdapterListener(menuAdapterListener)
+        }
+        dinnerRecyclerView.adapter = ModelRecyclerAdapter<Menu>(resourcesProvider).apply {
+            addAdapterListener(menuAdapterListener)
+        }
+    }
+
+    private val menuAdapterListener = object : MenuAdapterListener {
+
+        override fun onDeleteMenuButtonClicked(menu: Menu) {
+            //todo menu delete
+        }
+
+        override fun onMenuItemClicked(recipeId: Long) {
+            findNavController().navigate(
+                MenuFragmentDirections.actionFragmentMenuToFragmentDetail(recipeId)
+            )
+        }
     }
 }
