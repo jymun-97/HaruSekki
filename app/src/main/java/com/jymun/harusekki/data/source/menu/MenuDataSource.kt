@@ -13,4 +13,6 @@ interface MenuDataSource {
     suspend fun insertMenu(menuEntity: MenuEntity)
 
     suspend fun deleteMenu(menuEntity: MenuEntity)
+
+    suspend fun deleteMenu(year: Int, month: Int, dayOfMonth: Int)
 }

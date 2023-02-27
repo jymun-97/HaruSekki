@@ -30,4 +30,12 @@ class MenuLocalDataSource @Inject constructor(
         return@withContext db.dao().deleteMenu(menuEntity)
     }
 
+    override suspend fun deleteMenu(
+        year: Int,
+        month: Int,
+        dayOfMonth: Int
+    ) = withContext(dispatcherProvider.io) {
+
+        return@withContext db.dao().deleteMenu(year, month, dayOfMonth)
+    }
 }

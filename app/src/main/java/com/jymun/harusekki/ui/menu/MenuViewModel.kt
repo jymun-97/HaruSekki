@@ -66,4 +66,9 @@ class MenuViewModel @Inject constructor(
         insertMenuUseCase(menu)
         loadMenu(year, month, dayOfMonth)
     }
+
+    fun deleteMenu(year: Int, month: Int, dayOfMonth: Int) = onMainDispatcher {
+        deleteMenuUseCase(year, month, dayOfMonth)
+        loadMenu(year, month, dayOfMonth)
+    }
 }

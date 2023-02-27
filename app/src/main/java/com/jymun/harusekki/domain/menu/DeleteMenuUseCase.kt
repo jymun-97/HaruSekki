@@ -17,4 +17,10 @@ class DeleteMenuUseCase @Inject constructor(
 
         menuRepository.deleteMenu(menu.toEntity())
     }
+
+    suspend operator fun invoke(year: Int, month: Int, dayOfMonth: Int) =
+        withContext(dispatcherProvider.default) {
+
+            menuRepository.deleteMenu(year, month, dayOfMonth)
+        }
 }
