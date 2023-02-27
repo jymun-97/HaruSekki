@@ -1,6 +1,7 @@
 package com.jymun.harusekki.ui.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -46,6 +47,9 @@ class MenuPageFragment(
         initAddMenuButtons()
 
         viewModel.loadMenu(date.year, date.monthValue, date.dayOfMonth)
+        viewModel.lunch.observe(viewLifecycleOwner) {
+            Log.d("# MenuPageFragment", "$it")
+        }
     }
 
     private fun initMenuRecyclerView() = binding.apply {
@@ -104,5 +108,9 @@ class MenuPageFragment(
             resourcesProvider.getString(R.string.toast_empty_menu),
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    fun deleteMenu() {
+        viewModel.deleteMenu(date.year, date.monthValue, date.dayOfMonth)
     }
 }

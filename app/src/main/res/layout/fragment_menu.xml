@@ -21,6 +21,11 @@
             app:toolbar_icon="@drawable/ic_calendar"
             app:toolbar_text="@string/menu">
 
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/deleteMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/ic_delete" />
 
         </com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar>
 

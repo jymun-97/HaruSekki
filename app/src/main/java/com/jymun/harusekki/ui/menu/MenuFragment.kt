@@ -1,11 +1,13 @@
 package com.jymun.harusekki.ui.menu
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentMenuBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
@@ -44,6 +46,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
 
         initMenuPager()
         initCalendarView()
+        initDeleteMenuButton()
     }
 
     override fun setUpBinding() = binding.apply {
@@ -87,5 +90,21 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
             curDate = newDate
             curPosition = binding.menuViewPager.currentItem
         }
+    }
+
+    private fun initDeleteMenuButton() = binding.deleteMenuButton.setOnClickListener {
+        AlertDialog.Builder(requireActivity())
+            .setTitle(resourcesProvider.getString(R.string.delete_menu))
+            .setMessage("${curDate.year}년 ${curDate.monthValue}월 ${curDate.dayOfMonth}일자 식단을 모두 삭제하시겠습니까?")
+            .setPositiveButton(resourcesProvider.getString(R.string.okay)) { _, _ ->
+                requireActivity().supportFragmentManager.findFragmentByTag("f$curPosition")?.let {
+                    (it as MenuPageFragment).deleteMenu()
+                }
+            }
+            .setNegativeButton(resourcesProvider.getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 }
