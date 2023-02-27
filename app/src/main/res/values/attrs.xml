@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="button_icon" format="reference" />
+    <attr name="button_icon_tint" format="color" />
+
     <declare-styleable name="CustomToggleButton">
         <attr name="toggle_background" format="reference" />
         <attr name="selected_background" format="reference" />
@@ -17,7 +20,13 @@
         <attr name="button_text_enabled" format="boolean" />
         <attr name="button_text" format="string" />
         <attr name="button_text_color" format="color" />
-        <attr name="button_icon" format="reference" />
-        <attr name="button_icon_tint" format="color" />
+        <attr name="button_icon" />
+        <attr name="button_icon_tint" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomButtonWithEditText">
+        <attr name="button_icon" />
+        <attr name="button_icon_tint" />
+        <attr name="edit_text_color" format="color" />
     </declare-styleable>
 </resources>
