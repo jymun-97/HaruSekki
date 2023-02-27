@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.menu.Menu
+import com.jymun.harusekki.data.model.menu.MenuCategory
 import com.jymun.harusekki.databinding.FragmentMenuPageBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
@@ -41,6 +43,8 @@ class MenuPageFragment(
         super.onViewCreated(view, savedInstanceState)
 
         initMenuRecyclerView()
+        initAddMenuButtons()
+
         viewModel.loadMenu(date.year, date.monthValue, date.dayOfMonth)
     }
 
@@ -67,5 +71,38 @@ class MenuPageFragment(
                 MenuFragmentDirections.actionFragmentMenuToFragmentDetail(recipeId)
             )
         }
+    }
+
+    private fun initAddMenuButtons() = binding.apply {
+        addBreakfastMenuButton.addOnEnterClicked(onEmptyText) {
+            addMenu(it, MenuCategory.BREAKFAST)
+        }
+        addLunchMenuButton.addOnEnterClicked(onEmptyText) {
+            addMenu(it, MenuCategory.LUNCH)
+        }
+        addDinnerMenuButton.addOnEnterClicked(onEmptyText) {
+            addMenu(it, MenuCategory.DINNER)
+        }
+    }
+
+    private fun addMenu(menuTitle: String, category: MenuCategory) {
+        viewModel.addMenu(
+            Menu(
+                year = date.year,
+                month = date.monthValue,
+                dayOfMonth = date.dayOfMonth,
+                category = category,
+                menuTitle = menuTitle,
+                recipeId = null
+            ), date.year, date.monthValue, date.dayOfMonth
+        )
+    }
+
+    private val onEmptyText: () -> Unit = {
+        Toast.makeText(
+            requireActivity(),
+            resourcesProvider.getString(R.string.toast_empty_menu),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

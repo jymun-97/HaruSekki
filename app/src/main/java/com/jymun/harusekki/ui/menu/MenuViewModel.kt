@@ -62,7 +62,8 @@ class MenuViewModel @Inject constructor(
         )
     }
 
-    fun addMenu(menu: Menu) = onMainDispatcher {
+    fun addMenu(menu: Menu, year: Int, month: Int, dayOfMonth: Int) = onMainDispatcher {
         insertMenuUseCase(menu)
+        loadMenu(year, month, dayOfMonth)
     }
 }

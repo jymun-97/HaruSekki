@@ -62,4 +62,7 @@
     <string name="breakfast">아침</string>
     <string name="lunch">점심</string>
     <string name="dinner">저녁</string>
+
+    <!-- Add Menu -->
+    <string name="toast_empty_menu">추가할 식단을 입력하세요.</string>
 </resources>
