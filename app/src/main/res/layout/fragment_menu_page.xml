@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/breakfastHeader">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -66,7 +66,10 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     app:items="@{viewModel.breakfast}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toStartOf="@id/lunchRecyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/lunchRecyclerView"
@@ -76,7 +79,10 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     app:items="@{viewModel.lunch}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toStartOf="@id/dinnerRecyclerView"
+                    app:layout_constraintStart_toEndOf="@id/breakfastRecyclerView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dinnerRecyclerView"
@@ -86,9 +92,45 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     app:items="@{viewModel.dinner}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/lunchRecyclerView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <com.jymun.harusekki.ui.custom_view.CustomButtonWithEditText
+                    android:id="@+id/addBreakfastMenuButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:button_icon="@drawable/ic_add_box"
+                    app:button_icon_tint="@color/gray_light"
+                    app:edit_text_color="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/breakfastRecyclerView"
+                    app:layout_constraintStart_toStartOf="@id/breakfastRecyclerView"
+                    app:layout_constraintTop_toBottomOf="@id/breakfastRecyclerView" />
+
+                <com.jymun.harusekki.ui.custom_view.CustomButtonWithEditText
+                    android:id="@+id/addLunchMenuButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:button_icon="@drawable/ic_add_box"
+                    app:button_icon_tint="@color/gray_light"
+                    app:edit_text_color="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/lunchRecyclerView"
+                    app:layout_constraintStart_toStartOf="@id/lunchRecyclerView"
+                    app:layout_constraintTop_toBottomOf="@id/lunchRecyclerView" />
+
+                <com.jymun.harusekki.ui.custom_view.CustomButtonWithEditText
+                    android:id="@+id/addDinnerMenuButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:button_icon="@drawable/ic_add_box"
+                    app:button_icon_tint="@color/gray_light"
+                    app:edit_text_color="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/dinnerRecyclerView"
+                    app:layout_constraintStart_toStartOf="@id/dinnerRecyclerView"
+                    app:layout_constraintTop_toBottomOf="@id/dinnerRecyclerView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 

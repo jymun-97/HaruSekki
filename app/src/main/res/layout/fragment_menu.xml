@@ -21,12 +21,6 @@
             app:toolbar_icon="@drawable/ic_calendar"
             app:toolbar_text="@string/menu">
 
-            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:button_icon="@drawable/ic_add"
-                app:button_text="식단 추가하기"
-                app:button_text_enabled="true" />
 
         </com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar>
 
