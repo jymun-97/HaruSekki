@@ -22,12 +22,12 @@ import javax.inject.Inject
 class MenuPageFragment(
     private val date: LocalDate,
     private val onMenuAdded: () -> Unit
-) : BaseFragment<MenuViewModel, FragmentMenuPageBinding>() {
+) : BaseFragment<MenuPageViewModel, FragmentMenuPageBinding>() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
 
-    override val viewModel: MenuViewModel by viewModels()
+    override val viewModel: MenuPageViewModel by viewModels()
 
     override fun getViewDataBinding() = FragmentMenuPageBinding.inflate(layoutInflater)
 
@@ -87,6 +87,7 @@ class MenuPageFragment(
     }
 
     private fun addMenu(menuTitle: String, category: MenuCategory) {
+        onMenuAdded()
         viewModel.addMenu(
             Menu(
                 year = date.year,
@@ -95,7 +96,7 @@ class MenuPageFragment(
                 category = category,
                 menuTitle = menuTitle,
                 recipeId = null
-            ), date.year, date.monthValue, date.dayOfMonth, onMenuAdded
+            ), date.year, date.monthValue, date.dayOfMonth
         )
     }
 

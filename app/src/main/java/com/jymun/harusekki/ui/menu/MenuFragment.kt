@@ -2,7 +2,6 @@ package com.jymun.harusekki.ui.menu
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -46,7 +45,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         menuPageAdapter = MenuPageAdapter(requireActivity()) {
-            viewModel.loadDate(curDate.year, curDate.monthValue)
+            viewModel.addDate(curDate.toCalendarDay())
         }
         curDate = args.date.toLocalDate() ?: LocalDate.now()
         curPosition =
@@ -63,7 +62,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         viewModel.dateSet.observe(viewLifecycleOwner) {
             it ?: return@observe
 
-            Log.d("# MenuFragment", "$it")
+            binding.calendarView.removeDecorators()
             binding.calendarView.addDecorator(object : DayViewDecorator {
                 override fun shouldDecorate(day: CalendarDay?): Boolean {
                     return it.contains(day)
@@ -134,7 +133,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                     requireActivity().supportFragmentManager
                 )?.let {
                     (it as MenuPageFragment).deleteMenu()
-                    viewModel.loadDate(curDate.year, curDate.monthValue)
+                    viewModel.deleteDate(curDate.toCalendarDay())
                 }
             }
             .setNegativeButton(resourcesProvider.getString(R.string.cancel)) { dialog, _ ->
@@ -170,7 +169,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                     requireActivity().supportFragmentManager
                 )?.let {
                     (it as MenuPageFragment).pasteMenu(copiedDate)
-                    viewModel.loadDate(curDate.year, curDate.monthValue)
+                    viewModel.addDate(curDate.toCalendarDay())
                 }
             }
             copiedDate = null

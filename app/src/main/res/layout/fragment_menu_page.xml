@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.jymun.harusekki.ui.menu.MenuViewModel" />
+            type="com.jymun.harusekki.ui.menu.MenuPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
