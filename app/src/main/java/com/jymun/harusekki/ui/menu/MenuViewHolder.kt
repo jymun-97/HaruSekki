@@ -21,7 +21,7 @@ class MenuViewHolder(
         }
 
         (adapterListener as? MenuAdapterListener)?.let { listener ->
-            binding.menuTitleTextView.setOnClickListener {
+            binding.root.setOnClickListener {
                 model.recipeId?.let { listener.onMenuItemClicked(it) }
             }
         }

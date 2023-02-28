@@ -67,10 +67,6 @@ class MenuPageFragment(
 
     private val menuAdapterListener = object : MenuAdapterListener {
 
-        override fun onDeleteMenuButtonClicked(menu: Menu) {
-            //todo menu delete
-        }
-
         override fun onMenuItemClicked(recipeId: Long) {
             findNavController().navigate(
                 MenuFragmentDirections.actionFragmentMenuToFragmentDetail(recipeId)
