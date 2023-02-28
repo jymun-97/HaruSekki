@@ -10,7 +10,14 @@ interface MenuRepository {
         dayOfMonth: Int
     ): List<MenuEntity>
 
+    suspend fun loadMenu(
+        year: Int,
+        month: Int,
+    ): List<MenuEntity>
+
     suspend fun insertMenu(menuEntity: MenuEntity)
 
     suspend fun deleteMenu(menuEntity: MenuEntity)
+
+    suspend fun deleteMenu(year: Int, month: Int, dayOfMonth: Int)
 }

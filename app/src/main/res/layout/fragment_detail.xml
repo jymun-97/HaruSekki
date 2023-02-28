@@ -12,7 +12,9 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarContainer"
@@ -35,58 +37,24 @@
                     app:layout_collapseMode="parallax"
                     tools:background="@color/app_signature_bright" />
 
-                <androidx.appcompat.widget.Toolbar
+                <com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar
+                    android:id="@+id/toolbarLayout"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="bottom"
-                    app:layout_collapseMode="pin">
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:toolbar_background="@color/transparent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                        android:id="@+id/addMenuButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:button_icon="@drawable/ic_add"
+                        app:button_text="식단에 추가하기"
+                        app:button_text_enabled="true" />
 
-                        <ImageView
-                            android:id="@+id/categoryImageView"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintBottom_toBottomOf="@id/recipeCategoryTextView"
-                            app:layout_constraintDimensionRatio="1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/recipeTitleTextView"
-                            app:srcId="@{viewModel.recipeDetail.category.imageResId}"
-                            tools:src="@color/black" />
-
-                        <TextView
-                            android:id="@+id/recipeTitleTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="@{viewModel.recipeDetail.title}"
-                            android:textColor="@color/white"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toTopOf="@id/recipeCategoryTextView"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/categoryImageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="Recipe Title" />
-
-                        <TextView
-                            android:id="@+id/recipeCategoryTextView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="5dp"
-                            android:text="@{viewModel.recipeDetail.category.name}"
-                            android:textColor="@color/gray_light"
-                            app:layout_constraintBottom_toBottomOf="@id/recipeTitleTextView"
-                            app:layout_constraintEnd_toEndOf="@id/recipeTitleTextView"
-                            app:layout_constraintStart_toStartOf="@id/recipeTitleTextView"
-                            app:layout_constraintTop_toBottomOf="@id/recipeTitleTextView"
-                            tools:text="Recipe Category" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.appcompat.widget.Toolbar>
+                </com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -110,4 +78,5 @@
             app:layout_anchorGravity="bottom|end" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

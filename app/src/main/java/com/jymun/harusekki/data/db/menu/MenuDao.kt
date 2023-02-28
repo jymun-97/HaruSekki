@@ -18,4 +18,13 @@ interface MenuDao {
 
     @Delete
     suspend fun deleteMenu(menuEntity: MenuEntity)
+
+    @Query("DELETE FROM menu WHERE year = :year AND month = :month AND dayOfMonth = :dayOfMonth")
+    suspend fun deleteMenu(year: Int, month: Int, dayOfMonth: Int)
+
+    @Query("SELECT * FROM menu WHERE year = :year AND month = :month")
+    suspend fun loadMenu(
+        year: Int,
+        month: Int,
+    ): List<MenuEntity>
 }

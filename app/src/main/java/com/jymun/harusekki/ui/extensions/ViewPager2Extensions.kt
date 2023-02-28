@@ -1,6 +1,8 @@
 package com.jymun.harusekki.ui.extensions
 
 import androidx.annotation.DimenRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 
 private fun ViewPager2.enableShowingOtherPages(numberOfPages: Int) {
@@ -29,4 +31,12 @@ fun ViewPager2.showOtherPages(
             else -> setPadding(pageMargin * 2, 0, nextPageVisible - pageMargin, 0)
         }
     }
+}
+
+fun ViewPager2.getFragment(
+    position: Int,
+    supportFragmentManager: FragmentManager
+): Fragment? {
+
+    return supportFragmentManager.findFragmentByTag("f$position")
 }

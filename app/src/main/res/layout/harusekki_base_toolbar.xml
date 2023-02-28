@@ -4,12 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:paddingHorizontal="10dp">
+    android:layout_height="?attr/actionBarSize">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/baseTitleGroup"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
@@ -17,7 +16,6 @@
             android:id="@+id/appNameImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
             android:src="@drawable/ic_app_name"
             app:layout_constraintBottom_toBottomOf="@id/appNameTextView"
             app:layout_constraintDimensionRatio="1:1"
@@ -38,6 +36,15 @@
             app:layout_constraintStart_toEndOf="@id/appNameImageView"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpUsage" />
+
+        <LinearLayout
+            android:id="@+id/toolbarButtonContainer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/appNameTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>

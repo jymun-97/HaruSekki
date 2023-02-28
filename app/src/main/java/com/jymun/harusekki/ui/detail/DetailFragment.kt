@@ -8,9 +8,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
+import com.jymun.harusekki.data.model.menu.MenuCategory
 import com.jymun.harusekki.databinding.FragmentDetailBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
@@ -40,7 +42,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
         if (it is LoadState.Error) {
-            Log.d("# DetailFragment", "${it.exception.message}")
+            Log.d("# DetailFragment", it.exception.message)
         }
     }
 
@@ -49,6 +51,8 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
         initNeedIngredientRecyclerView()
         initCookingStepRecyclerView()
+        initAppbarLayout()
+        initAddMenuButton()
 
         viewModel.loadData(args.id)
     }
@@ -81,4 +85,36 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
             DetailFragmentDirections.actionFragmentDetailToImageDetailFragment(imageUrl)
         )
     }
+
+    private fun initAppbarLayout() {
+        binding.appBarContainer.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.toolbarLayout.alpha = -verticalOffset.toFloat() / appBarLayout.totalScrollRange
+        }
+    }
+
+    private fun initAddMenuButton() {
+        binding.addMenuButton.setOnClickListener {
+            AddMenuDialog(requireActivity()) { year: Int, month: Int, dayOfMonth: Int, menuCategory: MenuCategory ->
+                viewModel.addMenu(year, month, dayOfMonth, menuCategory)
+
+                Snackbar.make(
+                    binding.root,
+                    "레시피를 ${year}년 ${month}월 ${dayOfMonth}일 ${
+                        resourcesProvider.getString(
+                            menuCategory.textResId
+                        )
+                    } 식단에 추가하였습니다.",
+                    Snackbar.LENGTH_LONG
+                ).apply {
+                    setAction(resourcesProvider.getString(R.string.move)) {
+                        moveToMenuFragment("$year-$month-$dayOfMonth")
+                    }
+                }.show()
+            }.show()
+        }
+    }
+
+    private fun moveToMenuFragment(dateStr: String) = findNavController().navigate(
+        DetailFragmentDirections.actionFragmentDetailToFragmentMenu(dateStr)
+    )
 }
