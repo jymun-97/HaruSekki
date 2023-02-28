@@ -59,14 +59,10 @@
 
         <TextView
             android:id="@+id/latestSearchKeyword"
+            style="@style/SubTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:text="@string/latest_search_keyword"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchTextInputLayout" />
 
@@ -98,14 +94,10 @@
 
         <TextView
             android:id="@+id/latestReadRecipe"
+            style="@style/SubTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:text="@string/latest_read_recipe"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/latestSearchKeywordRecyclerView" />
 
