@@ -13,8 +13,31 @@ class InsertMenuUseCase @Inject constructor(
     private val menuRepository: MenuRepository
 ) {
 
-    suspend operator fun invoke(menu: Menu) = withContext(dispatcherProvider.default){
+    suspend operator fun invoke(menu: Menu) = withContext(dispatcherProvider.default) {
 
         menuRepository.insertMenu(menu.toEntity())
+    }
+
+    suspend operator fun invoke(
+        year: Int,
+        month: Int,
+        dayOfMonth: Int,
+        menuList: List<Menu>
+    ) = withContext(dispatcherProvider.default) {
+
+        menuList.map {
+            Menu(
+                year = year,
+                month = month,
+                dayOfMonth = dayOfMonth,
+                category = it.category,
+                menuTitle = it.menuTitle,
+                recipeId = it.recipeId
+            ).toEntity()
+        }.forEach {
+            withContext(dispatcherProvider.io) {
+                menuRepository.insertMenu(it)
+            }
+        }
     }
 }
