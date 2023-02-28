@@ -11,6 +11,7 @@ import com.jymun.harusekki.R
 import com.jymun.harusekki.databinding.FragmentMenuBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
+import com.jymun.harusekki.ui.extensions.getFragment
 import com.jymun.harusekki.ui.extensions.toCalendarDay
 import com.jymun.harusekki.ui.extensions.toLocalDate
 import com.jymun.harusekki.util.resources.ResourcesProvider
@@ -30,6 +31,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
     private lateinit var menuPageAdapter: MenuPageAdapter
     private lateinit var curDate: LocalDate
     private var curPosition = 0
+    private var copiedDate: LocalDate? = null
 
     override val viewModel: MenuViewModel by viewModels()
 
@@ -47,6 +49,8 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         initMenuPager()
         initCalendarView()
         initDeleteMenuButton()
+        initCopyMenuButton()
+        initPasteMenuButton()
     }
 
     override fun setUpBinding() = binding.apply {
@@ -97,7 +101,10 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
             .setTitle(resourcesProvider.getString(R.string.delete_menu))
             .setMessage("${curDate.year}년 ${curDate.monthValue}월 ${curDate.dayOfMonth}일자 식단을 모두 삭제하시겠습니까?")
             .setPositiveButton(resourcesProvider.getString(R.string.okay)) { _, _ ->
-                requireActivity().supportFragmentManager.findFragmentByTag("f$curPosition")?.let {
+                binding.menuViewPager.getFragment(
+                    curPosition,
+                    requireActivity().supportFragmentManager
+                )?.let {
                     (it as MenuPageFragment).deleteMenu()
                 }
             }
@@ -106,5 +113,37 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
             }
             .create()
             .show()
+    }
+
+    private fun initCopyMenuButton() = binding.copyMenuButton.apply {
+        visibility = View.VISIBLE
+        setOnClickListener {
+            visibility = View.GONE
+            binding.pasteMenuButton.visibility = View.VISIBLE
+            copiedDate = curDate
+
+            Toast.makeText(
+                requireActivity(),
+                resourcesProvider.getString(R.string.toast_copy_menu),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun initPasteMenuButton() = binding.pasteMenuButton.apply {
+        visibility = View.GONE
+        setOnClickListener {
+            visibility = View.GONE
+            binding.copyMenuButton.visibility = View.VISIBLE
+            copiedDate?.let { copiedDate ->
+                binding.menuViewPager.getFragment(
+                    curPosition,
+                    requireActivity().supportFragmentManager
+                )?.let {
+                    (it as MenuPageFragment).pasteMenu(copiedDate)
+                }
+            }
+            copiedDate = null
+        }
     }
 }

@@ -71,4 +71,18 @@ class MenuViewModel @Inject constructor(
         deleteMenuUseCase(year, month, dayOfMonth)
         loadMenu(year, month, dayOfMonth)
     }
+
+    fun pasteMenu(
+        copiedYear: Int,
+        copiedMonth: Int,
+        copiedDayOfMonth: Int,
+        pasteYear: Int,
+        pasteMonth: Int,
+        pasteDayOfMonth: Int
+    ) = onMainDispatcher {
+
+        val targets = loadMenuUseCase(copiedYear, copiedMonth, copiedDayOfMonth)
+        insertMenuUseCase(pasteYear, pasteMonth, pasteDayOfMonth, targets)
+        loadMenu(pasteYear, pasteMonth, pasteDayOfMonth)
+    }
 }

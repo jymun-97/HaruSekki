@@ -64,7 +64,10 @@
     <string name="lunch">점심</string>
     <string name="dinner">저녁</string>
 
-    <!-- Add Menu -->
+    <!-- Menu -->
     <string name="toast_empty_menu">추가할 식단을 입력하세요.</string>
     <string name="delete_menu">식단 삭제하기</string>
+    <string name="copy_menu">식단 복사하기</string>
+    <string name="paste_menu">식단 붙여넣기</string>
+    <string name="toast_copy_menu">원하는 날짜에 식단을 붙여 넣으세요.</string>
 </resources>

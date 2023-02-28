@@ -113,4 +113,15 @@ class MenuPageFragment(
     fun deleteMenu() {
         viewModel.deleteMenu(date.year, date.monthValue, date.dayOfMonth)
     }
+
+    fun pasteMenu(copiedDate: LocalDate) {
+        viewModel.pasteMenu(
+            copiedDate.year,
+            copiedDate.monthValue,
+            copiedDate.dayOfMonth,
+            date.year,
+            date.monthValue,
+            date.dayOfMonth
+        )
+    }
 }

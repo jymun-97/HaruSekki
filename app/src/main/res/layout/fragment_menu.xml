@@ -22,6 +22,22 @@
             app:toolbar_text="@string/menu">
 
             <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/copyMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/copy"
+                app:button_text="@string/copy_menu"
+                app:button_text_enabled="true" />
+
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/pasteMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/ic_paste"
+                app:button_text="@string/paste_menu"
+                app:button_text_enabled="true" />
+
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
                 android:id="@+id/deleteMenuButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
