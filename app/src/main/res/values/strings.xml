@@ -70,4 +70,20 @@
     <string name="copy_menu">식단 복사하기</string>
     <string name="paste_menu">식단 붙여넣기</string>
     <string name="toast_copy_menu">원하는 날짜에 식단을 붙여 넣으세요.</string>
+
+    <!-- Ingredient Category -->
+    <string name="grain">곡류</string>
+    <string name="meat">육류</string>
+    <string name="vegetable">채소</string>
+    <string name="seafood">해물</string>
+    <string name="seasoning">조미료</string>
+    <string name="dairy_product">유제품</string>
+    <string name="fruit">과일</string>
+    <string name="nuts">견과류</string>
+    <string name="others">기타</string>
+
+    <!-- Ingredient -->
+    <string name="search_ingredient_hint">검색할 재료를 입력하세요</string>
+    <string name="add_ingredient">냉장고에 재료 추가하기</string>
+    <string name="add_selected_ingredient">선택한 재료 냉장고에 넣기</string>
 </resources>
