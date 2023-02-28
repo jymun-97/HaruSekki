@@ -1,7 +1,6 @@
 package com.jymun.harusekki.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -49,7 +48,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("# HomeFragment", "onViewCreated() called")
 
         initShortcuts()
         initRecipeCategoryRecyclerView()
