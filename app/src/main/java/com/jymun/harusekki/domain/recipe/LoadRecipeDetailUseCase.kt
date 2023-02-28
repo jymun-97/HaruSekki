@@ -5,6 +5,7 @@ import com.jymun.harusekki.data.entity.ingredient.IngredientEntity
 import com.jymun.harusekki.data.model.ModelType
 import com.jymun.harusekki.data.model.cooking_step.CookingStep
 import com.jymun.harusekki.data.model.ingredient.Ingredient
+import com.jymun.harusekki.data.model.ingredient.IngredientCategoryMapper
 import com.jymun.harusekki.data.model.recipe.RecipeDetail
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryMapper
@@ -43,7 +44,7 @@ class LoadRecipeDetailUseCase @Inject constructor(
         id = ingredientEntity.id,
         type = ModelType.INGREDIENT,
         title = ingredientEntity.title,
-        category = ingredientEntity.category,
+        category = IngredientCategoryMapper.map(ingredientEntity.category),
         image = ingredientEntity.image
     )
 

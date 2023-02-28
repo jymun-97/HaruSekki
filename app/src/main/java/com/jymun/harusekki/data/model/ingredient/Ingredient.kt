@@ -8,14 +8,14 @@ data class Ingredient(
     override val id: Long,
     override val type: ModelType = ModelType.INGREDIENT,
     val title: String,
-    val category: String,
+    val category: IngredientCategory,
     val image: String?
 ) : Model(id, type) {
 
     fun toEntity() = IngredientEntity(
         id = id,
         title = title,
-        category = category,
+        category = category.text,
         image = image
     )
 }

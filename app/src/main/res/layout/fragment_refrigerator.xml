@@ -4,20 +4,47 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.jymun.harusekki.ui.refrigerator.RefrigeratorViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tempTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar
+            android:id="@+id/toolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
+            app:toolbar_icon="@drawable/ic_refrigerator"
+            app:toolbar_text="@string/refrigerator">
+
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/addIngredientButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/ic_add"
+                app:button_text="@string/add_ingredient"
+                app:button_text_enabled="true" />
+
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/deleteIngredientButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/ic_delete" />
+
+        </com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/inRefrigeratorRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
