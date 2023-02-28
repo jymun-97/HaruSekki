@@ -4,13 +4,23 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jymun.harusekki.data.model.ingredient.IngredientByCategory
 import com.jymun.harusekki.databinding.FragmentIngredientBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
+import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class IngredientFragment : BaseFragment<IngredientViewModel, FragmentIngredientBinding>() {
+
+    @Inject
+    lateinit var resourcesProvider: ResourcesProvider
+
+    private lateinit var ingredientByCategoryAdapter: ModelRecyclerAdapter<IngredientByCategory>
 
     override val viewModel: IngredientViewModel by viewModels()
 
@@ -28,6 +38,20 @@ class IngredientFragment : BaseFragment<IngredientViewModel, FragmentIngredientB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
+        initAllIngredientRecyclerView()
+
+        viewModel.searchKeyword.postValue("")
+        viewModel.ingredientByCategoryList.observe(viewLifecycleOwner) {
+            ingredientByCategoryAdapter.submitList(it)
+        }
+    }
+
+    private fun initAllIngredientRecyclerView() {
+        ingredientByCategoryAdapter = ModelRecyclerAdapter(resourcesProvider)
+        binding.fragmentIngredientContent.allIngredientRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = ingredientByCategoryAdapter
+        }
     }
 }

@@ -9,6 +9,7 @@ import com.jymun.harusekki.ui.detail.cooking_step.CookingStepViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeGridViewHolder
 import com.jymun.harusekki.ui.home.recipe.RecipeLinearViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
+import com.jymun.harusekki.ui.ingredient.IngredientByCategoryViewHolder
 import com.jymun.harusekki.ui.ingredient.IngredientViewHolder
 import com.jymun.harusekki.ui.menu.MenuViewHolder
 import com.jymun.harusekki.ui.search_recipe.SearchKeywordViewHolder
@@ -38,6 +39,10 @@ object ModelViewHolderMapper {
             )
             ModelType.INGREDIENT -> IngredientViewHolder(
                 ItemIngredientBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
+            ModelType.INGREDIENT_BY_CATEGORY -> IngredientByCategoryViewHolder(
+                ItemIngredientByCategoryBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
             ModelType.COOKING_STEP -> CookingStepViewHolder(

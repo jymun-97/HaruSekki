@@ -76,6 +76,7 @@
                             android:imeOptions="actionSearch"
                             android:inputType="text"
                             android:maxLines="1"
+                            android:text="@={viewModel.searchKeyword}"
                             android:textColor="@color/white"
                             android:textColorHint="@color/gray_light"
                             android:textCursorDrawable="@drawable/shape_cursor_white" />
@@ -100,7 +101,9 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <include layout="@layout/fragment_ingredient_content" />
+            <include
+                android:id="@+id/fragmentIngredientContent"
+                layout="@layout/fragment_ingredient_content" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
