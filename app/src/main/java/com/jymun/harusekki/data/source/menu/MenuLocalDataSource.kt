@@ -20,6 +20,14 @@ class MenuLocalDataSource @Inject constructor(
         return@withContext db.dao().loadMenu(year, month, dayOfMonth)
     }
 
+    override suspend fun loadMenu(
+        year: Int,
+        month: Int,
+    ): List<MenuEntity> = withContext(dispatcherProvider.io) {
+
+        return@withContext db.dao().loadMenu(year, month)
+    }
+
     override suspend fun insertMenu(menuEntity: MenuEntity) = withContext(dispatcherProvider.io) {
 
         return@withContext db.dao().insertMenu(menuEntity)

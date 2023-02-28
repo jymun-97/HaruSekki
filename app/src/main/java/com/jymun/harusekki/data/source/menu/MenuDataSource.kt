@@ -10,6 +10,11 @@ interface MenuDataSource {
         dayOfMonth: Int
     ): List<MenuEntity>
 
+    suspend fun loadMenu(
+        year: Int,
+        month: Int,
+    ): List<MenuEntity>
+
     suspend fun insertMenu(menuEntity: MenuEntity)
 
     suspend fun deleteMenu(menuEntity: MenuEntity)

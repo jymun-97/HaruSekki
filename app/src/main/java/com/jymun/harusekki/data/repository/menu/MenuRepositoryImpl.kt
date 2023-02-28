@@ -20,6 +20,14 @@ class MenuRepositoryImpl @Inject constructor(
         return@withContext menuLocalDataSource.loadMenu(year, month, dayOfMonth)
     }
 
+    override suspend fun loadMenu(
+        year: Int,
+        month: Int,
+    ): List<MenuEntity> = withContext(dispatcherProvider.io) {
+
+        return@withContext menuLocalDataSource.loadMenu(year, month)
+    }
+
     override suspend fun insertMenu(menuEntity: MenuEntity) = withContext(dispatcherProvider.io) {
 
         return@withContext menuLocalDataSource.insertMenu(menuEntity)
