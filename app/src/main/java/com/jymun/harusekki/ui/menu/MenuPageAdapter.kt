@@ -5,7 +5,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import java.time.LocalDate
 
 class MenuPageAdapter(
-    fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity,
+    private val onMenuAdded: () -> Unit
 ) : FragmentStateAdapter(fragmentActivity) {
 
     private var date = LocalDate.now()
@@ -14,6 +15,7 @@ class MenuPageAdapter(
     override fun getItemCount(): Int = Int.MAX_VALUE
 
     override fun createFragment(position: Int) = MenuPageFragment(
-        date = date.plusDays(position - defaultPosition.toLong())
+        date = date.plusDays(position - defaultPosition.toLong()),
+        onMenuAdded = onMenuAdded
     )
 }

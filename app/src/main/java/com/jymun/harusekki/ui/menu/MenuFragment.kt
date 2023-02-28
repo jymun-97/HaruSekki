@@ -2,6 +2,7 @@ package com.jymun.harusekki.ui.menu
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -15,6 +16,10 @@ import com.jymun.harusekki.ui.extensions.getFragment
 import com.jymun.harusekki.ui.extensions.toCalendarDay
 import com.jymun.harusekki.ui.extensions.toLocalDate
 import com.jymun.harusekki.util.resources.ResourcesProvider
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.DayViewDecorator
+import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -40,7 +45,9 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        menuPageAdapter = MenuPageAdapter(requireActivity())
+        menuPageAdapter = MenuPageAdapter(requireActivity()) {
+            viewModel.loadDate(curDate.year, curDate.monthValue)
+        }
         curDate = args.date.toLocalDate() ?: LocalDate.now()
         curPosition =
             menuPageAdapter.defaultPosition + ChronoUnit.DAYS.between(LocalDate.now(), curDate)
@@ -51,6 +58,24 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
         initDeleteMenuButton()
         initCopyMenuButton()
         initPasteMenuButton()
+
+        viewModel.loadDate(curDate.year, curDate.monthValue)
+        viewModel.dateSet.observe(viewLifecycleOwner) {
+            it ?: return@observe
+
+            Log.d("# MenuFragment", "$it")
+            binding.calendarView.addDecorator(object : DayViewDecorator {
+                override fun shouldDecorate(day: CalendarDay?): Boolean {
+                    return it.contains(day)
+                }
+
+                override fun decorate(view: DayViewFacade?) {
+                    view?.addSpan(
+                        DotSpan(5f, resourcesProvider.getColor(R.color.app_signature_bright))
+                    )
+                }
+            })
+        }
     }
 
     override fun setUpBinding() = binding.apply {
@@ -94,6 +119,9 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
             curDate = newDate
             curPosition = binding.menuViewPager.currentItem
         }
+        setOnMonthChangedListener { _, date ->
+            viewModel.loadDate(date.year, date.month + 1)
+        }
     }
 
     private fun initDeleteMenuButton() = binding.deleteMenuButton.setOnClickListener {
@@ -106,6 +134,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                     requireActivity().supportFragmentManager
                 )?.let {
                     (it as MenuPageFragment).deleteMenu()
+                    viewModel.loadDate(curDate.year, curDate.monthValue)
                 }
             }
             .setNegativeButton(resourcesProvider.getString(R.string.cancel)) { dialog, _ ->
@@ -141,6 +170,7 @@ class MenuFragment : BaseFragment<MenuViewModel, FragmentMenuBinding>() {
                     requireActivity().supportFragmentManager
                 )?.let {
                     (it as MenuPageFragment).pasteMenu(copiedDate)
+                    viewModel.loadDate(curDate.year, curDate.monthValue)
                 }
             }
             copiedDate = null

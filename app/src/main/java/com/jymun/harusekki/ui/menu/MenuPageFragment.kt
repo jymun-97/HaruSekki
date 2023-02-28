@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MenuPageFragment(
-    private val date: LocalDate
+    private val date: LocalDate,
+    private val onMenuAdded: () -> Unit
 ) : BaseFragment<MenuViewModel, FragmentMenuPageBinding>() {
 
     @Inject
@@ -98,7 +99,7 @@ class MenuPageFragment(
                 category = category,
                 menuTitle = menuTitle,
                 recipeId = null
-            ), date.year, date.monthValue, date.dayOfMonth
+            ), date.year, date.monthValue, date.dayOfMonth, onMenuAdded
         )
     }
 
