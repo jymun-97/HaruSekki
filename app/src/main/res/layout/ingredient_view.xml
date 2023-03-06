@@ -12,6 +12,7 @@
         android:layout_height="0dp"
         android:padding="2dp"
         app:civ_border_color="@color/gray_light"
+        app:civ_border_width="1dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

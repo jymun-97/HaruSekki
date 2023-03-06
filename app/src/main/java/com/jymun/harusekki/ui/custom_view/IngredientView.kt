@@ -18,15 +18,20 @@ class IngredientView(
 ) : ConstraintLayout(context, attributeSet) {
 
     private var binding: IngredientViewBinding
-
+    
     lateinit var imageView: ImageView
-    var flag = false
+    var checkEnabled = true
     var selectedBorderColor: Int = 0
     var unselectedBorderColor: Int = 0
     var ingredientTitleText: String = ""
         set(value) {
             field = value
             binding.ingredientTextView.text = value
+        }
+    private var flag = false
+        set(value) {
+            field = value
+            binding.checked.visibility = if (flag) View.VISIBLE else View.GONE
         }
 
     init {
@@ -86,9 +91,13 @@ class IngredientView(
         return super.performClick()
     }
 
-    fun toggle() = with(binding.ingredientImageView) {
+    private fun toggle() = with(binding.ingredientImageView) {
+        if (!checkEnabled) return
         flag = !flag
-        binding.checked.visibility = if (flag) View.VISIBLE else View.GONE
+    }
+
+    override fun setSelected(selected: Boolean) {
+        flag = selected
     }
 
     companion object {
