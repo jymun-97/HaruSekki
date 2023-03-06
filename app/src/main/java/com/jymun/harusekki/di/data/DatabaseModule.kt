@@ -2,6 +2,7 @@ package com.jymun.harusekki.di.data
 
 import android.content.Context
 import androidx.room.Room
+import com.jymun.harusekki.data.db.ingredient.IngredientDatabase
 import com.jymun.harusekki.data.db.menu.MenuDatabase
 import com.jymun.harusekki.data.db.recipe.RecipeDatabase
 import com.jymun.harusekki.data.db.recipe.SearchKeywordDatabase
@@ -44,5 +45,15 @@ object DatabaseModule {
         context.applicationContext,
         MenuDatabase::class.java,
         "menu"
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideIngredientDatabase(
+        @ApplicationContext context: Context
+    ): IngredientDatabase = Room.databaseBuilder(
+        context.applicationContext,
+        IngredientDatabase::class.java,
+        "ingredient"
     ).build()
 }
