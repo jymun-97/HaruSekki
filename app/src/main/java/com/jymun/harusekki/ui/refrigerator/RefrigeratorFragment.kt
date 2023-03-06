@@ -11,6 +11,7 @@ import com.jymun.harusekki.databinding.FragmentRefrigeratorBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.ingredient.IngredientManager
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -41,6 +42,7 @@ class RefrigeratorFragment : BaseFragment<RefrigeratorViewModel, FragmentRefrige
 
         initAddIngredientButton()
         initAllIngredientRecyclerView()
+        initDeleteIngredientButton()
 
         viewModel.loadIngredients()
         viewModel.ingredientByCategoryList.observe(viewLifecycleOwner) {
@@ -59,6 +61,15 @@ class RefrigeratorFragment : BaseFragment<RefrigeratorViewModel, FragmentRefrige
         binding.allIngredientRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = ingredientByCategoryAdapter
+        }
+    }
+
+    private fun initDeleteIngredientButton() {
+        binding.deleteIngredientButton.setOnClickListener {
+            viewModel.deleteSelectedIngredients() {
+                IngredientManager.clear()
+                viewModel.loadIngredients()
+            }
         }
     }
 }
