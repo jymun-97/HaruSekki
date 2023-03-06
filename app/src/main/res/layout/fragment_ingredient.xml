@@ -26,6 +26,7 @@
             app:toolbar_text="재료 선택">
 
             <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/addInRefrigeratorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:button_icon="@drawable/ic_add"

@@ -5,13 +5,22 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jymun.harusekki.data.model.ingredient.IngredientByCategory
 import com.jymun.harusekki.databinding.FragmentRefrigeratorBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
+import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RefrigeratorFragment : BaseFragment<RefrigeratorViewModel, FragmentRefrigeratorBinding>() {
+
+    @Inject
+    lateinit var resourcesProvider: ResourcesProvider
+    private lateinit var ingredientByCategoryAdapter: ModelRecyclerAdapter<IngredientByCategory>
 
     override val viewModel: RefrigeratorViewModel by viewModels()
 
@@ -31,11 +40,25 @@ class RefrigeratorFragment : BaseFragment<RefrigeratorViewModel, FragmentRefrige
         super.onViewCreated(view, savedInstanceState)
 
         initAddIngredientButton()
+        initAllIngredientRecyclerView()
+
+        viewModel.loadIngredients()
+        viewModel.ingredientByCategoryList.observe(viewLifecycleOwner) {
+            ingredientByCategoryAdapter.submitList(it)
+        }
     }
 
     private fun initAddIngredientButton() = binding.addIngredientButton.setOnClickListener {
         findNavController().navigate(
             RefrigeratorFragmentDirections.actionFragmentRefrigeratorToFragmentIngredient()
         )
+    }
+
+    private fun initAllIngredientRecyclerView() {
+        ingredientByCategoryAdapter = ModelRecyclerAdapter(resourcesProvider)
+        binding.allIngredientRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = ingredientByCategoryAdapter
+        }
     }
 }
