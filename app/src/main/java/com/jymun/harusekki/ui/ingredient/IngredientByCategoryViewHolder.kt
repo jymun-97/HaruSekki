@@ -33,6 +33,15 @@ class IngredientByCategoryViewHolder(
             )
             adapter = ModelRecyclerAdapter<Ingredient>(resourcesProvider).apply {
                 submitList(model.ingredientList)
+                addAdapterListener(object : IngredientAdapterListener {
+                    override fun onIngredientItemClicked(ingredient: Ingredient) {
+                        if (!IngredientManager.isSelected(ingredient)) {
+                            IngredientManager.addIngredient(ingredient)
+                        } else {
+                            IngredientManager.deleteIngredient(ingredient)
+                        }
+                    }
+                })
             }
         }
     }

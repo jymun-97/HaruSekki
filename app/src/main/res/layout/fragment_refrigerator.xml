@@ -38,9 +38,10 @@
         </com.jymun.harusekki.ui.custom_view.HaruSekkiBaseToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/inRefrigeratorRecyclerView"
-            android:layout_width="0dp"
+            android:id="@+id/allIngredientRecyclerView"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

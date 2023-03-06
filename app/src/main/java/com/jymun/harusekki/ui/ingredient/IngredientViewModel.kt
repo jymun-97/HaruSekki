@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import com.jymun.harusekki.data.model.ingredient.IngredientByCategory
 import com.jymun.harusekki.data.model.ingredient.IngredientCategory
-import com.jymun.harusekki.domain.ingredient.SearchAllIngredientUseCase
+import com.jymun.harusekki.domain.ingredient.AddIngredientInRefrigeratorUseCase
 import com.jymun.harusekki.domain.ingredient.SearchIngredientByCategoryUseCase
 import com.jymun.harusekki.domain.ingredient.SearchIngredientByTitleUseCase
 import com.jymun.harusekki.ui.base.BaseViewModel
@@ -15,9 +15,9 @@ import javax.inject.Inject
 @HiltViewModel
 class IngredientViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
-    private val searchAllIngredientUseCase: SearchAllIngredientUseCase,
     private val searchIngredientByTitleUseCase: SearchIngredientByTitleUseCase,
-    private val searchIngredientByCategoryUseCase: SearchIngredientByCategoryUseCase
+    private val searchIngredientByCategoryUseCase: SearchIngredientByCategoryUseCase,
+    private val addIngredientInRefrigeratorUseCase: AddIngredientInRefrigeratorUseCase,
 ) : BaseViewModel(dispatcherProvider) {
 
     val searchKeyword = MutableLiveData<String>()
@@ -36,5 +36,14 @@ class IngredientViewModel @Inject constructor(
             )
         }
         result
+    }
+
+    fun addSelectedIngredients(
+        onFinished: () -> Unit
+    ) = onMainDispatcher {
+        IngredientManager.getSelectedIngredients().forEach {
+            addIngredientInRefrigeratorUseCase(it)
+        }
+        onFinished()
     }
 }

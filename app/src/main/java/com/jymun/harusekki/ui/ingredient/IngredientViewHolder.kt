@@ -16,6 +16,19 @@ class IngredientViewHolder(
         binding.apply {
             ingredient = model
             root.layoutParams.width = getWidthAccordingToShowingCount()
+            ingredientView.isSelected = IngredientManager.isSelected(model)
+
+            (adapterListener as? IngredientAdapterListener)?.let { listener ->
+                binding.ingredientView.apply {
+                    checkEnabled = true
+                    setOnClickListener {
+                        listener.onIngredientItemClicked(model)
+                        binding.ingredientView.isSelected = IngredientManager.isSelected(model)
+                    }
+                }
+            } ?: run {
+                binding.ingredientView.checkEnabled = false
+            }
         }
     }
 

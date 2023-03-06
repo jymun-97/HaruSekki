@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.harusekki.data.model.ingredient.IngredientByCategory
 import com.jymun.harusekki.databinding.FragmentIngredientBinding
@@ -40,6 +41,7 @@ class IngredientFragment : BaseFragment<IngredientViewModel, FragmentIngredientB
         super.onViewCreated(view, savedInstanceState)
 
         initAllIngredientRecyclerView()
+        initAddInRefrigeratorButton()
 
         viewModel.searchKeyword.postValue("")
         viewModel.ingredientByCategoryList.observe(viewLifecycleOwner) {
@@ -52,6 +54,15 @@ class IngredientFragment : BaseFragment<IngredientViewModel, FragmentIngredientB
         binding.fragmentIngredientContent.allIngredientRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = ingredientByCategoryAdapter
+        }
+    }
+
+    private fun initAddInRefrigeratorButton() {
+        binding.addInRefrigeratorButton.setOnClickListener {
+            viewModel.addSelectedIngredients() {
+                IngredientManager.clear()
+                findNavController().popBackStack()
+            }
         }
     }
 }

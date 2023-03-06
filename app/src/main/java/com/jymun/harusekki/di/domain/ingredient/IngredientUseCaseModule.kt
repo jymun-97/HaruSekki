@@ -1,9 +1,7 @@
 package com.jymun.harusekki.di.domain.ingredient
 
 import com.jymun.harusekki.data.repository.ingredient.IngredientRepository
-import com.jymun.harusekki.domain.ingredient.SearchAllIngredientUseCase
-import com.jymun.harusekki.domain.ingredient.SearchIngredientByCategoryUseCase
-import com.jymun.harusekki.domain.ingredient.SearchIngredientByTitleUseCase
+import com.jymun.harusekki.domain.ingredient.*
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -34,4 +32,25 @@ class IngredientUseCaseModule {
         ingredientRepository: IngredientRepository
     ) =
         SearchIngredientByCategoryUseCase(dispatcherProvider, ingredientRepository)
+
+    @Provides
+    fun provideLoadIngredientsInRefrigeratorByCategoryUseCase(
+        dispatcherProvider: DispatcherProvider,
+        ingredientRepository: IngredientRepository
+    ) =
+        LoadIngredientsInRefrigeratorUseCase(dispatcherProvider, ingredientRepository)
+
+    @Provides
+    fun provideAddIngredientInRefrigeratorByCategoryUseCase(
+        dispatcherProvider: DispatcherProvider,
+        ingredientRepository: IngredientRepository
+    ) =
+        AddIngredientInRefrigeratorUseCase(dispatcherProvider, ingredientRepository)
+
+    @Provides
+    fun provideDeleteIngredientInRefrigeratorByCategoryUseCase(
+        dispatcherProvider: DispatcherProvider,
+        ingredientRepository: IngredientRepository
+    ) =
+        DeleteIngredientInRefrigeratorUseCase(dispatcherProvider, ingredientRepository)
 }

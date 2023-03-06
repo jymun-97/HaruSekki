@@ -1,5 +1,7 @@
 package com.jymun.harusekki.di.data
 
+import com.jymun.harusekki.data.source.ingredient.IngredientDateSource
+import com.jymun.harusekki.data.source.ingredient.IngredientLocalDataSource
 import com.jymun.harusekki.data.source.menu.MenuDataSource
 import com.jymun.harusekki.data.source.menu.MenuLocalDataSource
 import com.jymun.harusekki.data.source.recipe.RecipeDataSource
@@ -33,4 +35,10 @@ abstract class LocalDataSourceModule {
     abstract fun bindsMenuLocalDataSource(
         menuLocalDataSource: MenuLocalDataSource
     ): MenuDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsIngredientLocalDataSource(
+        ingredientLocalDateSource: IngredientLocalDataSource
+    ): IngredientDateSource.Local
 }
