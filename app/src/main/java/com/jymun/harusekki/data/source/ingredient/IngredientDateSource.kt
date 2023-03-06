@@ -11,9 +11,9 @@ interface IngredientDateSource {
 
         suspend fun searchByCategory(category: String): List<IngredientEntity>
     }
-    
+
     interface Local {
-        suspend fun loadAll(): List<IngredientEntity>
+        suspend fun loadAll(category: String): List<IngredientEntity>
 
         suspend fun insertIngredient(ingredientEntity: IngredientEntity)
 

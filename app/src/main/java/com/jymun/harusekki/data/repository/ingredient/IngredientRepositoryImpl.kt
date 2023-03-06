@@ -32,10 +32,12 @@ class IngredientRepositoryImpl @Inject constructor(
         return@withContext ingredientRemoteDataSource.searchByCategory(category)
     }
 
-    override suspend fun loadIngredientsInRefrigerator(): List<IngredientEntity> =
+    override suspend fun loadIngredientsInRefrigerator(
+        category: String
+    ): List<IngredientEntity> =
         withContext(dispatcherProvider.io) {
 
-            return@withContext refrigerator.loadAll()
+            return@withContext refrigerator.loadAll(category)
         }
 
     override suspend fun addIngredientInRefrigerator(ingredientEntity: IngredientEntity) =

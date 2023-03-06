@@ -11,9 +11,11 @@ class IngredientLocalDataSource @Inject constructor(
     private val db: IngredientDatabase
 ) : IngredientDateSource.Local {
 
-    override suspend fun loadAll(): List<IngredientEntity> = withContext(dispatcherProvider.io) {
+    override suspend fun loadAll(
+        category: String
+    ): List<IngredientEntity> = withContext(dispatcherProvider.io) {
 
-        return@withContext db.dao().loadIngredient()
+        return@withContext db.dao().loadIngredient(category)
     }
 
     override suspend fun insertIngredient(

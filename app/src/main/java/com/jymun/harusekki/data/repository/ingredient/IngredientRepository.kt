@@ -10,7 +10,7 @@ interface IngredientRepository {
 
     suspend fun searchByCategory(category: String): List<IngredientEntity>
 
-    suspend fun loadIngredientsInRefrigerator(): List<IngredientEntity>
+    suspend fun loadIngredientsInRefrigerator(category: String): List<IngredientEntity>
 
     suspend fun addIngredientInRefrigerator(ingredientEntity: IngredientEntity)
 

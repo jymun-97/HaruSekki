@@ -21,7 +21,9 @@ class LoadIngredientsInRefrigeratorUseCase @Inject constructor(
         category: IngredientCategory
     ) = withContext(dispatcherProvider.default) {
 
-        val ingredientList = ingredientRepository.loadIngredientsInRefrigerator().map {
+        val ingredientList = ingredientRepository.loadIngredientsInRefrigerator(
+            category.text
+        ).map {
             Ingredient(
                 id = it.id,
                 title = it.title,
