@@ -12,5 +12,7 @@ object IngredientManager {
 
     fun addIngredient(ingredient: Ingredient) = selectedIngredientSet.add(ingredient)
 
+    fun deleteIngredient(ingredient: Ingredient) = selectedIngredientSet.remove(ingredient)
+
     fun clear() = selectedIngredientSet.clear()
 }

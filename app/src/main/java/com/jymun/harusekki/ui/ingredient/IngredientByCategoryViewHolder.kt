@@ -35,7 +35,11 @@ class IngredientByCategoryViewHolder(
                 submitList(model.ingredientList)
                 addAdapterListener(object : IngredientAdapterListener {
                     override fun onIngredientItemClicked(ingredient: Ingredient) {
-                        IngredientManager.addIngredient(ingredient)
+                        if (!IngredientManager.isSelected(ingredient)) {
+                            IngredientManager.addIngredient(ingredient)
+                        } else {
+                            IngredientManager.deleteIngredient(ingredient)
+                        }
                     }
                 })
             }
