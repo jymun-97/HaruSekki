@@ -4,6 +4,8 @@ import com.jymun.harusekki.data.repository.SearchKeywordRepository
 import com.jymun.harusekki.data.repository.SearchKeywordRepositoryImpl
 import com.jymun.harusekki.data.repository.ingredient.IngredientRepository
 import com.jymun.harusekki.data.repository.ingredient.IngredientRepositoryImpl
+import com.jymun.harusekki.data.repository.memo.MemoRepository
+import com.jymun.harusekki.data.repository.memo.MemoRepositoryImpl
 import com.jymun.harusekki.data.repository.menu.MenuRepository
 import com.jymun.harusekki.data.repository.menu.MenuRepositoryImpl
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
@@ -41,4 +43,10 @@ abstract class RepositoryModule {
     abstract fun bindsIngredientRepository(
         ingredientRepositoryImpl: IngredientRepositoryImpl
     ): IngredientRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsMemoRepository(
+        memoRepositoryImpl: MemoRepositoryImpl
+    ): MemoRepository
 }
