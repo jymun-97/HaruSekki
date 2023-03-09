@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.jymun.harusekki.R
+import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.memo.Memo
 import com.jymun.harusekki.databinding.MemoViewBinding
 
@@ -39,7 +40,8 @@ class MemoView(
     private var binding: MemoViewBinding
     private var onMemoChangedListener: OnMemoChangedListener? = null
 
-    private val adapter = Adapter(emptyList<String>())
+    private val adapter = Adapter(emptyList())
+    private var ingredientList = emptyList<Ingredient>()
 
     init {
         binding = MemoViewBinding.inflate(
@@ -88,10 +90,9 @@ class MemoView(
             true
         }
         doOnTextChanged { text, _, _, _ ->
-            onMemoChangedListener?.onMemoTextChanged(text?.toString() ?: "") {
-                val dataSet = it.map { it.title }
-                Log.d("# MemoView", "$dataSet")
-                this@MemoView.adapter.setData(dataSet)
+            onMemoChangedListener?.onMemoTextChanged(text?.toString() ?: "") { dataSet ->
+                this@MemoView.adapter.setData(dataSet.map { it.title })
+                ingredientList = dataSet
             }
         }
     }
@@ -111,7 +112,19 @@ class MemoView(
     }
 
     private fun finishEditMemo() = binding.apply {
-        memo = memo.copy(text = memoEditText.text.toString())
+        val text = memoEditText.text.toString()
+        memo = if (ingredientList.isNotEmpty() && text == ingredientList.first().title) {
+            memo.copy(
+                text = text,
+                ingredient = ingredientList.first()
+            )
+        } else {
+            memo.copy(
+                text = text,
+                ingredient = null
+            )
+        }
+        Log.d("# MemoView", "$memo")
         onMemoChangedListener?.onMemoUpdated(memo)
     }
 
@@ -143,12 +156,14 @@ class MemoView(
     }
 
     private inner class Adapter(
-        private var data: List<String>
+        private var data: List<String>,
     ) : ArrayAdapter<String>(
         context,
         androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
         data
     ) {
+        private var onItemClicked: ((position: Int) -> Unit)? = null
+
         override fun getItem(position: Int): String = data[position]
 
         override fun getCount(): Int = data.size
