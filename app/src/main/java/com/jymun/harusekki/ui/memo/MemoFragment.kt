@@ -14,6 +14,7 @@ import com.jymun.harusekki.databinding.FragmentMemoBinding
 import com.jymun.harusekki.ui.base.BaseFragment
 import com.jymun.harusekki.ui.base.LoadState
 import com.jymun.harusekki.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.harusekki.ui.custom_view.OnMemoChangedListener
 import com.jymun.harusekki.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -32,6 +33,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // todo. 메모뷰에 리스너 넘기기
         initMemoSeekbar()
         initMemoRecyclerView()
         initCheckAllButton()
@@ -72,6 +74,28 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         layoutManager = GridLayoutManager(requireActivity(), 2, VERTICAL, false)
         adapter = ModelRecyclerAdapter<Memo>(resourcesProvider).also {
             memoAdapter = it
+            it.addAdapterListener(object : MemoAdapterListener {
+                override val onMemoChangedListener: OnMemoChangedListener
+                    get() = memoChangedListener
+            })
+        }
+    }
+
+    private val memoChangedListener = object : OnMemoChangedListener {
+        override fun onMemoCheckedChanged(memo: Memo) {
+            viewModel.insertMemo(memo)
+        }
+
+        override fun onMemoUpdated(memo: Memo) {
+
+        }
+
+        override fun onMemoDeleted(memo: Memo) {
+
+        }
+
+        override fun onMemoTextChanged(newText: String) {
+
         }
     }
 }

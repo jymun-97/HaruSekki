@@ -8,8 +8,8 @@ import com.jymun.harusekki.data.entity.ingredient.IngredientEntity
     tableName = "memo"
 )
 data class MemoEntity(
+    @PrimaryKey(autoGenerate = true)
     override val id: Long = 0,
-    @PrimaryKey(autoGenerate = false)
     val text: String,
     val ingredient: IngredientEntity? = null,
     val isChecked: Boolean = false

@@ -27,6 +27,11 @@ class MemoViewModel @Inject constructor(
     val memoCount = memoList.switchMap {
         MutableLiveData(it?.size ?: 0)
     }
+    val selectedMemoCount = memoList.switchMap {
+        MutableLiveData(
+            it?.filter { it.isChecked }?.size ?: 0
+        )
+    }
 
     fun loadAllMemo() = onMainDispatcher {
         _memoList.postValue(

@@ -13,5 +13,8 @@ class MemoViewHolder(
 
     override fun bindData(model: Memo, adapterListener: AdapterListener?) {
         binding.memo = model
+        (adapterListener as? MemoAdapterListener)?.let {
+            binding.memoView.registerMemoChangedListener(it.onMemoChangedListener)
+        }
     }
 }

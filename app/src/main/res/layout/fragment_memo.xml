@@ -65,6 +65,7 @@
             android:layout_margin="20dp"
             android:max="@{viewModel.memoCount}"
             android:min="0"
+            android:progress="@{viewModel.selectedMemoCount}"
             android:progressTint="@color/app_signature"
             android:thumb="@drawable/shape_seekbar_thumb"
             app:layout_constraintBottom_toBottomOf="parent"
