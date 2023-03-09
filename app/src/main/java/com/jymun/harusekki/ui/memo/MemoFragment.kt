@@ -34,7 +34,6 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
 
         initMemoSeekbar()
         initMemoRecyclerView()
-        initCheckAllButton()
         initAddMemoButton()
 
         viewModel.loadAllMemo()
@@ -57,12 +56,6 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
 
     private fun initMemoSeekbar() = binding.memoSeekbar.apply {
         isEnabled = false
-    }
-
-    private fun initCheckAllButton() = binding.checkAllButton.apply {
-        setOnClickListener {
-
-        }
     }
 
     private fun initMemoRecyclerView() = binding.memoRecyclerView.apply {

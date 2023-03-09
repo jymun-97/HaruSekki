@@ -61,4 +61,12 @@ class MemoViewModel @Inject constructor(
             searchIngredientByTitleUseCase(keyword)
         )
     }
+
+    fun selectAllMemo() {
+        memoList.value?.forEach { memo ->
+            insertMemo(
+                memo.copy(isChecked = true)
+            )
+        }
+    }
 }

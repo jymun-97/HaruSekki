@@ -91,4 +91,5 @@
     <string name="need_ingredient">필요 재료</string>
     <string name="cooking_step">조리 과정</string>
     <string name="checklist">체크리스트</string>
+    <string name="select_all">모두 체크</string>
 </resources>
