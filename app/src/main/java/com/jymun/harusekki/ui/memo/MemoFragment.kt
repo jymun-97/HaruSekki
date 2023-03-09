@@ -87,7 +87,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         }
 
         override fun onMemoUpdated(memo: Memo) {
-
+            viewModel.insertMemo(memo)
         }
 
         override fun onMemoDeleted(memo: Memo) {
