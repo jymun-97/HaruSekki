@@ -91,7 +91,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         }
 
         override fun onMemoDeleted(memo: Memo) {
-
+            viewModel.deleteMemo(memo)
         }
 
         override fun onMemoTextChanged(newText: String) {

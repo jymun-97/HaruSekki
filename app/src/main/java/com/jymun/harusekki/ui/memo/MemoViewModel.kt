@@ -43,4 +43,9 @@ class MemoViewModel @Inject constructor(
         insertMemoUseCase(memo)
         loadAllMemo()
     }
+
+    fun deleteMemo(memo: Memo) = onMainDispatcher {
+        deleteMemoUseCase(memo)
+        loadAllMemo()
+    }
 }
