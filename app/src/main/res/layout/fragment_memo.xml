@@ -24,6 +24,14 @@
             app:toolbar_text="@string/memo">
 
             <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
+                android:id="@+id/addIntoRefrigeratorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:button_icon="@drawable/ic_refrigerator"
+                app:button_text="@string/add_selected_ingredient"
+                app:button_text_enabled="true" />
+
+            <com.jymun.harusekki.ui.custom_view.HaruSekkiToolbarButton
                 android:id="@+id/addMenoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

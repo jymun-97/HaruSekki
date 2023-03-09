@@ -3,9 +3,11 @@ package com.jymun.harusekki.ui.memo
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.jymun.harusekki.R
 import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.memo.Memo
 import com.jymun.harusekki.databinding.FragmentMemoBinding
@@ -35,6 +37,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         initMemoSeekbar()
         initMemoRecyclerView()
         initAddMemoButton()
+        initAddIntoRefrigeratorButton()
 
         viewModel.loadAllMemo()
         viewModel.ingredientList.observe(viewLifecycleOwner) {
@@ -74,6 +77,42 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
             Memo.getEmptyMemo()
         )
     }
+
+    private fun initAddIntoRefrigeratorButton() =
+        binding.addIntoRefrigeratorButton.setOnClickListener {
+            val notIngredientMemoList = mutableListOf<Memo>()
+            viewModel.memoList.value?.filter { it.isChecked }?.forEach { memo ->
+                memo.ingredient?.let {
+                    viewModel.addIngredientIntoRefrigerator(it)
+                    viewModel.deleteMemo(memo)
+                } ?: run {
+                    notIngredientMemoList.add(memo)
+                }
+            }
+            if (notIngredientMemoList.isNotEmpty()) {
+                showAlertDialog(notIngredientMemoList)
+            }
+        }
+
+    private fun showAlertDialog(
+        list: List<Memo>
+    ) = AlertDialog.Builder(requireActivity())
+        .setTitle("${list.size}개 항목이 재료 데이터에 없습니다.")
+        .setMessage(
+            buildString {
+                list.forEach { appendLine(it.text) }
+                appendLine()
+                appendLine("모두 삭제하시겠습니까?")
+            }
+        )
+        .setPositiveButton(resourcesProvider.getString(R.string.okay)) { _, _ ->
+            list.forEach { viewModel.deleteMemo(it) }
+        }
+        .setNegativeButton(resourcesProvider.getString(R.string.cancel)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        .create()
+        .show()
 
     private val memoChangedListener = object : OnMemoChangedListener {
         override fun onMemoCheckedChanged(memo: Memo) {
