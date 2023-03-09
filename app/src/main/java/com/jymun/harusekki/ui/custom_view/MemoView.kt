@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.jymun.harusekki.R
@@ -73,9 +74,15 @@ class MemoView(
         setAdapter(this@MemoView.adapter)
         setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                binding.root.background =
+                    ContextCompat.getDrawable(context, R.drawable.shape_signature_round_rectangle)
+
                 setSelection(text.length)
                 showKeyboard()
             } else {
+                binding.root.background =
+                    ContextCompat.getDrawable(context, R.drawable.shape_gray_round_rectangle)
+
                 finishEditMemo()
                 if (memo.isEmptyMemo()) {
                     onMemoChangedListener?.onMemoDeleted(memo)

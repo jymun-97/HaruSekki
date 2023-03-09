@@ -97,7 +97,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
     private fun showAlertDialog(
         list: List<Memo>
     ) = AlertDialog.Builder(requireActivity())
-        .setTitle("${list.size}개 항목이 재료 데이터에 없습니다.")
+        .setTitle("아래 ${list.size}개 항목이 재료 데이터에 없습니다.")
         .setMessage(
             buildString {
                 list.forEach { appendLine(it.text) }
