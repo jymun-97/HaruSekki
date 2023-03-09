@@ -2,7 +2,6 @@ package com.jymun.harusekki.ui.custom_view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +31,7 @@ class MemoView(
                 checkedLine.visibility = if (field.isChecked) View.VISIBLE else View.GONE
                 memoEditText.setText(field.text)
 
-                if (memo.isEmptyMemo()) onEditMode()
-                else offEditMode()
+                if (memo.isEmptyMemo()) memoEditText.requestFocus()
             }
         }
 
@@ -74,10 +72,13 @@ class MemoView(
         setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 setSelection(text.length)
-                onEditMode()
                 showKeyboard()
             } else {
-                offEditMode()
+                finishEditMemo()
+                if (memo.isEmptyMemo()) {
+                    onMemoChangedListener?.onMemoDeleted(memo)
+                    return@setOnFocusChangeListener
+                }
                 hideKeyboard()
             }
         }
@@ -112,7 +113,7 @@ class MemoView(
     }
 
     private fun finishEditMemo() = binding.apply {
-        val text = memoEditText.text.toString()
+        val text = memoEditText.text.toString().ifEmpty { return@apply }
         memo = if (ingredientList.isNotEmpty() && text == ingredientList.first().title) {
             memo.copy(
                 text = text,
@@ -124,17 +125,7 @@ class MemoView(
                 ingredient = null
             )
         }
-        Log.d("# MemoView", "$memo")
         onMemoChangedListener?.onMemoUpdated(memo)
-    }
-
-    private fun onEditMode() = binding.apply {
-        memoCheckBox.isEnabled = false
-    }
-
-    private fun offEditMode() = binding.apply {
-        memoEditText.setText(memo.text)
-        memoCheckBox.isEnabled = true
     }
 
     private fun showKeyboard() {
@@ -162,8 +153,6 @@ class MemoView(
         androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
         data
     ) {
-        private var onItemClicked: ((position: Int) -> Unit)? = null
-
         override fun getItem(position: Int): String = data[position]
 
         override fun getCount(): Int = data.size

@@ -35,6 +35,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         initMemoSeekbar()
         initMemoRecyclerView()
         initCheckAllButton()
+        initAddMemoButton()
 
         viewModel.loadAllMemo()
         viewModel.ingredientList.observe(viewLifecycleOwner) {
@@ -73,6 +74,12 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
                     get() = memoChangedListener
             })
         }
+    }
+
+    private fun initAddMemoButton() = binding.addMenoButton.setOnClickListener {
+        viewModel.insertMemo(
+            Memo.getEmptyMemo()
+        )
     }
 
     private val memoChangedListener = object : OnMemoChangedListener {
