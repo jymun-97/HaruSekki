@@ -72,6 +72,12 @@ class MemoViewModel @Inject constructor(
         }
     }
 
+    fun deleteCheckedMemo() = onDefaultDispatcher {
+        memoList.value?.filter { it.isChecked }?.forEach {
+            deleteMemo(it)
+        }
+    }
+
     fun addIngredientIntoRefrigerator(
         ingredient: Ingredient
     ) = onIoDispatcher {
