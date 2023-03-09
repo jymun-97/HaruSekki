@@ -11,6 +11,7 @@ import com.jymun.harusekki.ui.home.recipe.RecipeLinearViewHolder
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategoryViewHolder
 import com.jymun.harusekki.ui.ingredient.IngredientByCategoryViewHolder
 import com.jymun.harusekki.ui.ingredient.IngredientViewHolder
+import com.jymun.harusekki.ui.memo.MemoViewHolder
 import com.jymun.harusekki.ui.menu.MenuViewHolder
 import com.jymun.harusekki.ui.search_recipe.SearchKeywordViewHolder
 import com.jymun.harusekki.util.resources.ResourcesProvider
@@ -51,6 +52,10 @@ object ModelViewHolderMapper {
             )
             ModelType.MENU -> MenuViewHolder(
                 ItemMenuBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
+            ModelType.MEMO -> MemoViewHolder(
+                ItemMemoBinding.inflate(inflater, parent, false),
                 resourcesProvider
             )
             else -> SearchKeywordViewHolder(

@@ -21,7 +21,14 @@ class SearchIngredientByTitleUseCase @Inject constructor(
         title: String
     ) = withContext(dispatcherProvider.default) {
 
-        return@withContext ingredientRepository.searchByTitle(title)
+        return@withContext ingredientRepository.searchByTitle(title).map { ingredientEntity ->
+            Ingredient(
+                id = ingredientEntity.id,
+                title = ingredientEntity.title,
+                category = IngredientCategoryMapper.map(ingredientEntity.category),
+                image = ingredientEntity.image
+            )
+        }
     }
 
     suspend operator fun invoke(
