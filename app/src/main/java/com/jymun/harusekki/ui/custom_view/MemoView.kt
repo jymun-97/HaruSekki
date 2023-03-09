@@ -2,12 +2,15 @@ package com.jymun.harusekki.ui.custom_view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
@@ -36,6 +39,8 @@ class MemoView(
     private var binding: MemoViewBinding
     private var onMemoChangedListener: OnMemoChangedListener? = null
 
+    private val adapter = Adapter(emptyList<String>())
+
     init {
         binding = MemoViewBinding.inflate(
             LayoutInflater.from(context),
@@ -59,6 +64,11 @@ class MemoView(
     }
 
     private fun initMemoEditText() = binding.memoEditText.apply {
+        dropDownVerticalOffset = 20
+        dropDownHorizontalOffset = -20
+        threshold = 1
+
+        setAdapter(this@MemoView.adapter)
         setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 setSelection(text.length)
@@ -78,7 +88,11 @@ class MemoView(
             true
         }
         doOnTextChanged { text, _, _, _ ->
-            onMemoChangedListener?.onMemoTextChanged(text?.toString() ?: "")
+            onMemoChangedListener?.onMemoTextChanged(text?.toString() ?: "") {
+                val dataSet = it.map { it.title }
+                Log.d("# MemoView", "$dataSet")
+                this@MemoView.adapter.setData(dataSet)
+            }
         }
     }
 
@@ -128,13 +142,30 @@ class MemoView(
         initViews()
     }
 
-    fun submitList(dataSet: List<String>) = binding.memoEditText.setAdapter(
-        ArrayAdapter(
-            context,
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-            dataSet
-        )
-    )
+    private inner class Adapter(
+        private var data: List<String>
+    ) : ArrayAdapter<String>(
+        context,
+        androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+        data
+    ) {
+        override fun getItem(position: Int): String = data[position]
+
+        override fun getCount(): Int = data.size
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            return TextView(context).apply {
+                setPadding(20, 20, 20, 20)
+                text = data[position]
+                setTextColor(context.getColor(R.color.gray))
+            }
+        }
+
+        fun setData(newData: List<String>) {
+            data = newData
+            notifyDataSetChanged()
+        }
+    }
 
     companion object {
         @BindingAdapter("app:memo_model")

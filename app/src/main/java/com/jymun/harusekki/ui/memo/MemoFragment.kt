@@ -1,14 +1,12 @@
 package com.jymun.harusekki.ui.memo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.memo.Memo
 import com.jymun.harusekki.databinding.FragmentMemoBinding
 import com.jymun.harusekki.ui.base.BaseFragment
@@ -25,6 +23,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
     private lateinit var memoAdapter: ModelRecyclerAdapter<Memo>
+    private var onMemoTextChangedResult: ((List<Ingredient>) -> Unit)? = null
 
     override val viewModel: MemoViewModel by viewModels()
 
@@ -33,12 +32,16 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // todo. 메모뷰에 리스너 넘기기
         initMemoSeekbar()
         initMemoRecyclerView()
         initCheckAllButton()
 
         viewModel.loadAllMemo()
+        viewModel.ingredientList.observe(viewLifecycleOwner) {
+            if (it != null && onMemoTextChangedResult != null) {
+                onMemoTextChangedResult!!(it)
+            }
+        }
     }
 
     override fun setUpBinding() = binding.apply {
@@ -53,15 +56,6 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
 
     private fun initMemoSeekbar() = binding.memoSeekbar.apply {
         isEnabled = false
-        setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                Log.d("# MemoFragment", "$progress / ${binding.memoSeekbar.max}")
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
     }
 
     private fun initCheckAllButton() = binding.checkAllButton.apply {
@@ -94,8 +88,14 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
             viewModel.deleteMemo(memo)
         }
 
-        override fun onMemoTextChanged(newText: String) {
-            Log.d("# MemoFragment", "$newText")
+        override fun onMemoTextChanged(
+            newText: String,
+            onSearchResult: (List<Ingredient>) -> Unit
+        ) {
+            if (newText.isEmpty()) return
+
+            onMemoTextChangedResult = onSearchResult
+            viewModel.searchIngredient(newText)
         }
     }
 }
