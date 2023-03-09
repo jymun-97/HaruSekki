@@ -26,7 +26,6 @@ class MemoView(
             binding.apply {
                 memoCheckBox.isChecked = field.isChecked
                 checkedLine.visibility = if (field.isChecked) View.VISIBLE else View.GONE
-                openOptionButton.isEnabled = !field.isChecked
                 memoEditText.setText(field.text)
 
                 if (memo.isEmptyMemo()) onEditMode()

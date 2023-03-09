@@ -95,7 +95,7 @@ class MemoFragment : BaseFragment<MemoViewModel, FragmentMemoBinding>() {
         }
 
         override fun onMemoTextChanged(newText: String) {
-
+            Log.d("# MemoFragment", "$newText")
         }
     }
 }
