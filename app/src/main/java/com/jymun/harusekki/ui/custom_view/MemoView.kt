@@ -58,6 +58,8 @@ class MemoView(
 
     private fun initMemoCheckBox() = binding.apply {
         memoCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (memo.isChecked == isChecked) return@setOnCheckedChangeListener
+
             memo = memo.copy(isChecked = isChecked)
             onMemoChangedListener?.onMemoCheckedChanged(memo)
         }
@@ -113,7 +115,9 @@ class MemoView(
     }
 
     private fun finishEditMemo() = binding.apply {
-        val text = memoEditText.text.toString().ifEmpty { return@apply }
+        val text = memoEditText.text.toString()
+        if (text == memo.text || text.isEmpty()) return@apply
+
         memo = if (ingredientList.isNotEmpty() && text == ingredientList.first().title) {
             memo.copy(
                 text = text,
