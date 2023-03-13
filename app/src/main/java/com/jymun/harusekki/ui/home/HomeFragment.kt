@@ -52,11 +52,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         initShortcuts()
         initRecipeCategoryRecyclerView()
         initBestRecipeRecyclerView()
+        initFavoriteRecipeRecyclerView()
         initLatestRecipeRecyclerview()
         initSearchByTitleButton()
         initRefreshButton()
         initSearchByIngredientButton()
         initSearchMoreBestRecipeButton()
+        initSearchMoreFavoriteRecipeButton()
         initSearchMoreLatestRecipeButton()
 
         viewModel.loadData()
@@ -123,6 +125,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    private fun initFavoriteRecipeRecyclerView() {
+        binding.fragmentHomeContent.favoriteRecipeRecyclerView.apply {
+            addSnapToStartHelper()
+            layoutManager = GridLayoutManager(requireActivity(), 1, HORIZONTAL, false)
+            adapter = ModelRecyclerAdapter<Recipe>(resourcesProvider).apply {
+                addAdapterListener(recipeAdapterListener)
+            }
+        }
+    }
+
     private fun initLatestRecipeRecyclerview() {
         binding.fragmentHomeContent.latestRecipeRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
@@ -153,6 +165,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun initSearchMoreBestRecipeButton() {
         binding.fragmentHomeContent.searchMoreBestRecipe.setOnClickListener {
             moveToSearchResultFragment(SearchMode.All(RecipeSortOption.LIKES))
+        }
+    }
+
+    private fun initSearchMoreFavoriteRecipeButton() {
+        binding.fragmentHomeContent.searchMoreFavoriteRecipe.setOnClickListener {
+            moveToSearchResultFragment(SearchMode.Favorite(RecipeSortOption.LATEST))
         }
     }
 

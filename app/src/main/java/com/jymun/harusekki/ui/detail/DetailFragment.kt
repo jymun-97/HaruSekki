@@ -55,6 +55,15 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         initAddMenuButton()
 
         viewModel.loadData(args.id)
+        viewModel.liked.observe(viewLifecycleOwner) { isLiked ->
+            binding.likeRecipeButton.apply {
+                if (isLiked) {
+                    setImageDrawable(resourcesProvider.getDrawable(R.drawable.heart_like))
+                } else {
+                    setImageDrawable(resourcesProvider.getDrawable(R.drawable.heart_dislike))
+                }
+            }
+        }
     }
 
     private fun initNeedIngredientRecyclerView() {

@@ -87,13 +87,50 @@
                     app:layout_constraintTop_toBottomOf="@id/bestRecipeTextView" />
 
                 <TextView
+                    android:id="@+id/favoriteRecipeTextView"
+                    style="@style/SubTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/favorite_mode"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bestRecipeRecyclerView" />
+
+                <TextView
+                    android:id="@+id/searchMoreFavoriteRecipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontal_space"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="@string/show_more"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    app:drawableEndCompat="@drawable/ic_arrow_forward"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintBottom_toBottomOf="@id/favoriteRecipeTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/favoriteRecipeTextView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favoriteRecipeRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingHorizontal="@dimen/horizontal_space"
+                    app:items="@{viewModel.favoriteRecipeList}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/favoriteRecipeTextView" />
+
+                <TextView
                     android:id="@+id/latestRecipeTextView"
                     style="@style/SubTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/latest_recipe"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bestRecipeRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/favoriteRecipeRecyclerView" />
 
                 <TextView
                     android:id="@+id/searchMoreLatestRecipe"

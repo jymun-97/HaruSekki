@@ -58,6 +58,7 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
 
         initSortOptionSpinner()
         initByTitleModeButton()
+        initFavoriteModeButton()
         initSearchModeToggleGroup()
         initSearchResultPager()
         initCategoryTabLayout()
@@ -112,6 +113,12 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
                     moveToSearchRecipeFragment()
                 }
             }
+        }
+    }
+
+    private fun initFavoriteModeButton() {
+        if (searchMode is SearchMode.Favorite) {
+            binding.favoriteModeButton.performClick()
         }
     }
 
