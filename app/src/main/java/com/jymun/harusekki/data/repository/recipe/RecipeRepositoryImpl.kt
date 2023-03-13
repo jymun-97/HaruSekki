@@ -71,4 +71,38 @@ class RecipeRepositoryImpl @Inject constructor(
         recipeLocalDataSource.deleteOldestReadRecipe()
     }
 
+    override suspend fun loadLatestFavoriteRecipe(): List<RecipeEntity> =
+        withContext(dispatcherProvider.io) {
+            return@withContext recipeLocalDataSource.loadLatestReadRecipe()
+        }
+
+    override suspend fun loadMostHitsFavoriteRecipe(): List<RecipeEntity> =
+        withContext(dispatcherProvider.io) {
+            return@withContext recipeLocalDataSource.loadMostHitsFavoriteRecipe()
+        }
+
+    override suspend fun loadMostLikesFavoriteRecipe(): List<RecipeEntity> =
+        withContext(dispatcherProvider.io) {
+            return@withContext recipeLocalDataSource.loadMostLikesFavoriteRecipe()
+        }
+
+    override suspend fun insertFavoriteRecipe(
+        recipeEntity: RecipeEntity
+    ) = withContext(dispatcherProvider.io) {
+
+        recipeLocalDataSource.insertFavoriteRecipe(recipeEntity)
+    }
+
+    override suspend fun deleteFavoriteRecipe(
+        recipeEntity: RecipeEntity
+    ) = withContext(dispatcherProvider.io) {
+        recipeLocalDataSource.deleteFavoriteRecipe(recipeEntity)
+    }
+
+    override suspend fun isRecipeLiked(
+        id: Long
+    ): Boolean = withContext(dispatcherProvider.io) {
+
+        recipeLocalDataSource.isRecipeLiked(id)
+    }
 }
