@@ -40,6 +40,12 @@ class IngredientRepositoryImpl @Inject constructor(
             return@withContext refrigerator.loadAll(category)
         }
 
+    override suspend fun loadIngredientsInRefrigerator(): List<IngredientEntity> =
+        withContext(dispatcherProvider.io) {
+
+            return@withContext refrigerator.loadAll()
+        }
+
     override suspend fun addIngredientInRefrigerator(ingredientEntity: IngredientEntity) =
         withContext(dispatcherProvider.io) {
 

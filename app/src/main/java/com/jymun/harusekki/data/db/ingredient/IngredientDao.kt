@@ -9,6 +9,9 @@ interface IngredientDao {
     @Query("SELECT * FROM ingredient WHERE category = :category")
     suspend fun loadIngredient(category: String): List<IngredientEntity>
 
+    @Query("SELECT * FROM ingredient")
+    suspend fun loadIngredient(): List<IngredientEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIngredient(ingredientEntity: IngredientEntity)
 

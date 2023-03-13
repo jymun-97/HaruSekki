@@ -12,6 +12,8 @@ interface IngredientRepository {
 
     suspend fun loadIngredientsInRefrigerator(category: String): List<IngredientEntity>
 
+    suspend fun loadIngredientsInRefrigerator(): List<IngredientEntity>
+
     suspend fun addIngredientInRefrigerator(ingredientEntity: IngredientEntity)
 
     suspend fun deleteIngredientInRefrigerator(ingredientEntity: IngredientEntity)
