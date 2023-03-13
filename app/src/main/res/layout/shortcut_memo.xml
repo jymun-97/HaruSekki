@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.jymun.harusekki.ui.memo.MemoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/todayTextView"
+            android:id="@+id/subTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -44,45 +47,43 @@
             app:layout_constraintStart_toStartOf="@id/shortcutTitleTextView"
             app:layout_constraintTop_toBottomOf="@id/shortcutTitleTextView" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addMenoButton"
+        <TextView
+            android:id="@+id/moveToMenoFragmentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_gray_round_button"
-            android:drawableEnd="@drawable/ic_add_box"
-            android:drawableTint="@color/gray"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingVertical="3dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="7dp"
-            android:text="@string/add"
-            android:textColor="@color/gray_dark"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/todayTextView" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/showDetailButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_gray_round_button"
-            android:drawableEnd="@drawable/ic_arrow_forward"
-            android:drawableTint="@color/gray"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingVertical="3dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="1dp"
+            android:gravity="center"
             android:text="@string/show_detail"
-            android:textColor="@color/gray_dark"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/addMenoButton"
-            app:layout_constraintTop_toBottomOf="@id/todayTextView" />
+            android:textColor="@color/gray_light"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableTint="@color/gray_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/shortcutTitleTextView" />
+
+        <SeekBar
+            android:id="@+id/memoSeekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:max="@{viewModel.memoCount}"
+            android:min="0"
+            android:progress="@{viewModel.selectedMemoCount}"
+            android:progressTint="@color/app_signature"
+            android:thumb="@drawable/shape_seekbar_thumb"
+            app:layout_constraintBottom_toTopOf="@id/memoSeekbarStateTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subTitleTextView" />
+
+        <TextView
+            android:id="@+id/memoSeekbarStateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{viewModel.selectedMemoCount + "/" + viewModel.memoCount}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/memoSeekbar"
+            app:layout_constraintTop_toBottomOf="@id/memoSeekbar"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

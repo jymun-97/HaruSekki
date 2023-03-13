@@ -1,28 +1,52 @@
 package com.jymun.harusekki.ui.home.shortcut
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jymun.harusekki.databinding.ShortcutRefrigeratorBinding
-import com.jymun.harusekki.ui.base.BaseFragment
-import com.jymun.harusekki.ui.menu.MenuViewModel
+import com.jymun.harusekki.ui.home.HomeFragmentDirections
 
-class RefrigeratorShortcutFragment : BaseFragment<MenuViewModel, ShortcutRefrigeratorBinding>() {
+class RefrigeratorShortcutFragment : Fragment() {
 
-    override val viewModel: MenuViewModel by activityViewModels()
+    private var _binding: ShortcutRefrigeratorBinding? = null
+    private val binding: ShortcutRefrigeratorBinding
+        get() = _binding!!
 
-    override fun getViewDataBinding() = ShortcutRefrigeratorBinding.inflate(layoutInflater)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = ShortcutRefrigeratorBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initAddIngredientButton()
+        initShowDetailButton()
     }
 
-    override fun setUpBinding() = binding.apply {
-        // TODO("Not yet implemented")
+    private fun initAddIngredientButton() = binding.addIngredientButton.apply {
+        setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionFragmentHomeToFragmentIngredient()
+            )
+        }
     }
 
-    override fun observeState() {
-        // TODO("Not yet implemented")
+    private fun initShowDetailButton() = binding.showDetailButton.setOnClickListener {
+        findNavController().navigate(
+            HomeFragmentDirections.actionFragmentHomeToFragmentRefrigerator()
+        )
     }
 }

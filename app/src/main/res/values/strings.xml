@@ -72,6 +72,7 @@
     <string name="copy_menu">식단 복사하기</string>
     <string name="paste_menu">식단 붙여넣기</string>
     <string name="toast_copy_menu">원하는 날짜에 식단을 붙여 넣으세요.</string>
+    <string name="not_exist_menu">등록된 식단이 없습니다</string>
 
     <!-- Ingredient Category -->
     <string name="grain">곡류</string>
