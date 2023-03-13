@@ -1,6 +1,7 @@
 package com.jymun.harusekki.domain.recipe
 
 import com.jymun.harusekki.data.model.ModelType
+import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
@@ -19,14 +20,16 @@ class SearchRecipeByIngredientUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(
-        ingredientList: List<Long>,
+        ingredientList: List<Ingredient>,
         orderBy: RecipeSortOption = RecipeSortOption.LATEST,
         category: RecipeCategory,
         refreshFlag: Boolean = false
     ): List<Recipe> = withContext(dispatcherProvider.default) {
 
         // TODO. api -> orderBy 파라미터 추가
-        val recipeEntityList = recipeRepository.searchByIngredient(ingredientList)
+        if (ingredientList.isEmpty()) throw CustomExceptions.NotDataExistException()
+
+        val recipeEntityList = recipeRepository.searchByIngredient(ingredientList.map { it.id })
         if (recipeEntityList.isEmpty()) throw CustomExceptions.NotDataExistException()
 
         return@withContext recipeEntityList.map {

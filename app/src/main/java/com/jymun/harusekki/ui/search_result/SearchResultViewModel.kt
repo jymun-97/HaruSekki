@@ -1,8 +1,11 @@
 package com.jymun.harusekki.ui.search_result
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import com.jymun.harusekki.data.model.ingredient.Ingredient
 import com.jymun.harusekki.data.model.recipe.Recipe
+import com.jymun.harusekki.domain.ingredient.LoadIngredientsInRefrigeratorUseCase
 import com.jymun.harusekki.domain.recipe.*
 import com.jymun.harusekki.domain.recipe.favorite.LoadFavoriteRecipeUseCase
 import com.jymun.harusekki.ui.base.BaseViewModel
@@ -22,9 +25,14 @@ class SearchResultViewModel @Inject constructor(
     private val insertLatestReadRecipeUseCase: InsertLatestReadRecipeUseCase,
     private val deleteOldestReadRecipeUseCase: DeleteOldestReadRecipeUseCase,
     private val loadFavoriteRecipeUseCase: LoadFavoriteRecipeUseCase,
+    private val loadIngredientsInRefrigeratorUseCase: LoadIngredientsInRefrigeratorUseCase
 ) : BaseViewModel(dispatcherProvider) {
 
     private val searchMode = MutableLiveData<SearchMode>()
+
+    private val _ingredientList = MutableLiveData<List<Ingredient>?>()
+    val ingredientList: LiveData<List<Ingredient>?>
+        get() = _ingredientList
 
     fun updateSearchMode(mode: SearchMode) = searchMode.postValue(mode)
 
@@ -48,7 +56,11 @@ class SearchResultViewModel @Inject constructor(
                             refreshFlag = false
                         ).take(10)
 
-                        // todo. ingredient mode
+                        is SearchMode.ByIngredient -> searchRecipeByIngredientUseCase(
+                            ingredientList = ingredientList.value!!,
+                            orderBy = mode.sortOption,
+                            category = category,
+                        ).take(10)
 
                         is SearchMode.Favorite -> loadFavoriteRecipeUseCase(
                             orderBy = mode.sortOption,
@@ -71,5 +83,11 @@ class SearchResultViewModel @Inject constructor(
     fun readRecipe(recipe: Recipe) = onMainDispatcher {
         insertLatestReadRecipeUseCase(recipe)
         deleteOldestReadRecipeUseCase()
+    }
+
+    fun loadIngredientListInRefrigerator() = onMainDispatcher {
+        _ingredientList.postValue(
+            loadIngredientsInRefrigeratorUseCase()
+        )
     }
 }

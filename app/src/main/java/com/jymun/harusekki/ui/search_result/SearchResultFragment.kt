@@ -59,12 +59,18 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
         initSortOptionSpinner()
         initByTitleModeButton()
         initFavoriteModeButton()
+        initByIngredientModeButton()
         initSearchModeToggleGroup()
         initSearchResultPager()
         initCategoryTabLayout()
         setInitialPage()
 
-        viewModel.updateSearchMode(searchMode)
+        viewModel.loadIngredientListInRefrigerator()
+
+        viewModel.ingredientList.observe(viewLifecycleOwner) {
+            it ?: return@observe
+            viewModel.updateSearchMode(searchMode)
+        }
     }
 
     private fun initSortOptionSpinner() = binding.sortOptionSpinner.apply {
@@ -119,6 +125,12 @@ class SearchResultFragment : BaseFragment<SearchResultViewModel, FragmentSearchR
     private fun initFavoriteModeButton() {
         if (searchMode is SearchMode.Favorite) {
             binding.favoriteModeButton.performClick()
+        }
+    }
+
+    private fun initByIngredientModeButton() {
+        if (searchMode is SearchMode.ByIngredient) {
+            binding.byIngredientModeButton.performClick()
         }
     }
 
