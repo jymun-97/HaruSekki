@@ -78,7 +78,6 @@
             android:textColor="@color/gray_light"
             app:drawableEndCompat="@drawable/ic_arrow_forward"
             app:drawableTint="@color/gray_light"
-            app:layout_constraintBottom_toBottomOf="@id/todayTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/shortcutTitleTextView" />
 
