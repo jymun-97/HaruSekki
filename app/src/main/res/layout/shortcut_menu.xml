@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.jymun.harusekki.ui.menu.MenuPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,45 +47,40 @@
             app:layout_constraintStart_toStartOf="@id/shortcutTitleTextView"
             app:layout_constraintTop_toBottomOf="@id/shortcutTitleTextView" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addMenuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/menuRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_gray_round_button"
-            android:drawableEnd="@drawable/ic_add_box"
-            android:drawableTint="@color/gray"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingVertical="3dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="7dp"
-            android:text="@string/add"
-            android:textColor="@color/gray_dark"
-            android:textSize="12sp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/todayTextView" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/showDetailButton"
+        <TextView
+            android:id="@+id/emptyMenuTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_gray_round_button"
-            android:drawableEnd="@drawable/ic_arrow_forward"
-            android:drawableTint="@color/gray"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:paddingVertical="3dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="1dp"
-            android:text="@string/show_detail"
-            android:textColor="@color/gray_dark"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/addMenuButton"
+            android:text="@string/not_exist_menu"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/todayTextView"
             app:layout_constraintTop_toBottomOf="@id/todayTextView" />
+
+        <TextView
+            android:id="@+id/moveToMenuFragmentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/show_detail"
+            android:textColor="@color/gray_light"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableTint="@color/gray_light"
+            app:layout_constraintBottom_toBottomOf="@id/todayTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/shortcutTitleTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
