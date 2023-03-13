@@ -2,6 +2,9 @@ package com.jymun.harusekki.di.domain.recipe
 
 import com.jymun.harusekki.data.repository.recipe.RecipeRepository
 import com.jymun.harusekki.domain.recipe.*
+import com.jymun.harusekki.domain.recipe.favorite.DeleteFavoriteRecipeUseCase
+import com.jymun.harusekki.domain.recipe.favorite.InsertFavoriteRecipeUseCase
+import com.jymun.harusekki.domain.recipe.favorite.LoadFavoriteRecipeUseCase
 import com.jymun.harusekki.util.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -72,6 +75,33 @@ object RecipeUseCaseModule {
         recipeRepository: RecipeRepository
     ) =
         DeleteOldestReadRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideLoadFavoriteRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        LoadFavoriteRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideInsertFavoriteRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        InsertFavoriteRecipeUseCase(
+            dispatcherProvider, recipeRepository
+        )
+
+    @Provides
+    fun provideDeleteFavoriteRecipeUseCase(
+        dispatcherProvider: DispatcherProvider,
+        recipeRepository: RecipeRepository
+    ) =
+        DeleteFavoriteRecipeUseCase(
             dispatcherProvider, recipeRepository
         )
 }
