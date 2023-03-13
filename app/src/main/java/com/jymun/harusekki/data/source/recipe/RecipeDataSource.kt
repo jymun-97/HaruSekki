@@ -36,5 +36,17 @@ interface RecipeDataSource {
         suspend fun insertLatestReadRecipe(recipeEntity: RecipeEntity)
 
         suspend fun deleteOldestReadRecipe()
+
+        suspend fun loadLatestFavoriteRecipe(): List<RecipeEntity>
+
+        suspend fun loadMostHitsFavoriteRecipe(): List<RecipeEntity>
+
+        suspend fun loadMostLikesFavoriteRecipe(): List<RecipeEntity>
+
+        suspend fun insertFavoriteRecipe(recipeEntity: RecipeEntity)
+
+        suspend fun deleteFavoriteRecipe(recipeEntity: RecipeEntity)
+
+        suspend fun isRecipeLiked(id: Long): Boolean
     }
 }
