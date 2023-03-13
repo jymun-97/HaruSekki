@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import com.jymun.harusekki.data.model.recipe.Recipe
 import com.jymun.harusekki.domain.recipe.*
+import com.jymun.harusekki.domain.recipe.favorite.LoadFavoriteRecipeUseCase
 import com.jymun.harusekki.ui.base.BaseViewModel
 import com.jymun.harusekki.ui.home.recipe.RecipeSortOption
 import com.jymun.harusekki.ui.home.recipe.category.RecipeCategory
@@ -19,7 +20,8 @@ class SearchResultViewModel @Inject constructor(
     private val searchRecipeByTitleUseCase: SearchRecipeByTitleUseCase,
     private val searchRecipeByIngredientUseCase: SearchRecipeByIngredientUseCase,
     private val insertLatestReadRecipeUseCase: InsertLatestReadRecipeUseCase,
-    private val deleteOldestReadRecipeUseCase: DeleteOldestReadRecipeUseCase
+    private val deleteOldestReadRecipeUseCase: DeleteOldestReadRecipeUseCase,
+    private val loadFavoriteRecipeUseCase: LoadFavoriteRecipeUseCase,
 ) : BaseViewModel(dispatcherProvider) {
 
     private val searchMode = MutableLiveData<SearchMode>()
@@ -48,7 +50,10 @@ class SearchResultViewModel @Inject constructor(
 
                         // todo. ingredient mode
 
-                        // todo. favorite mode
+                        is SearchMode.Favorite -> loadFavoriteRecipeUseCase(
+                            orderBy = mode.sortOption,
+                            category = category
+                        ).take(10)
 
                         else -> loadAllRecipeUseCase(
                             orderBy = mode.sortOption,
