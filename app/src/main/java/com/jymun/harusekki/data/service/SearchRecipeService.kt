@@ -30,7 +30,7 @@ interface SearchRecipeService {
         @Query("recipe_id") id: Long
     ): Response<RecipeEntity>
 
-    @GET("/recipe/findbyingredientlist")
+    @GET("/recipe/findbyingredients")
     suspend fun searchByIngredient(
         @Query("ingredients") ingredientList: List<Long>
     ): Response<List<RecipeEntity>>

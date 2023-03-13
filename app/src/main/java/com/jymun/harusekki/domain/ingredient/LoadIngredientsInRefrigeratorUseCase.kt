@@ -38,4 +38,16 @@ class LoadIngredientsInRefrigeratorUseCase @Inject constructor(
             ingredientList = ingredientList
         )
     }
+
+    suspend operator fun invoke() = withContext(dispatcherProvider.default) {
+
+        return@withContext ingredientRepository.loadIngredientsInRefrigerator().map {
+            Ingredient(
+                id = it.id,
+                title = it.title,
+                category = IngredientCategoryMapper.map(it.category),
+                image = it.image
+            )
+        }
+    }
 }
