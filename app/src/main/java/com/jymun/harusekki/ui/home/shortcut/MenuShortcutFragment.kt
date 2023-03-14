@@ -99,7 +99,7 @@ class MenuShortcutFragment : BaseFragment<MenuPageViewModel, ShortcutMenuBinding
     }
 
     private fun initMenuRecyclerView() = binding.menuRecyclerView.apply {
-        layoutManager = GridLayoutManager(requireActivity(), 4, VERTICAL, false)
+        layoutManager = GridLayoutManager(requireActivity(), 3, VERTICAL, false)
         adapter = ModelRecyclerAdapter<Menu>(resourcesProvider).also {
             menuAdapter = it
         }
