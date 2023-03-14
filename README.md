@@ -1,8 +1,4 @@
-![splash.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5f8e71d3-2542-4005-84e1-31230854b30e/splash.png)
-
-[https://youtu.be/vxHA9Yk9IQs](https://youtu.be/vxHA9Yk9IQs)
-
-[GitHub - jymun-97/HaruSekki](https://github.com/jymun-97/HaruSekki)
+[![image](https://user-images.githubusercontent.com/89020936/225002232-6b5d286e-b788-4d41-92ba-9390718c4638.png)](https://youtu.be/vxHA9Yk9IQs)
 
 # 💡 Topic
 
@@ -10,10 +6,14 @@
 - 개인의 냉장고 현황을 바탕으로 레시피 검색 가능
 - 식단 관리 및 장보기 메모를 통한 필요 재료 동기화
 
+<br/>
+
 # 📝 Summary
 
 레시피명을 검색하는 것에서 나아가 현재 자신이 보유한 음식 재료를 바탕으로 만들 수 있는 레시피를 검색 및 추천해주는 플랫폼. 개인의 냉장고 속 식재료 현황, 일 단위 식단표,
 장보기 메모 등의 기능이 서로 동기화 되어 편리한 식단 관리 및 레시피 검색 기능을 제공하는 안드로이드 애플리케이션 입니다.
+
+<br/>
 
 # ⭐️ Key Function
 
@@ -33,14 +33,20 @@
 - **나의 냉장고**
     - 현재 나의 냉장고 속에 있는 식재료를 직접 등록하거나 ‘장보기 메모’로 부터 자동으로 생성
 
+<br/>
+
 # 🛠 Tech Stack
 
 `Kotlin`, `Retrofit`, `DataBinding`, `ViewModel`, `LiveData`, `Glide`, `Coroutine`, `Retrofit`
 , `Custom-View`, `Hilt`, `Room`, `Coroutine-Exception-Handler`
 
+<br/>
+
 # ⚙️ Architecture
 
 `MVVM`, `Clean-Architecture` , `Single-Activity`
+
+<br/>
 
 # 🧑🏻‍💻 Team
 
