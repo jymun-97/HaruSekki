@@ -1,6 +1,5 @@
 package com.jymun.harusekki.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jymun.harusekki.data.model.menu.Menu
@@ -58,9 +57,6 @@ class DetailViewModel @Inject constructor(
         val recipe = recipeDetail.value ?: return@onMainDispatcher
         val isLiked = liked.value ?: false
 
-        Log.d("# DetailViewModel", "$recipe")
-        Log.d("# DetailViewModel", "$isLiked")
-        
         if (isLiked) {
             deleteFavoriteRecipeUseCase(recipe)
         } else {

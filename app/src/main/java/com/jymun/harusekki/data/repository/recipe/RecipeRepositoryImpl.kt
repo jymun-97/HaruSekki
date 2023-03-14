@@ -73,7 +73,7 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun loadLatestFavoriteRecipe(): List<RecipeEntity> =
         withContext(dispatcherProvider.io) {
-            return@withContext recipeLocalDataSource.loadLatestReadRecipe()
+            return@withContext recipeLocalDataSource.loadLatestFavoriteRecipe()
         }
 
     override suspend fun loadMostHitsFavoriteRecipe(): List<RecipeEntity> =
